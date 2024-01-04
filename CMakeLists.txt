@@ -17,6 +17,27 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
+        keret.h
+        keret.cpp
+        abra.h
+        abra.cpp
+        belyeg.h
+        belyeg.cpp
+        elem.h
+        elem.cpp
+        elrendezes.h
+        elrendezes.cpp
+        minta.h
+        minta.cpp
+        oldal.h
+        oldal.cpp
+        projekt.h
+        projekt.cpp
+        rendszer.h
+        stilus.h
+        stilus.cpp
+        szoveg.h
+        szoveg.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
