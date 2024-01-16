@@ -13,7 +13,7 @@ private:
     int forrasXKoordinata;
     int forrasYKoordinata;
 public:
-    Keret(const QSize &meret, const QPixmap &forras, const unsigned &xKoordinata, const unsigned &yKoordinata, int dolesszog);
+    Keret(const QSize &meret, const QPixmap &forras, const unsigned &xKoordinata, const unsigned &yKoordinata, int dolesszog, unsigned short meretArany);
     void kepKeszites();
     const QPixmap &getKep() const;
     void setKeret(unsigned index);

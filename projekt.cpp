@@ -37,7 +37,7 @@ const list<string> &Projekt::getKepek() const
 
 void Projekt::addKep(string eleres)
 {
-
+    kepek.push_back(eleres);
 }
 
 Oldal* Projekt::getJelenlegiOldal() const

@@ -20,13 +20,13 @@ public:
     const QColor &getSzin() const;
     void setSzin(const QColor &newSzin);
     const QFont &getBetutipus() const;
-    void setBetutipus(const string &nev);
     unsigned getMeret() const;
     void setMeret(unsigned ujMeret);
     bool isFelkover() const;
     void setFelkover(bool ertek);
     bool isDolt() const;
     void setDolt(bool ertek);
+    void setBetutipus(const QFont &newBetutipus);
 };
 
 #endif // SZOVEG_H

@@ -15,12 +15,18 @@ void Abra::setForras(const string &eleres)
 
 }
 
-void Abra::meretezes(unsigned szelesseg, unsigned hosszusag)
+unsigned short Abra::getMeretArany() const
 {
-
+    return meretArany;
 }
 
-Abra::Abra(const QSize &meret, const QPixmap &forras, const unsigned &xKoordinata, const unsigned &yKoordinata, int dolesszog) : Elem(xKoordinata, yKoordinata, dolesszog),
+void Abra::setMeretArany(unsigned short newMeretArany)
+{
+    meretArany = newMeretArany;
+}
+
+Abra::Abra(const QSize &meret, const QPixmap &forras, const unsigned &xKoordinata, const unsigned &yKoordinata, int dolesszog, unsigned short meretArany) : Elem(xKoordinata, yKoordinata, dolesszog),
     meret(meret),
-    forras(forras)
+    forras(forras),
+    meretArany(meretArany)
 {}

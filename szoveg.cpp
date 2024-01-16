@@ -26,11 +26,6 @@ const QFont &Szoveg::getBetutipus() const
     return betutipus;
 }
 
-void Szoveg::setBetutipus(const string &nev)
-{
-
-}
-
 unsigned Szoveg::getMeret() const
 {
 
@@ -59,6 +54,11 @@ bool Szoveg::isDolt() const
 void Szoveg::setDolt(bool ertek)
 {
 
+}
+
+void Szoveg::setBetutipus(const QFont &newBetutipus)
+{
+    betutipus = newBetutipus;
 }
 
 Szoveg::Szoveg(const unsigned &xKoordinata, const unsigned &yKoordinata, int dolesszog) : Elem(xKoordinata, yKoordinata, dolesszog)
