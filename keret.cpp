@@ -2,7 +2,54 @@
 
 void Keret::kepKeszites()
 {
-    QPixmap ujKep;
+    QPixmap ujKep = forras.copy(kepXKoordinata, kepYKoordinata, meret.width()*(szelesseg/100.0), meret.height()*(magassag/100.0));
+
+    if(szuro == 1)
+    {
+        QImage temp = ujKep.toImage();
+        unsigned width = temp.width();
+        unsigned height = temp.height();
+
+        QRgb color;
+
+        for(int i = 0; i < width; ++i)
+        {
+            for(int j = 0; j< height; ++j)
+            {
+                color = temp.pixel(i,j);
+                int gray = qGray(color);
+                temp.setPixel(i, j, qRgb(gray, gray, gray));
+            }
+        }
+
+        ujKep = QPixmap::fromImage(temp);
+
+    }else if(szuro == 2){
+        QImage temp = ujKep.toImage();
+        unsigned width = temp.width();
+        unsigned height = temp.height();
+
+        QColor color;
+
+        for(int i = 0; i < width; ++i)
+        {
+            for(int j = 0; j< height; ++j)
+            {
+                color = temp.pixel(i,j);
+
+                int tr = color.red()*0.393 + color.green()*0.769 + color.blue()*0.189;
+                int tg = color.red()*0.343 + color.green()*0.686 + color.blue()*0.168;
+                int tb = color.red()*0.272 + color.green()*0.534 + color.blue()*0.131;
+
+                temp.setPixel(i, j, qRgb(tr>255?255:tr, tg>255?255:tg, tb>255?255:tb));
+            }
+        }
+
+        ujKep = QPixmap::fromImage(temp);
+    }
+
+    kimenet->resize(ujKep.size());
+    kimenet->setIcon(ujKep);
 }
 
 const QPixmap &Keret::getKep() const
@@ -55,6 +102,16 @@ void Keret::setKepYKoordinata(unsigned int newKepYKoordinata)
     kepYKoordinata = newKepYKoordinata;
 }
 
-Keret::Keret(const QSize &meret, const QPixmap &forras, const unsigned &xKoordinata, const unsigned &yKoordinata, int dolesszog, unsigned short meretArany, unsigned short szelesseg, unsigned short magassag, unsigned kepXKoordinata, unsigned kepYKoordinata) : Abra(meret, forras, xKoordinata, yKoordinata, dolesszog, meretArany),
-    szelesseg(szelesseg), magassag(magassag), kepXKoordinata(kepXKoordinata), kepYKoordinata(kepYKoordinata)
+unsigned short Keret::getSzuro() const
+{
+    return szuro;
+}
+
+void Keret::setSzuro(unsigned short newSzuro)
+{
+    szuro = newSzuro;
+}
+
+Keret::Keret(const QSize &meret, const QPixmap &forras, const unsigned &xKoordinata, const unsigned &yKoordinata, int dolesszog, unsigned short meretArany, unsigned short szelesseg, unsigned short magassag, unsigned kepXKoordinata, unsigned kepYKoordinata, unsigned short szuro) : Abra(meret, forras, xKoordinata, yKoordinata, dolesszog, meretArany),
+    szelesseg(szelesseg), magassag(magassag), kepXKoordinata(kepXKoordinata), kepYKoordinata(kepYKoordinata), szuro(szuro)
 {}

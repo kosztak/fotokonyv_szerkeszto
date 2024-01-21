@@ -94,7 +94,11 @@ private slots:
 
     void on_kepMagassagSpinBoxSzerkeszto_valueChanged(int arg1);
 
-    void on_spinBox_valueChanged(int arg1);
+    void on_keparanyHorizontalisSpinBoxSzerkeszto_valueChanged(int arg1);
+
+    void on_keparanyVertikalisSpinBoxSzerkeszto_valueChanged(int arg1);
+
+    void on_kepSzuroComboBoxSzerkeszto_currentIndexChanged(int index);
 
 private:
     Ui::MainWindow *ui;
