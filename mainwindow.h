@@ -90,6 +90,12 @@ private slots:
 
     void on_kepMeretHorizontalSliderSzerkeszto_valueChanged(int value);
 
+    void on_kepSzelessegSpinBoxSzerkeszto_valueChanged(int arg1);
+
+    void on_kepMagassagSpinBoxSzerkeszto_valueChanged(int arg1);
+
+    void on_spinBox_valueChanged(int arg1);
+
 private:
     Ui::MainWindow *ui;
 

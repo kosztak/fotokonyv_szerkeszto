@@ -64,7 +64,7 @@ MainWindow::MainWindow(QWidget *parent)
     counter = 0;
     list<string> kepLista = jelenlegiProjekt.getKepek();
 
-    for(auto i : kepLista)
+    for(string i : kepLista)
     {
         QPushButton *tempbutton = new QPushButton;
         QPixmap pixmap(QString::fromStdString(i));
@@ -79,7 +79,7 @@ MainWindow::MainWindow(QWidget *parent)
 
         //funkcio hozzaadas a kep gombnak
         connect(tempbutton, &QPushButton::clicked, [=]{
-            Keret *ujKeret = new Keret(pixmap.size(), pixmap, 0, 0, 0, 100);
+            Keret *ujKeret = new Keret(pixmap.size(), pixmap, 0, 0, 0, 100, 100, 100, 0, 0);
             ujKeret->getKimenet()->setParent(ui->szerkesztoWidgetSzerkeszto);
             ujKeret->getKimenet()->setIcon(pixmap);
             ujKeret->getKimenet()->setIconSize(pixmap.size());
@@ -101,6 +101,10 @@ MainWindow::MainWindow(QWidget *parent)
 
                 //meretezes
                 ui->kepMeretHorizontalSliderSzerkeszto->setValue(ujKeret->getMeretArany());
+
+                //aranyok
+                ui->kepSzelessegSpinBoxSzerkeszto->setValue(ujKeret->getSzelesseg());
+                ui->kepMagassagSpinBoxSzerkeszto->setValue(ujKeret->getMagassag());
             });
 
             jelenlegiProjekt.getJelenlegiOldal()->keretHozzaadas(ujKeret);
@@ -272,9 +276,14 @@ void MainWindow::on_belyegMeretHorizontalSliderSzerkeszto_valueChanged(int value
     //belyeg meretenek megvaltoztatasa
     QPushButton* jelenlegiButton = jelenlegiBelyeg->getKimenet();
     QSize jelenlegiMeret = jelenlegiBelyeg->getMeret();
+    jelenlegiMeret.setWidth((jelenlegiMeret.width()/100.0)*value);
+    jelenlegiMeret.setHeight((jelenlegiMeret.height()/100.0)*value);
 
-    jelenlegiButton->setIconSize(QSize((jelenlegiMeret.width()/100.0)*value, (jelenlegiMeret.height()/100.0)*value));
-    jelenlegiButton->adjustSize();
+    jelenlegiButton->resize(jelenlegiMeret);
+    jelenlegiButton->setIconSize(jelenlegiMeret);
+
+    //tooltip beallitas
+    ui->belyegMeretHorizontalSliderSzerkeszto->setToolTip(QString::number(value));
 
     //horizontalis mozgatas
     ui->belyegHorizontalisSpinBoxSzerkeszto->setMaximum(ui->szerkesztoWidgetSzerkeszto->width() - jelenlegiButton->width());
@@ -348,9 +357,14 @@ void MainWindow::on_kepMeretHorizontalSliderSzerkeszto_valueChanged(int value)
     //kep meretenek megvaltoztatasa
     QPushButton* jelenlegiButton = jelenlegiKep->getKimenet();
     QSize jelenlegiMeret = jelenlegiKep->getMeret();
+    jelenlegiMeret.setWidth((jelenlegiMeret.width()/100.0)*value);
+    jelenlegiMeret.setHeight((jelenlegiMeret.height()/100.0)*value);
 
-    jelenlegiButton->setIconSize(QSize((jelenlegiMeret.width()/100.0)*value, (jelenlegiMeret.height()/100.0)*value));
-    jelenlegiButton->adjustSize();
+    jelenlegiButton->resize(QSize(jelenlegiMeret.width()*(jelenlegiKep->getSzelesseg()/100.0), jelenlegiMeret.height()*(jelenlegiKep->getMagassag()/100.0)));
+    jelenlegiButton->setIconSize(jelenlegiMeret);
+
+    //tooltip beallitas
+    ui->kepMeretHorizontalSliderSzerkeszto->setToolTip(QString::number(value));
 
     //horizontalis mozgatas
     ui->kepHorizontalisSpinBoxSzerkeszto->setMaximum(ui->szerkesztoWidgetSzerkeszto->width() - jelenlegiButton->width());
@@ -359,4 +373,47 @@ void MainWindow::on_kepMeretHorizontalSliderSzerkeszto_valueChanged(int value)
     //vertikalis mozgatas
     ui->kepVertikalisSpinBoxSzerkeszto->setMaximum(ui->szerkesztoWidgetSzerkeszto->height() - jelenlegiButton->height());
     ui->kepVertikalisSpinBoxSzerkeszto->setValue(jelenlegiButton->y());
+}
+
+void MainWindow::on_kepSzelessegSpinBoxSzerkeszto_valueChanged(int arg1)
+{
+    Keret* jelenlegiKeret = dynamic_cast<Keret*>(jelenlegiProjekt.getJelenlegiElem());
+
+    jelenlegiKeret->setSzelesseg(arg1);
+
+    jelenlegiKeret->getKimenet()->resize(QSize(jelenlegiKeret->getMeret().width()*(arg1/100.0), jelenlegiKeret->getMeret().height()*(jelenlegiKeret->getMagassag()/100.0)));
+
+    //horizontalis mozgatas
+    ui->kepHorizontalisSpinBoxSzerkeszto->setMaximum(ui->szerkesztoWidgetSzerkeszto->width() - jelenlegiKeret->getKimenet()->width());
+    ui->kepHorizontalisSpinBoxSzerkeszto->setValue(jelenlegiKeret->getKimenet()->x());
+
+    //vertikalis mozgatas
+    ui->kepVertikalisSpinBoxSzerkeszto->setMaximum(ui->szerkesztoWidgetSzerkeszto->height() - jelenlegiKeret->getKimenet()->height());
+    ui->kepVertikalisSpinBoxSzerkeszto->setValue(jelenlegiKeret->getKimenet()->y());
+}
+
+void MainWindow::on_kepMagassagSpinBoxSzerkeszto_valueChanged(int arg1)
+{
+    Keret* jelenlegiKeret = dynamic_cast<Keret*>(jelenlegiProjekt.getJelenlegiElem());
+
+    jelenlegiKeret->setMagassag(arg1);
+
+    jelenlegiKeret->getKimenet()->resize(QSize(jelenlegiKeret->getMeret().width()*(jelenlegiKeret->getSzelesseg()/100.0), jelenlegiKeret->getMeret().height()*(arg1/100.0)));
+
+    //horizontalis mozgatas
+    ui->kepHorizontalisSpinBoxSzerkeszto->setMaximum(ui->szerkesztoWidgetSzerkeszto->width() - jelenlegiKeret->getKimenet()->width());
+    ui->kepHorizontalisSpinBoxSzerkeszto->setValue(jelenlegiKeret->getKimenet()->x());
+
+    //vertikalis mozgatas
+    ui->kepVertikalisSpinBoxSzerkeszto->setMaximum(ui->szerkesztoWidgetSzerkeszto->height() - jelenlegiKeret->getKimenet()->height());
+    ui->kepVertikalisSpinBoxSzerkeszto->setValue(jelenlegiKeret->getKimenet()->y());
+}
+
+void MainWindow::on_spinBox_valueChanged(int arg1)
+{
+    Keret* jelenlegiKeret = dynamic_cast<Keret*>(jelenlegiProjekt.getJelenlegiElem());
+
+    jelenlegiKeret->setXKoordinata(arg1);
+
+    jelenlegiKeret->kepKeszites();
 }
