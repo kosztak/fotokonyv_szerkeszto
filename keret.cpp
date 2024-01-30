@@ -4,7 +4,8 @@ void Keret::kepKeszites()
 {
     QPixmap ujKep = forras.copy(kepXKoordinata, kepYKoordinata, meret.width()*(szelesseg/100.0), meret.height()*(magassag/100.0));
 
-    if(szuro == 1)
+    //szuro felhelyezes
+    if(szuro == 1) //fekete-feher
     {
         QImage temp = ujKep.toImage();
         unsigned width = temp.width();
@@ -24,7 +25,7 @@ void Keret::kepKeszites()
 
         ujKep = QPixmap::fromImage(temp);
 
-    }else if(szuro == 2){
+    }else if(szuro == 2){ //szepia
         QImage temp = ujKep.toImage();
         unsigned width = temp.width();
         unsigned height = temp.height();
@@ -46,6 +47,20 @@ void Keret::kepKeszites()
         }
 
         ujKep = QPixmap::fromImage(temp);
+    }
+
+    //keret felhelyezes
+    if(kepKeret != 0)
+    {
+        if(kepKeret < 2) //rahelyezes
+        {
+            QImage temp = ujKep.toImage();
+            QPainter painter(&temp);
+            QSvgRenderer renderer(QString("./keretek/keret1.SVG"));
+            renderer.render(&painter);
+        }else{ //kivagas
+
+        }
     }
 
     kimenet->resize(ujKep.size());

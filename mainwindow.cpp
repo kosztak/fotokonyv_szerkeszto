@@ -170,6 +170,10 @@ void MainWindow::inicializalas()
     //kepek
     jelenlegiProjekt.addKep("./kepek/cat.jpg");
     jelenlegiProjekt.addKep("./kepek/flower.png");
+
+    //keretek
+    //kepKeretek.push_back(QSvgRenderer(QString("./keretek/1.svg")));
+    //kepKeretek.push_back(QSvgRenderer(QString("./keretek/2.svg")));
 }
 
 map<string, string> MainWindow::getProjektek()

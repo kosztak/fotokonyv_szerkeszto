@@ -8,6 +8,7 @@
 #include <QColorDialog>
 #include <QColor>
 #include <QPalette>
+#include <QtSvg/QSvgRenderer>
 #include <string>
 #include <list>
 #include <map>
@@ -108,7 +109,7 @@ private:
     map<string, string> projektek; //nev, eleres
     map<string, string> belyegek; //nev, eleres
     map<string, string> mintak; //nev, eleres
-    list<QImage> kepKeretek;
+    list<QSvgRenderer> kepKeretek;
     list<Stilus> stilusok;
     list<Elrendezes> elrendezesek;
     QImage keretAlapHatter;

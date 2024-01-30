@@ -4,6 +4,9 @@
 #include "abra.h"
 
 #include <QPixmap>
+#include <QPainter>
+
+#include <QtSvg/QSvgRenderer>
 
 class Keret : public Abra
 {
