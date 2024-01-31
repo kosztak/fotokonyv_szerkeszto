@@ -358,7 +358,7 @@ background-color: rgb(255, 255, 255);</string>
                 <string notr="true"/>
                </property>
                <property name="currentIndex">
-                <number>2</number>
+                <number>0</number>
                </property>
                <widget class="QWidget" name="kepekPageSzerkeszto">
                 <layout class="QGridLayout" name="gridLayout_6">
@@ -424,7 +424,7 @@ background-color: rgb(255, 255, 255);</string>
                     </spacer>
                    </item>
                    <item>
-                    <widget class="QPushButton" name="kepTorlesPushButtonSzerkeszto">
+                    <widget class="QPushButton" name="kepProjektTorlesPushButtonSzerkeszto">
                      <property name="font">
                       <font>
                        <pointsize>11</pointsize>
@@ -961,7 +961,7 @@ background-color: rgb(255, 255, 255);</string>
              <item row="0" column="0">
               <widget class="QStackedWidget" name="tulajdonsagokStackedWidgetSzerkeszto">
                <property name="currentIndex">
-                <number>1</number>
+                <number>3</number>
                </property>
                <widget class="QWidget" name="uresPageSzerkeszto">
                 <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -1422,7 +1422,7 @@ background-color: rgb(255, 255, 255);</string>
                     </spacer>
                    </item>
                    <item>
-                    <widget class="QPushButton" name="pushButton">
+                    <widget class="QPushButton" name="kepTorlesPushButtonSzerkeszto_2">
                      <property name="styleSheet">
                       <string notr="true">color: rgb(0, 0, 0);
 background-color: rgb(255, 255, 255);</string>

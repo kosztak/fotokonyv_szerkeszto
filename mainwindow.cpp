@@ -33,6 +33,7 @@ MainWindow::MainWindow(QWidget *parent)
         //funkcio hozzaadas a belyeg gombnak
         connect(tempbutton, &QPushButton::clicked, [=]{
             Belyeg *ujBelyeg = new Belyeg(i.first, pixmap.size(), pixmap, 0, 0, 0, 100);
+            ujBelyeg->getKimenet()->setStyleSheet("background-color: transparent");
             ujBelyeg->getKimenet()->setParent(ui->szerkesztoWidgetSzerkeszto);
             ujBelyeg->getKimenet()->setIcon(pixmap);
             ujBelyeg->getKimenet()->setIconSize(pixmap.size());
@@ -42,7 +43,11 @@ MainWindow::MainWindow(QWidget *parent)
             connect(ujBelyeg->getKimenet(), &QPushButton::clicked, [=]{
                 ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->belyegPageSzerkeszto);
 
+                if(jelenlegiProjekt.getJelenlegiElem() != nullptr)
+                    jelenlegiProjekt.getJelenlegiElem()->getKimenet()->setStyleSheet("background-color: transparent");
+
                 jelenlegiProjekt.setJelenlegiElem(ujBelyeg);
+                ujBelyeg->getKimenet()->setStyleSheet(QString::fromStdString(kijeloltElemQSS));
 
                 //horizontalis mozgatas
                 unsigned xPont = ujBelyeg->getKimenet()->x();
@@ -81,7 +86,8 @@ MainWindow::MainWindow(QWidget *parent)
 
         //funkcio hozzaadas a kep gombnak
         connect(tempbutton, &QPushButton::clicked, [=]{
-            Keret *ujKeret = new Keret(pixmap.size(), pixmap, 0, 0, 0, 100, 100, 100, 0, 0, 0);
+            Keret *ujKeret = new Keret(pixmap.size(), pixmap, 0, 0, 0, 100, 100, 100, 0, 0, 0, 2);
+            ujKeret->getKimenet()->setStyleSheet("background-color: transparent");
             ujKeret->getKimenet()->setParent(ui->szerkesztoWidgetSzerkeszto);
             ujKeret->getKimenet()->setIcon(pixmap);
             ujKeret->getKimenet()->setIconSize(pixmap.size());
@@ -91,7 +97,11 @@ MainWindow::MainWindow(QWidget *parent)
             connect(ujKeret->getKimenet(), &QPushButton::clicked, [=]{
                 ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->kepPageSzerkeszto);
 
+                if(jelenlegiProjekt.getJelenlegiElem() != nullptr)
+                    jelenlegiProjekt.getJelenlegiElem()->getKimenet()->setStyleSheet("background-color: transparent");
+
                 jelenlegiProjekt.setJelenlegiElem(ujKeret);
+                ujKeret->getKimenet()->setStyleSheet(QString::fromStdString(kijeloltElemQSS));
 
 
                 //horizontalis mozgatas
@@ -170,10 +180,6 @@ void MainWindow::inicializalas()
     //kepek
     jelenlegiProjekt.addKep("./kepek/cat.jpg");
     jelenlegiProjekt.addKep("./kepek/flower.png");
-
-    //keretek
-    //kepKeretek.push_back(QSvgRenderer(QString("./keretek/1.svg")));
-    //kepKeretek.push_back(QSvgRenderer(QString("./keretek/2.svg")));
 }
 
 map<string, string> MainWindow::getProjektek()
@@ -196,16 +202,15 @@ void MainWindow::on_belyegHorizontalisSpinBoxSzerkeszto_valueChanged(int arg1)
     jelenlegiProjekt.getJelenlegiElem()->getKimenet()->move(arg1, jelenlegiProjekt.getJelenlegiElem()->getKimenet()->y()); //x, y
 }
 
-
 void MainWindow::on_belyegVertikalisSpinBoxSzerkeszto_valueChanged(int arg1)
 {
     jelenlegiProjekt.getJelenlegiElem()->getKimenet()->move(jelenlegiProjekt.getJelenlegiElem()->getKimenet()->x(), arg1); //x, y
 }
 
-
 void MainWindow::on_ujSzovegPushButtonSzerkeszto_clicked()
 {
     Szoveg *ujSzoveg = new Szoveg(0, 0, 0);
+    ujSzoveg->getKimenet()->setStyleSheet("background-color: transparent");
     ujSzoveg->getKimenet()->setParent(ui->szerkesztoWidgetSzerkeszto);
     ujSzoveg->getKimenet()->setText(QString::fromStdString(ujSzoveg->getTartalom()));
     ujSzoveg->getKimenet()->show();
@@ -213,7 +218,11 @@ void MainWindow::on_ujSzovegPushButtonSzerkeszto_clicked()
     connect(ujSzoveg->getKimenet(), &QPushButton::clicked, [=]{
         ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->szovegPageSzerkeszto);
 
+        if(jelenlegiProjekt.getJelenlegiElem() != nullptr)
+            jelenlegiProjekt.getJelenlegiElem()->getKimenet()->setStyleSheet("background-color: transparent");
+
         jelenlegiProjekt.setJelenlegiElem(ujSzoveg);
+        ujSzoveg->getKimenet()->setStyleSheet(QString::fromStdString(kijeloltElemQSS));
 
         //szoveg
         ui->szovegTextEditSzerkeszto->setText(QString::fromStdString(ujSzoveg->getTartalom()));
@@ -244,12 +253,10 @@ void MainWindow::on_szovegHorizontalisSpinBoxSzerkeszto_valueChanged(int arg1)
     jelenlegiProjekt.getJelenlegiElem()->getKimenet()->move(arg1, jelenlegiProjekt.getJelenlegiElem()->getKimenet()->y()); //x, y
 }
 
-
 void MainWindow::on_szovegVertikalisSpinBoxSzerkeszto_valueChanged(int arg1)
 {
     jelenlegiProjekt.getJelenlegiElem()->getKimenet()->move(jelenlegiProjekt.getJelenlegiElem()->getKimenet()->x(), arg1); //x, y
 }
-
 
 void MainWindow::on_szovegTextEditSzerkeszto_textChanged()
 {
@@ -264,7 +271,6 @@ void MainWindow::on_szovegTextEditSzerkeszto_textChanged()
     ui->szovegVertikalisSpinBoxSzerkeszto->setMaximum(ui->szerkesztoWidgetSzerkeszto->height() - jelenlegiProjekt.getJelenlegiElem()->getKimenet()->height());
 }
 
-
 void MainWindow::on_betumeretSpinBoxSzerkeszto_valueChanged(int arg1)
 {
     QFont font = jelenlegiProjekt.getJelenlegiElem()->getKimenet()->font();
@@ -276,7 +282,6 @@ void MainWindow::on_betumeretSpinBoxSzerkeszto_valueChanged(int arg1)
     ui->szovegHorizontalisSpinBoxSzerkeszto->setMaximum(ui->szerkesztoWidgetSzerkeszto->width() - jelenlegiProjekt.getJelenlegiElem()->getKimenet()->width());
     ui->szovegVertikalisSpinBoxSzerkeszto->setMaximum(ui->szerkesztoWidgetSzerkeszto->height() - jelenlegiProjekt.getJelenlegiElem()->getKimenet()->height());
 }
-
 
 void MainWindow::on_betutipusComboBoxSzerkeszto_currentIndexChanged(int index)
 {
@@ -321,7 +326,6 @@ void MainWindow::on_belyegMeretHorizontalSliderSzerkeszto_valueChanged(int value
     ui->belyegVertikalisSpinBoxSzerkeszto->setValue(yPont);
 }
 
-
 void MainWindow::on_betuszinPushButtonSzerkeszto_clicked()
 {
     QColor ujSzin = QColorDialog::getColor(Qt::black, this, "Betűszín Választó");
@@ -346,14 +350,12 @@ void MainWindow::on_felkoverCheckBoxSzerkeszto_stateChanged(int arg1)
     jelenlegiProjekt.getJelenlegiElem()->getKimenet()->setFont(font);
 }
 
-
 void MainWindow::on_doltCheckBoxSzerkeszto_stateChanged(int arg1)
 {
     QFont font = jelenlegiProjekt.getJelenlegiElem()->getKimenet()->font();
     font.setItalic(arg1);
     jelenlegiProjekt.getJelenlegiElem()->getKimenet()->setFont(font);
 }
-
 
 void MainWindow::on_alahuzottCheckBoxSzerkeszto_stateChanged(int arg1)
 {
@@ -362,18 +364,15 @@ void MainWindow::on_alahuzottCheckBoxSzerkeszto_stateChanged(int arg1)
     jelenlegiProjekt.getJelenlegiElem()->getKimenet()->setFont(font);
 }
 
-
 void MainWindow::on_kepHorizontalisSpinBoxSzerkeszto_valueChanged(int arg1)
 {
     jelenlegiProjekt.getJelenlegiElem()->getKimenet()->move(arg1, jelenlegiProjekt.getJelenlegiElem()->getKimenet()->y()); //x, y
 }
 
-
 void MainWindow::on_kepVertikalisSpinBoxSzerkeszto_valueChanged(int arg1)
 {
     jelenlegiProjekt.getJelenlegiElem()->getKimenet()->move(jelenlegiProjekt.getJelenlegiElem()->getKimenet()->x(), arg1); //x, y
 }
-
 
 void MainWindow::on_kepMeretHorizontalSliderSzerkeszto_valueChanged(int value)
 {
@@ -383,12 +382,7 @@ void MainWindow::on_kepMeretHorizontalSliderSzerkeszto_valueChanged(int value)
 
     //kep meretenek megvaltoztatasa
     QPushButton* jelenlegiButton = jelenlegiKep->getKimenet();
-    QSize jelenlegiMeret = jelenlegiKep->getMeret();
-    jelenlegiMeret.setWidth((jelenlegiMeret.width()/100.0)*value);
-    jelenlegiMeret.setHeight((jelenlegiMeret.height()/100.0)*value);
-
-    jelenlegiButton->resize(QSize(jelenlegiMeret.width()*(jelenlegiKep->getSzelesseg()/100.0), jelenlegiMeret.height()*(jelenlegiKep->getMagassag()/100.0)));
-    jelenlegiButton->setIconSize(jelenlegiMeret);
+    jelenlegiKep->kepKeszites();
 
     //tooltip beallitas
     ui->kepMeretHorizontalSliderSzerkeszto->setToolTip(QString::number(value));
@@ -466,7 +460,6 @@ void MainWindow::on_keparanyVertikalisSpinBoxSzerkeszto_valueChanged(int arg1)
     jelenlegiKeret->kepKeszites();
 }
 
-
 void MainWindow::on_kepSzuroComboBoxSzerkeszto_currentIndexChanged(int index)
 {
     Keret* jelenlegiKeret = dynamic_cast<Keret*>(jelenlegiProjekt.getJelenlegiElem());
@@ -476,3 +469,29 @@ void MainWindow::on_kepSzuroComboBoxSzerkeszto_currentIndexChanged(int index)
     jelenlegiKeret->kepKeszites();
 }
 
+void MainWindow::on_kepTorlesPushButtonSzerkeszto_2_clicked()
+{
+    delete jelenlegiProjekt.getJelenlegiElem();
+
+    ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->uresPageSzerkeszto);
+
+    jelenlegiProjekt.setJelenlegiElem(nullptr);
+}
+
+void MainWindow::on_belyegTorlesPushButtonSzerkeszto_clicked()
+{
+    delete jelenlegiProjekt.getJelenlegiElem();
+
+    ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->uresPageSzerkeszto);
+
+    jelenlegiProjekt.setJelenlegiElem(nullptr);
+}
+
+void MainWindow::on_szovegTorlesPushButtonSzerkeszto_clicked()
+{
+    delete jelenlegiProjekt.getJelenlegiElem();
+
+    ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->uresPageSzerkeszto);
+
+    jelenlegiProjekt.setJelenlegiElem(nullptr);
+}

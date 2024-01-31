@@ -101,8 +101,19 @@ private slots:
 
     void on_kepSzuroComboBoxSzerkeszto_currentIndexChanged(int index);
 
+    void on_kepTorlesPushButtonSzerkeszto_2_clicked();
+
+    void on_belyegTorlesPushButtonSzerkeszto_clicked();
+
+    void on_szovegTorlesPushButtonSzerkeszto_clicked();
+
 private:
     Ui::MainWindow *ui;
+
+    string kijeloltElemQSS = "background-color: transparent;"
+                             "border-style: dotted;"
+                             "border-width: 3px;"
+                             "border-color: blue;";
 
     //rendszer
     Projekt jelenlegiProjekt;

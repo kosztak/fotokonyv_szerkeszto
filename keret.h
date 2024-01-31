@@ -8,22 +8,24 @@
 
 #include <QtSvg/QSvgRenderer>
 
+#include <stdio.h>
+
 class Keret : public Abra
 {
 private:
-    unsigned kepKeret;
     QPixmap kep;
-    unsigned kepXKoordinata;
-    unsigned kepYKoordinata;
     unsigned short szelesseg;
     unsigned short magassag;
+    unsigned kepXKoordinata;
+    unsigned kepYKoordinata;
     unsigned short szuro;
+    unsigned short kepKeret;
 
 public:
-    Keret(const QSize &meret, const QPixmap &forras, const unsigned &xKoordinata, const unsigned &yKoordinata, int dolesszog, unsigned short meretArany, unsigned short szelesseg, unsigned short magassag, unsigned kepXKoordinata, unsigned kepYKoordinata, unsigned short szuro);
+    Keret(const QSize &meret, const QPixmap &forras, const unsigned &xKoordinata, const unsigned &yKoordinata, int dolesszog, unsigned short meretArany, unsigned short szelesseg, unsigned short magassag, unsigned kepXKoordinata, unsigned kepYKoordinata, unsigned short szuro, unsigned short kepKeret);
     void kepKeszites();
     const QPixmap &getKep() const;
-    void setKeret(unsigned index);
+    void setKeret(unsigned short index);
     void setXKoordinata(int ertek);
     void setYKoordinata(int ertek);
     unsigned short getSzelesseg() const;

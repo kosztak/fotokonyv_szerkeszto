@@ -24,6 +24,7 @@ protected:
 
 public:
     Elem(unsigned xKoordinata, unsigned yKoordinata, int dolesszog);
+    virtual ~Elem(){delete kimenet;};
     void mozgatas(unsigned xPont, unsigned yPont);
     const unsigned &getXKoordinata() const;
     const unsigned &getYKoordinata() const;
