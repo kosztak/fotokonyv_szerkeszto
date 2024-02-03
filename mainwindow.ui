@@ -358,7 +358,7 @@ background-color: rgb(255, 255, 255);</string>
                 <string notr="true"/>
                </property>
                <property name="currentIndex">
-                <number>0</number>
+                <number>2</number>
                </property>
                <widget class="QWidget" name="kepekPageSzerkeszto">
                 <layout class="QGridLayout" name="gridLayout_6">
@@ -961,7 +961,7 @@ background-color: rgb(255, 255, 255);</string>
              <item row="0" column="0">
               <widget class="QStackedWidget" name="tulajdonsagokStackedWidgetSzerkeszto">
                <property name="currentIndex">
-                <number>3</number>
+                <number>4</number>
                </property>
                <widget class="QWidget" name="uresPageSzerkeszto">
                 <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -2169,7 +2169,7 @@ background-color: rgb(255, 255, 255);</string>
                       </widget>
                      </item>
                      <item>
-                      <widget class="QWidget" name="widget_2" native="true">
+                      <widget class="QWidget" name="hatterszinWidgetSzerkeszto" native="true">
                        <property name="minimumSize">
                         <size>
                          <width>0</width>
@@ -2185,7 +2185,7 @@ background-color: rgb(255, 255, 255);</string>
                       </widget>
                      </item>
                      <item>
-                      <widget class="QPushButton" name="pushButton_2">
+                      <widget class="QPushButton" name="hatterszinMegvaltoztatPushButtonSzerkeszto">
                        <property name="font">
                         <font>
                          <pointsize>11</pointsize>
@@ -2230,8 +2230,8 @@ background-color: rgb(255, 255, 255);</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>62</width>
-                          <height>16</height>
+                          <width>224</width>
+                          <height>232</height>
                          </rect>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_18">

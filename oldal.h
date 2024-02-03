@@ -13,12 +13,14 @@
 class Oldal
 {
 private:
-    Stilus stilus;
-    list<Keret> keretek;
-    list<Belyeg> belyegek;
-    list<Szoveg> szovegek;
+    Stilus* stilus;
+    list<Keret*> keretek;
+    list<Belyeg*> belyegek;
+    list<Szoveg*> szovegek;
+    unsigned oldalszam;
 public:
-    Oldal();
+    Oldal(const unsigned &oldalszam);
+    Stilus *getStilus() const;
     void stilusAlkalmazas();
     void belyegHozzaadas(Belyeg *ujBelyeg);
     void belyegTorles(Belyeg *belyeg);
@@ -26,6 +28,9 @@ public:
     void keretTorles(Keret *keret);
     void szovegHozzaadas(Szoveg *ujSzoveg);
     void szovegTorles(Szoveg *szoveg);
+    unsigned int getOldalszam() const;
+    void elemekElrejtese();
+    void elemekMutatasa();
 };
 
 #endif // OLDAL_H

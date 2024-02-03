@@ -16,16 +16,14 @@ private:
     string nev;
     string elresiUt;
     unsigned oldalszam;
-    list<Oldal> oldalak;
+    vector<Oldal> oldalak;
     list<string> kepek;
-    list<Keret> keretek;
-    list<Belyeg> belyegek;
-    list<Szoveg> szovegek;
-    Oldal *jelenlegiOldal = new Oldal();
+    Oldal* jelenlegiOldal;
     Elem* jelenlegiElem = nullptr;
     ElemTipus jelenlegiElemTipus;
 public:
     Projekt();
+    // Projekt(const string &nev, const string &eleresiUt, unsigned &oldalszam, );
 
     const string &getNev() const;
     void setNev(const string &newNev);
@@ -39,6 +37,7 @@ public:
     void setJelenlegiOldal(const unsigned &newJelenlegiOldal);
     Elem* getJelenlegiElem() const;
     void setJelenlegiElem(Elem *newJelenlegiElem);
+    bool lapozas(const bool &fel);
 };
 
 #endif // PROJEKT_H

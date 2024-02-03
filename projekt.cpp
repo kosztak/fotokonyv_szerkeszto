@@ -58,11 +58,37 @@ Elem* Projekt::getJelenlegiElem() const
 void Projekt::setJelenlegiElem(Elem *newJelenlegiElem)
 {
     jelenlegiElem = newJelenlegiElem;
-    jelenlegiElemTipus = newJelenlegiElem->getTipus();
+    // jelenlegiElemTipus = newJelenlegiElem->getTipus();
+}
+
+bool Projekt::lapozas(const bool &fel)
+{
+    if(!((fel && jelenlegiOldal->getOldalszam() == oldalszam) || (!fel && jelenlegiOldal->getOldalszam() == 1)))
+    {
+        Oldal* ujOldal;
+        if(fel)
+        {
+            ujOldal = &oldalak[jelenlegiOldal->getOldalszam()];
+
+        }else{
+            ujOldal = &oldalak[jelenlegiOldal->getOldalszam()-2];
+        }
+
+        //regi elemek elrejtése
+        jelenlegiOldal->elemekElrejtese();
+
+        //uj elemek mutatasa
+        ujOldal->elemekMutatasa();
+
+        jelenlegiOldal = ujOldal;
+    }
 }
 
 Projekt::Projekt()
 {
-    oldalszam = 1;
-    oldalak.push_back(Oldal());
+    oldalszam = 2;
+    oldalak.push_back(Oldal(1));
+    oldalak.push_back(Oldal(2));
+
+    jelenlegiOldal = &(*(oldalak.begin()));
 }

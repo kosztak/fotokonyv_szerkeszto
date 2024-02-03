@@ -1,23 +1,69 @@
 #include "oldal.h"
 
-Oldal::Oldal()
+unsigned int Oldal::getOldalszam() const
 {
-    stilus = Stilus();
+    return oldalszam;
 }
 
-void Oldal::stilusAlkalmazas()
+void Oldal::elemekElrejtese()
 {
+    //keretek elrejteese
+    for(auto i : keretek)
+    {
+        i->getKimenet()->hide();
+    }
 
+    //bejegek elrejteese
+    for(auto i : belyegek)
+    {
+        i->getKimenet()->hide();
+    }
+
+    //szovegek elrejteese
+    for(auto i : szovegek)
+    {
+        i->getKimenet()->hide();
+    }
+}
+
+void Oldal::elemekMutatasa()
+{
+    //keretek mutatasa
+    for(auto i : keretek)
+    {
+        i->getKimenet()->show();
+    }
+
+    //bejegek mutatasa
+    for(auto i : belyegek)
+    {
+        i->getKimenet()->show();
+    }
+
+    //szovegek mutatasa
+    for(auto i : szovegek)
+    {
+        i->getKimenet()->show();
+    }
+}
+
+Oldal::Oldal(const unsigned &oldalszam): oldalszam(oldalszam)
+{
+}
+
+Stilus *Oldal::getStilus() const
+{
+    return stilus;
 }
 
 void Oldal::belyegHozzaadas(Belyeg *ujBelyeg)
 {
-    this->belyegek.push_back(*ujBelyeg);
+    belyegek.push_back(ujBelyeg);
 }
 
 void Oldal::belyegTorles(Belyeg *belyeg)
 {
-
+    belyegek.remove(belyeg);
 }
 
 void Oldal::keretHozzaadas(Keret *ujKeret)

@@ -336,11 +336,7 @@ void MainWindow::on_betuszinPushButtonSzerkeszto_clicked()
     jelenlegiProjekt.getJelenlegiElem()->getKimenet()->setPalette(betuPal);
 
     //hatterszin
-    // QPalette hatterPal = ui->betuszinWidgetSzerkeszto->palette();
-    // hatterPal.setColor(QPalette::Window, ujSzin);
-    // ui->betuszinWidgetSzerkeszto->setAutoFillBackground(true);
-    // ui->betuszinWidgetSzerkeszto->setPalette(hatterPal);
-    // ui->betuszinWidgetSzerkeszto->show();
+    ui->betuszinWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(ujSzin.red()) + "," + to_string(ujSzin.green()) + "," + to_string(ujSzin.blue()) + "," + to_string(ujSzin.alphaF()) + ");"));
 }
 
 void MainWindow::on_felkoverCheckBoxSzerkeszto_stateChanged(int arg1)
@@ -495,3 +491,31 @@ void MainWindow::on_szovegTorlesPushButtonSzerkeszto_clicked()
 
     jelenlegiProjekt.setJelenlegiElem(nullptr);
 }
+
+void MainWindow::on_hatterszinMegvaltoztatPushButtonSzerkeszto_clicked()
+{
+    QColor ujSzin = QColorDialog::getColor(Qt::black, this, "Háttérszín Választó");
+
+    //oldalszin
+    ui->szerkesztoWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(ujSzin.red()) + "," + to_string(ujSzin.green()) + "," + to_string(ujSzin.blue()) + "," + to_string(ujSzin.alphaF()) + ");"));
+
+    //hatterszin
+    ui->hatterszinWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(ujSzin.red()) + "," + to_string(ujSzin.green()) + "," + to_string(ujSzin.blue()) + "," + to_string(ujSzin.alphaF()) + ");"));
+}
+
+void MainWindow::on_hatterPushButtonSzerkeszto_clicked()
+{
+    ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->hatterPageSzerkeszto);
+}
+
+void MainWindow::on_lapozasLePushButtonSzerkeszto_clicked()
+{
+    jelenlegiProjekt.lapozas(false);
+}
+
+
+void MainWindow::on_lapozasFelPushButtonSzerkeszto_clicked()
+{
+    jelenlegiProjekt.lapozas(true);
+}
+

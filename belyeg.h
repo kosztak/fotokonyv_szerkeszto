@@ -9,7 +9,6 @@ private:
     string nev;
 public:
     Belyeg(const string &nev, const QSize &meret, const QPixmap &forras, const unsigned &xKoordinata, const unsigned &yKoordinata, int dolesszog, unsigned short meretArany);
-
     const string &getNev() const;
     void setNev(const string &newNev);
 };

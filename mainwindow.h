@@ -107,6 +107,14 @@ private slots:
 
     void on_szovegTorlesPushButtonSzerkeszto_clicked();
 
+    void on_hatterszinMegvaltoztatPushButtonSzerkeszto_clicked();
+
+    void on_hatterPushButtonSzerkeszto_clicked();
+
+    void on_lapozasLePushButtonSzerkeszto_clicked();
+
+    void on_lapozasFelPushButtonSzerkeszto_clicked();
+
 private:
     Ui::MainWindow *ui;
 
