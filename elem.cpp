@@ -23,7 +23,6 @@ Elem::Elem(unsigned xKoordinata, unsigned yKoordinata, int dolesszog):
 
 void Elem::mozgatas(unsigned xPont, unsigned yPont)
 {
-
 }
 
 const unsigned &Elem::getXKoordinata() const

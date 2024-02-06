@@ -163,4 +163,6 @@ void Keret::setSzuro(unsigned short newSzuro)
 
 Keret::Keret(const QSize &meret, const QPixmap &forras, const unsigned &xKoordinata, const unsigned &yKoordinata, int dolesszog, unsigned short meretArany, unsigned short szelesseg, unsigned short magassag, unsigned kepXKoordinata, unsigned kepYKoordinata, unsigned short szuro, unsigned short kepKeret) : Abra(meret, forras, xKoordinata, yKoordinata, dolesszog, meretArany),
     szelesseg(szelesseg), magassag(magassag), kepXKoordinata(kepXKoordinata), kepYKoordinata(kepYKoordinata), szuro(szuro), kepKeret(kepKeret)
-{}
+{
+    tipus = keret;
+}

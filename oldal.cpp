@@ -51,9 +51,9 @@ Oldal::Oldal(const unsigned &oldalszam): oldalszam(oldalszam)
 {
 }
 
-Stilus *Oldal::getStilus() const
+Stilus *Oldal::getStilus()
 {
-    return stilus;
+    return &stilus;
 }
 
 void Oldal::belyegHozzaadas(Belyeg *ujBelyeg)
@@ -68,20 +68,20 @@ void Oldal::belyegTorles(Belyeg *belyeg)
 
 void Oldal::keretHozzaadas(Keret *ujKeret)
 {
-
+    keretek.push_back(ujKeret);
 }
 
 void Oldal::keretTorles(Keret *keret)
 {
-
+    keretek.remove(keret);
 }
 
 void Oldal::szovegHozzaadas(Szoveg *ujSzoveg)
 {
-
+    szovegek.push_back(ujSzoveg);
 }
 
 void Oldal::szovegTorles(Szoveg *szoveg)
 {
-
+    szovegek.remove(szoveg);
 }

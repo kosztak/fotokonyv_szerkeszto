@@ -15,12 +15,12 @@ const string &Minta::getEleresiUt() const
     return eleresiUt;
 }
 
-const QImage &Minta::getKep() const
+const QPixmap &Minta::getKep() const
 {
     return kep;
 }
 
-Minta::Minta(const string &nev, const string &eleresiUt, const QImage &kep) : nev(nev),
+Minta::Minta(const string &nev, const string &eleresiUt, const QPixmap &kep) : nev(nev),
     eleresiUt(eleresiUt),
     kep(kep)
 {}

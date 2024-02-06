@@ -14,7 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     //inicializalas
     inicializalas();
 
-    //belyegek betoltese
+    //belyegek betoltese szerkesztobe
     int counter = 0;
     for(auto i : belyegek)
     {
@@ -44,7 +44,16 @@ MainWindow::MainWindow(QWidget *parent)
                 ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->belyegPageSzerkeszto);
 
                 if(jelenlegiProjekt.getJelenlegiElem() != nullptr)
-                    jelenlegiProjekt.getJelenlegiElem()->getKimenet()->setStyleSheet("background-color: transparent");
+                {
+                    cout << jelenlegiProjekt.getJelenlegiElem()->getTipus() << endl;
+                    if(jelenlegiProjekt.getJelenlegiElem()->getTipus() != szoveg)
+                    {
+                        jelenlegiProjekt.getJelenlegiElem()->getKimenet()->setStyleSheet("background-color: transparent");
+                    }else{
+                        QColor szin = dynamic_cast<Szoveg*>(jelenlegiProjekt.getJelenlegiElem())->getSzin();
+                        jelenlegiProjekt.getJelenlegiElem()->getKimenet()->setStyleSheet(QString::fromStdString("background-color: transparent; color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
+                    }
+                }
 
                 jelenlegiProjekt.setJelenlegiElem(ujBelyeg);
                 ujBelyeg->getKimenet()->setStyleSheet(QString::fromStdString(kijeloltElemQSS));
@@ -67,7 +76,33 @@ MainWindow::MainWindow(QWidget *parent)
         });
     }
 
-    //kepek betoltese
+    //mintak betoltese szerkesztobe
+    counter = 0;
+    for(auto i : mintak)
+    {
+        QPushButton *tempbutton = new QPushButton;
+        tempbutton->setAutoFillBackground(true);
+        QPixmap pixmap(QString::fromStdString(i.second));
+
+        QIcon icon(pixmap);
+        tempbutton->setIcon(icon);
+        tempbutton->setIconSize(QSize(100, 100));
+
+        ui->mintakGridLayoutSzerkeszto->addWidget(tempbutton, counter/2, counter%2);
+
+        ++counter;
+
+        //funkcio hozzaadas a minta gombnak
+        connect(tempbutton, &QPushButton::clicked, [=]{
+            Minta ujMinta = Minta(i.first, i.second, pixmap);
+
+            jelenlegiProjekt.getJelenlegiOldal()->getStilus()->setMinta(ujMinta);
+            jelenlegiProjekt.getJelenlegiOldal()->getStilus()->setHatterTipus(1);
+
+            ui->szerkesztoWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-image: url(" + i.second + ");"));
+        });
+    }
+    //kepek betoltese szerkesztobe
     counter = 0;
     list<string> kepLista = jelenlegiProjekt.getKepek();
 
@@ -98,7 +133,15 @@ MainWindow::MainWindow(QWidget *parent)
                 ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->kepPageSzerkeszto);
 
                 if(jelenlegiProjekt.getJelenlegiElem() != nullptr)
-                    jelenlegiProjekt.getJelenlegiElem()->getKimenet()->setStyleSheet("background-color: transparent");
+                {
+                    if(jelenlegiProjekt.getJelenlegiElem()->getTipus() != szoveg)
+                    {
+                        jelenlegiProjekt.getJelenlegiElem()->getKimenet()->setStyleSheet("background-color: transparent");
+                    }else{
+                        QColor szin = dynamic_cast<Szoveg*>(jelenlegiProjekt.getJelenlegiElem())->getSzin();
+                        jelenlegiProjekt.getJelenlegiElem()->getKimenet()->setStyleSheet(QString::fromStdString("background-color: transparent; color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
+                    }
+                }
 
                 jelenlegiProjekt.setJelenlegiElem(ujKeret);
                 ujKeret->getKimenet()->setStyleSheet(QString::fromStdString(kijeloltElemQSS));
@@ -219,10 +262,21 @@ void MainWindow::on_ujSzovegPushButtonSzerkeszto_clicked()
         ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->szovegPageSzerkeszto);
 
         if(jelenlegiProjekt.getJelenlegiElem() != nullptr)
-            jelenlegiProjekt.getJelenlegiElem()->getKimenet()->setStyleSheet("background-color: transparent");
+        {
+            cout << jelenlegiProjekt.getJelenlegiElem()->getTipus() << endl;
+            if(jelenlegiProjekt.getJelenlegiElem()->getTipus() != szoveg)
+            {
+                jelenlegiProjekt.getJelenlegiElem()->getKimenet()->setStyleSheet("background-color: transparent");
+            }else{
+                QColor szin = dynamic_cast<Szoveg*>(jelenlegiProjekt.getJelenlegiElem())->getSzin();
+                std::cout << szin.red() << " " << szin.green() << " " << szin.blue() << std::endl;
+                jelenlegiProjekt.getJelenlegiElem()->getKimenet()->setStyleSheet(QString::fromStdString("background-color: transparent; color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
+            }
+        }
 
         jelenlegiProjekt.setJelenlegiElem(ujSzoveg);
-        ujSzoveg->getKimenet()->setStyleSheet(QString::fromStdString(kijeloltElemQSS));
+        QColor szin = ujSzoveg->getSzin();
+        ujSzoveg->getKimenet()->setStyleSheet(QString::fromStdString(kijeloltElemQSS + "color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
 
         //szoveg
         ui->szovegTextEditSzerkeszto->setText(QString::fromStdString(ujSzoveg->getTartalom()));
@@ -331,9 +385,8 @@ void MainWindow::on_betuszinPushButtonSzerkeszto_clicked()
     QColor ujSzin = QColorDialog::getColor(Qt::black, this, "Betűszín Választó");
 
     //betuszin
-    QPalette betuPal = jelenlegiProjekt.getJelenlegiElem()->getKimenet()->palette();
-    betuPal.setColor(QPalette::ButtonText, ujSzin);
-    jelenlegiProjekt.getJelenlegiElem()->getKimenet()->setPalette(betuPal);
+    dynamic_cast<Szoveg*>(jelenlegiProjekt.getJelenlegiElem())->setSzin(ujSzin);
+    jelenlegiProjekt.getJelenlegiElem()->getKimenet()->setStyleSheet(QString::fromStdString(kijeloltElemQSS + "color: rgba(" + to_string(ujSzin.red()) + "," + to_string(ujSzin.green()) + "," + to_string(ujSzin.blue()) + "," + to_string(ujSzin.alphaF()) + ");"));
 
     //hatterszin
     ui->betuszinWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(ujSzin.red()) + "," + to_string(ujSzin.green()) + "," + to_string(ujSzin.blue()) + "," + to_string(ujSzin.alphaF()) + ");"));
@@ -509,7 +562,6 @@ void MainWindow::on_hatterPushButtonSzerkeszto_clicked()
 {
     ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->hatterPageSzerkeszto);
 
-
     //hatterszin
     QColor szin = jelenlegiProjekt.getJelenlegiOldal()->getStilus()->getSzin();
     ui->hatterszinWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
@@ -519,13 +571,21 @@ void MainWindow::on_lapozasLePushButtonSzerkeszto_clicked()
 {
     if(jelenlegiProjekt.lapozas(false))
     {
-        QColor szin = jelenlegiProjekt.getJelenlegiOldal()->getStilus()->getSzin();
+        if(jelenlegiProjekt.getJelenlegiOldal()->getStilus()->getHatterTipus() == 0)
+        {
+            QColor szin = jelenlegiProjekt.getJelenlegiOldal()->getStilus()->getSzin();
 
-        //oldalszin
-        ui->szerkesztoWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
+            //oldalszin
+            ui->szerkesztoWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
 
-        //hatterszin
-        ui->hatterszinWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
+            //hatterszin
+            ui->hatterszinWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
+        }else{
+            Minta minta = jelenlegiProjekt.getJelenlegiOldal()->getStilus()->getMinta();
+
+            //minta beallitas
+            ui->szerkesztoWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-image: url(" + minta.getEleresiUt() + ");"));
+        }
     }
 }
 
@@ -533,12 +593,21 @@ void MainWindow::on_lapozasFelPushButtonSzerkeszto_clicked()
 {
     if(jelenlegiProjekt.lapozas(true))
     {
-        QColor szin = jelenlegiProjekt.getJelenlegiOldal()->getStilus()->getSzin();
+        if(jelenlegiProjekt.getJelenlegiOldal()->getStilus()->getHatterTipus() == 0)
+        {
+            QColor szin = jelenlegiProjekt.getJelenlegiOldal()->getStilus()->getSzin();
 
-        ui->szerkesztoWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
+            //oldalszin
+            ui->szerkesztoWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
 
-        //hatterszin
-        ui->hatterszinWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
+            //hatterszin
+            ui->hatterszinWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
+        }else{
+            Minta minta = jelenlegiProjekt.getJelenlegiOldal()->getStilus()->getMinta();
+
+            //minta beallitas
+            ui->szerkesztoWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-image: url(" + minta.getEleresiUt() + ");"));
+        }
     }
 }
 

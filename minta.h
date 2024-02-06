@@ -2,7 +2,7 @@
 #define MINTA_H
 
 #include <string>
-#include <QImage>
+#include <QPixmap>
 
 using namespace std;
 
@@ -11,13 +11,13 @@ class Minta
 private:
     string nev;
     string eleresiUt;
-    QImage kep;
+    QPixmap kep;
 public:
-    Minta(const string &nev, const string &eleresiUt, const QImage &kep);
+    Minta(const string &nev, const string &eleresiUt, const QPixmap &kep);
     const string &getNev() const;
     void setNev(const string &newNev);
     const string &getEleresiUt() const;
-    const QImage &getKep() const;
+    const QPixmap &getKep() const;
 };
 
 #endif // MINTA_H

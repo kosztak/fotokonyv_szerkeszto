@@ -11,7 +11,7 @@ private:
     Elrendezes elrendezes;
     bool elrendezesAktiv = 0;
     bool hatterTipus = 0; //0 = szin, 1 = minta
-    Minta minta = Minta("", "", QImage());
+    Minta minta = Minta("", "", QPixmap());
     QColor szin = Qt::white;
 public:
     Stilus();

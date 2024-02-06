@@ -589,38 +589,6 @@ background-color: rgb(255, 255, 255);</string>
                      </property>
                     </spacer>
                    </item>
-                   <item>
-                    <widget class="QPushButton" name="stilusMentesePushButtonSzerkeszto">
-                     <property name="font">
-                      <font>
-                       <pointsize>11</pointsize>
-                      </font>
-                     </property>
-                     <property name="styleSheet">
-                      <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
-                     </property>
-                     <property name="text">
-                      <string>STÍLUS MENTÉSE</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QPushButton" name="stilusBetoltesePushButtonSzerkeszto">
-                     <property name="font">
-                      <font>
-                       <pointsize>11</pointsize>
-                      </font>
-                     </property>
-                     <property name="styleSheet">
-                      <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
-                     </property>
-                     <property name="text">
-                      <string>STÍLUS BETÖLTÉSE</string>
-                     </property>
-                    </widget>
-                   </item>
                   </layout>
                  </item>
                 </layout>
@@ -2092,65 +2060,6 @@ background-color: rgb(255, 255, 255);</string>
                     <number>10</number>
                    </property>
                    <item>
-                    <layout class="QVBoxLayout" name="verticalLayout_18">
-                     <property name="spacing">
-                      <number>10</number>
-                     </property>
-                     <item>
-                      <widget class="QLabel" name="label_18">
-                       <property name="font">
-                        <font>
-                         <pointsize>11</pointsize>
-                         <bold>true</bold>
-                        </font>
-                       </property>
-                       <property name="styleSheet">
-                        <string notr="true">color: rgb(255, 255, 255);</string>
-                       </property>
-                       <property name="text">
-                        <string>TIPUS:</string>
-                       </property>
-                      </widget>
-                     </item>
-                     <item>
-                      <widget class="QWidget" name="widget" native="true">
-                       <layout class="QVBoxLayout" name="verticalLayout_19">
-                        <item>
-                         <widget class="QRadioButton" name="radioButton">
-                          <property name="font">
-                           <font>
-                            <pointsize>11</pointsize>
-                           </font>
-                          </property>
-                          <property name="styleSheet">
-                           <string notr="true">color: rgb(255, 255, 255);</string>
-                          </property>
-                          <property name="text">
-                           <string>szín</string>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QRadioButton" name="radioButton_2">
-                          <property name="font">
-                           <font>
-                            <pointsize>11</pointsize>
-                           </font>
-                          </property>
-                          <property name="styleSheet">
-                           <string notr="true">color: rgb(255, 255, 255);</string>
-                          </property>
-                          <property name="text">
-                           <string>minta</string>
-                          </property>
-                         </widget>
-                        </item>
-                       </layout>
-                      </widget>
-                     </item>
-                    </layout>
-                   </item>
-                   <item>
                     <layout class="QVBoxLayout" name="verticalLayout_20">
                      <item>
                       <widget class="QLabel" name="label_19">
@@ -2222,6 +2131,12 @@ background-color: rgb(255, 255, 255);</string>
                      </item>
                      <item>
                       <widget class="QScrollArea" name="scrollArea">
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>0</height>
+                        </size>
+                       </property>
                        <property name="widgetResizable">
                         <bool>true</bool>
                        </property>
@@ -2231,7 +2146,7 @@ background-color: rgb(255, 255, 255);</string>
                           <x>0</x>
                           <y>0</y>
                           <width>224</width>
-                          <height>232</height>
+                          <height>662</height>
                          </rect>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_18">
@@ -2251,26 +2166,13 @@ background-color: rgb(255, 255, 255);</string>
                           <number>0</number>
                          </property>
                          <item row="0" column="0">
-                          <layout class="QGridLayout" name="gridLayout_17"/>
+                          <layout class="QGridLayout" name="mintakGridLayoutSzerkeszto"/>
                          </item>
                         </layout>
                        </widget>
                       </widget>
                      </item>
                     </layout>
-                   </item>
-                   <item>
-                    <spacer name="verticalSpacer_11">
-                     <property name="orientation">
-                      <enum>Qt::Vertical</enum>
-                     </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>20</width>
-                       <height>40</height>
-                      </size>
-                     </property>
-                    </spacer>
                    </item>
                   </layout>
                  </item>

@@ -8,7 +8,7 @@ using namespace std;
 
 enum ElemTipus
 {
-    beyleg,
+    belyeg,
     keret,
     szoveg
 };
