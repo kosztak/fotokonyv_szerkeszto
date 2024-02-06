@@ -586,6 +586,9 @@ void MainWindow::on_lapozasLePushButtonSzerkeszto_clicked()
             //minta beallitas
             ui->szerkesztoWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-image: url(" + minta.getEleresiUt() + ");"));
         }
+
+        //oldal beállítása
+        ui->oldalszamLabelSzerkeszto->setText(QString::fromStdString(to_string((ui->oldalszamLabelSzerkeszto->text().toInt())-1)));
     }
 }
 
@@ -608,6 +611,9 @@ void MainWindow::on_lapozasFelPushButtonSzerkeszto_clicked()
             //minta beallitas
             ui->szerkesztoWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-image: url(" + minta.getEleresiUt() + ");"));
         }
+
+        //oldal beállítása
+        ui->oldalszamLabelSzerkeszto->setText(QString::fromStdString(to_string((ui->oldalszamLabelSzerkeszto->text().toInt())+1)));
     }
 }
 
