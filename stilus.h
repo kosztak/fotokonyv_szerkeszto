@@ -8,18 +8,16 @@
 class Stilus
 {
 private:
-    bool aktiv = 0;
     Elrendezes elrendezes;
     bool elrendezesAktiv = 0;
     bool hatterTipus = 0; //0 = szin, 1 = minta
     Minta minta = Minta("", "", QImage());
-    QColor szin = QColor();
+    QColor szin = Qt::white;
 public:
     Stilus();
-    bool isAktiv() const;
     void setAktiv(bool ertek);
     const Elrendezes &getElrendezes() const;
-    void setElrendezes(unsigned index);
+    void setElrendezes(Elrendezes uj);
     bool getElrendezesAktiv() const;
     void setElrendezesAktiv(bool ertek);
     bool getHatterTipus() const;

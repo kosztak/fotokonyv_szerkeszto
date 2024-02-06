@@ -13,7 +13,7 @@
 class Oldal
 {
 private:
-    Stilus* stilus;
+    Stilus* stilus = new Stilus();
     list<Keret*> keretek;
     list<Belyeg*> belyegek;
     list<Szoveg*> szovegek;

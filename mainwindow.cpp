@@ -497,6 +497,8 @@ void MainWindow::on_hatterszinMegvaltoztatPushButtonSzerkeszto_clicked()
     QColor ujSzin = QColorDialog::getColor(Qt::black, this, "Háttérszín Választó");
 
     //oldalszin
+    jelenlegiProjekt.getJelenlegiOldal()->getStilus()->setSzin(ujSzin);
+    jelenlegiProjekt.getJelenlegiOldal()->getStilus()->setHatterTipus(0);
     ui->szerkesztoWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(ujSzin.red()) + "," + to_string(ujSzin.green()) + "," + to_string(ujSzin.blue()) + "," + to_string(ujSzin.alphaF()) + ");"));
 
     //hatterszin
@@ -506,16 +508,37 @@ void MainWindow::on_hatterszinMegvaltoztatPushButtonSzerkeszto_clicked()
 void MainWindow::on_hatterPushButtonSzerkeszto_clicked()
 {
     ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->hatterPageSzerkeszto);
+
+
+    //hatterszin
+    QColor szin = jelenlegiProjekt.getJelenlegiOldal()->getStilus()->getSzin();
+    ui->hatterszinWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
 }
 
 void MainWindow::on_lapozasLePushButtonSzerkeszto_clicked()
 {
-    jelenlegiProjekt.lapozas(false);
-}
+    if(jelenlegiProjekt.lapozas(false))
+    {
+        QColor szin = jelenlegiProjekt.getJelenlegiOldal()->getStilus()->getSzin();
 
+        //oldalszin
+        ui->szerkesztoWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
+
+        //hatterszin
+        ui->hatterszinWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
+    }
+}
 
 void MainWindow::on_lapozasFelPushButtonSzerkeszto_clicked()
 {
-    jelenlegiProjekt.lapozas(true);
+    if(jelenlegiProjekt.lapozas(true))
+    {
+        QColor szin = jelenlegiProjekt.getJelenlegiOldal()->getStilus()->getSzin();
+
+        ui->szerkesztoWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
+
+        //hatterszin
+        ui->hatterszinWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
+    }
 }
 

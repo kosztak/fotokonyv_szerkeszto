@@ -15,7 +15,7 @@ const Elrendezes &Stilus::getElrendezes() const
     return elrendezes;
 }
 
-void Stilus::setElrendezes(unsigned index)
+void Stilus::setElrendezes(Elrendezes uj)
 {
 }
 
@@ -52,11 +52,6 @@ void Stilus::setSzin(const QColor &newSzin)
 Stilus::Stilus()
 {
     elrendezes = Elrendezes();
-}
-
-bool Stilus::isAktiv() const
-{
-
 }
 
 void Stilus::setAktiv(bool ertek)
