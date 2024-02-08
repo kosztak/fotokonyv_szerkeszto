@@ -47,6 +47,15 @@ void Oldal::elemekMutatasa()
     }
 }
 
+void Oldal::egysegesKeret(unsigned short index)
+{
+    for(auto i : keretek)
+    {
+        i->setKeret(index);
+        i->kepKeszites();
+    }
+}
+
 Oldal::Oldal(const unsigned &oldalszam): oldalszam(oldalszam)
 {
 }

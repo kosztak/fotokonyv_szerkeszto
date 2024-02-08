@@ -26,6 +26,7 @@ public:
     void kepKeszites();
     const QPixmap &getKep() const;
     void setKeret(unsigned short index);
+    unsigned short getKeret() const;
     void setXKoordinata(int ertek);
     void setYKoordinata(int ertek);
     unsigned short getSzelesseg() const;

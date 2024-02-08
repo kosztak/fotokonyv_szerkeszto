@@ -31,6 +31,7 @@ public:
     unsigned int getOldalszam() const;
     void elemekElrejtese();
     void elemekMutatasa();
+    void egysegesKeret(unsigned short index);
 };
 
 #endif // OLDAL_H

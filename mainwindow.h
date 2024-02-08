@@ -16,6 +16,8 @@
 #include "minta.h"
 #include "stilus.h"
 #include "elrendezes.h"
+#include "keretvalaszto.h"
+#include "kepvalaszto.h"
 
 #include <iostream>
 #include <QMouseEvent>
@@ -115,6 +117,12 @@ private slots:
 
     void on_lapozasFelPushButtonSzerkeszto_clicked();
 
+    void on_keretValasztasPushButtonSzerleszto_clicked();
+
+    void on_egysegeskeretPushButtonSzerkeszto_clicked();
+
+    void on_kepValasztasPushButtonSzerkeszto_clicked();
+
 private:
     Ui::MainWindow *ui;
 
@@ -128,9 +136,8 @@ private:
     map<string, string> projektek; //nev, eleres
     map<string, string> belyegek; //nev, eleres
     map<string, string> mintak; //nev, eleres
-    list<QSvgRenderer> kepKeretek;
     list<Stilus> stilusok;
     list<Elrendezes> elrendezesek;
-    QImage keretAlapHatter;
+    QSvgRenderer keretAlapHatter;
 };
 #endif // MAINWINDOW_H

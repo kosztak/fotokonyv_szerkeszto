@@ -12,7 +12,7 @@ const QPixmap &Abra::getForras() const
 
 void Abra::setForras(const string &eleres)
 {
-
+    forras = QPixmap(QString::fromStdString(eleres));
 }
 
 unsigned short Abra::getMeretArany() const

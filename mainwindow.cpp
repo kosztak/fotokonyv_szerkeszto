@@ -102,6 +102,7 @@ MainWindow::MainWindow(QWidget *parent)
             ui->szerkesztoWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-image: url(" + i.second + ");"));
         });
     }
+
     //kepek betoltese szerkesztobe
     counter = 0;
     list<string> kepLista = jelenlegiProjekt.getKepek();
@@ -617,3 +618,39 @@ void MainWindow::on_lapozasFelPushButtonSzerkeszto_clicked()
     }
 }
 
+
+void MainWindow::on_keretValasztasPushButtonSzerleszto_clicked()
+{
+    KeretValaszto* k = new KeretValaszto(this);
+    if(k->exec() == QDialog::Accepted)
+    {
+        Keret* jelenlegiKeret = dynamic_cast<Keret*>(jelenlegiProjekt.getJelenlegiElem());
+        jelenlegiKeret->setKeret(k->getIndex());
+        jelenlegiKeret->kepKeszites();
+    }
+}
+
+void MainWindow::on_egysegeskeretPushButtonSzerkeszto_clicked()
+{
+    KeretValaszto* k = new KeretValaszto(this, dynamic_cast<Keret*>(jelenlegiProjekt.getJelenlegiElem())->getKeret());
+    if(k->exec() == QDialog::Accepted)
+    {
+        jelenlegiProjekt.getJelenlegiOldal()->egysegesKeret(k->getIndex());
+    }
+}
+
+
+void MainWindow::on_kepValasztasPushButtonSzerkeszto_clicked()
+{
+    KepValaszto* k = new KepValaszto(this, jelenlegiProjekt.getKepek());
+    if(k->exec() == QDialog::Accepted)
+    {
+        string forras = k->getJelenlegiKep();
+        if(forras != "")
+        {
+            Keret* jelenlegiKeret = dynamic_cast<Keret*>(jelenlegiProjekt.getJelenlegiElem());
+            jelenlegiKeret->setForras(forras);
+            jelenlegiKeret->kepKeszites();
+        }
+    }
+}

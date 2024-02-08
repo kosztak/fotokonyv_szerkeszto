@@ -111,6 +111,11 @@ void Keret::setKeret(unsigned short index)
     kepKeret = index;
 }
 
+unsigned short Keret::getKeret() const
+{
+    return kepKeret;
+}
+
 unsigned short Keret::getSzelesseg() const
 {
     return szelesseg;
