@@ -99,7 +99,7 @@ MainWindow::MainWindow(QWidget *parent)
             jelenlegiProjekt.getJelenlegiOldal()->getStilus()->setMinta(ujMinta);
             jelenlegiProjekt.getJelenlegiOldal()->getStilus()->setHatterTipus(1);
 
-            ui->szerkesztoWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-image: url(" + i.second + ");"));
+            ui->szerkesztoWidgetSzerkeszto->setStyleSheet(QString::fromStdString("QWidget#szerkesztoWidgetSzerkeszto{border-image: url(" + i.second + ") 0 0 0 0 stretch stretch;}"));
         });
     }
 
@@ -585,7 +585,7 @@ void MainWindow::on_lapozasLePushButtonSzerkeszto_clicked()
             Minta minta = jelenlegiProjekt.getJelenlegiOldal()->getStilus()->getMinta();
 
             //minta beallitas
-            ui->szerkesztoWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-image: url(" + minta.getEleresiUt() + ");"));
+            ui->szerkesztoWidgetSzerkeszto->setStyleSheet(QString::fromStdString("QWidget#szerkesztoWidgetSzerkeszto{border-image: url(" + minta.getEleresiUt() + ") 0 0 0 0 stretch stretch;}"));
         }
 
         //oldal beállítása
@@ -610,7 +610,7 @@ void MainWindow::on_lapozasFelPushButtonSzerkeszto_clicked()
             Minta minta = jelenlegiProjekt.getJelenlegiOldal()->getStilus()->getMinta();
 
             //minta beallitas
-            ui->szerkesztoWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-image: url(" + minta.getEleresiUt() + ");"));
+            ui->szerkesztoWidgetSzerkeszto->setStyleSheet(QString::fromStdString("QWidget#szerkesztoWidgetSzerkeszto{border-image: url(" + minta.getEleresiUt() + ") 0 0 0 0 stretch stretch;}"));
         }
 
         //oldal beállítása
