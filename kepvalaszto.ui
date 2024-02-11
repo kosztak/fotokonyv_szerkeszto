@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(220, 20, 60);</string>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
     <number>10</number>
@@ -27,7 +30,7 @@
     <number>30</number>
    </property>
    <property name="bottomMargin">
-    <number>30</number>
+    <number>20</number>
    </property>
    <item>
     <widget class="QScrollArea" name="scrollArea">
@@ -40,8 +43,11 @@
         <x>0</x>
         <y>0</y>
         <width>438</width>
-        <height>202</height>
+        <height>208</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(249, 219, 189);</string>
       </property>
       <layout class="QGridLayout" name="gridLayout_3">
        <property name="leftMargin">
@@ -96,6 +102,15 @@
      </item>
      <item>
       <widget class="QPushButton" name="valasztPushButton">
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);</string>
+       </property>
        <property name="text">
         <string>VÁLASZT</string>
        </property>
@@ -116,6 +131,15 @@
      </item>
      <item>
       <widget class="QPushButton" name="megsePushButton">
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);</string>
+       </property>
        <property name="text">
         <string>MÉGSE</string>
        </property>

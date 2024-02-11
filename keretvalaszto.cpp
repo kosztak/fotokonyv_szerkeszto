@@ -14,16 +14,29 @@ KeretValaszto::KeretValaszto(QWidget *parent, unsigned short jelenlegi)
 
 void KeretValaszto::inicializalas()
 {
-    int counter = 0;
+    QPushButton *tempbutton = new QPushButton();
+    tempbutton->setAutoFillBackground(true);
+
+    QPixmap pixmap(128, 128);
+    QPainter imagePainter(&pixmap);
+    image.render(&imagePainter);
+    imagePainter.end();
+
+    tempbutton->setIconSize(QSize(128, 128));
+    tempbutton->setIcon(pixmap);
+
+    ui->keretekGridLayout->addWidget(tempbutton, 0, 0);
+
+    //funkcio hozzaadas a keret gombnak
+    connect(tempbutton, &QPushButton::clicked, [=]{
+        index = 0;
+    });
+
+    int counter = 1;
     for(unsigned short i = 1; i <= 2; ++i)
     {
-        QPushButton *tempbutton = new QPushButton;
+        tempbutton = new QPushButton();
         tempbutton->setAutoFillBackground(true);
-
-        QPixmap pixmap(128, 128);
-        QPainter imagePainter(&pixmap);
-        image.render(&imagePainter);
-        imagePainter.end();
 
         QImage temp = pixmap.toImage().convertToFormat(QImage::Format_ARGB32);
 
@@ -57,14 +70,13 @@ void KeretValaszto::inicializalas()
             }
         }
 
-        pixmap = QPixmap::fromImage(temp);
-
         tempbutton->setIconSize(QSize(128, 128));
-        tempbutton->setIcon(pixmap);
+        tempbutton->setIcon(QPixmap::fromImage(temp));
 
         ui->keretekGridLayout->addWidget(tempbutton, counter/3, counter%3);
 
         ++counter;
+
         //funkcio hozzaadas a keret gombnak
         connect(tempbutton, &QPushButton::clicked, [=]{
             index = i;
