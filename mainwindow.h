@@ -12,6 +12,7 @@
 #include <string>
 #include <list>
 #include <map>
+#include "kimenet.h"
 #include "projekt.h"
 #include "minta.h"
 #include "stilus.h"
@@ -128,7 +129,7 @@ private:
 
     string kijeloltElemQSS = "background-color: transparent;"
                              "border-style: dotted;"
-                             "border-width: 3px;"
+                             "border-width: 2px;"
                              "border-color: blue;";
 
     //rendszer

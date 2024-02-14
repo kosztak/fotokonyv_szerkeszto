@@ -35,12 +35,12 @@ MainWindow::MainWindow(QWidget *parent)
             Belyeg *ujBelyeg = new Belyeg(i.first, pixmap.size(), pixmap, 0, 0, 0, 100);
             ujBelyeg->getKimenet()->setStyleSheet("background-color: transparent");
             ujBelyeg->getKimenet()->setParent(ui->szerkesztoWidgetSzerkeszto);
-            ujBelyeg->getKimenet()->setIcon(pixmap);
-            ujBelyeg->getKimenet()->setIconSize(pixmap.size());
+            ujBelyeg->getKimenet()->setPixmap(pixmap);
+            ujBelyeg->getKimenet()->resize(pixmap.size());
             ujBelyeg->getKimenet()->resize(pixmap.size());
             ujBelyeg->getKimenet()->show();
 
-            connect(ujBelyeg->getKimenet(), &QPushButton::clicked, [=]{
+            connect(ujBelyeg->getKimenet(), &Kimenet::clicked, [=]{
                 ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->belyegPageSzerkeszto);
 
                 if(jelenlegiProjekt.getJelenlegiElem() != nullptr)
@@ -122,15 +122,15 @@ MainWindow::MainWindow(QWidget *parent)
 
         //funkcio hozzaadas a kep gombnak
         connect(tempbutton, &QPushButton::clicked, [=]{
-            Keret *ujKeret = new Keret(pixmap.size(), pixmap, 0, 0, 0, 100, 100, 100, 0, 0, 0, 2);
+            Keret *ujKeret = new Keret(pixmap.size(), pixmap, 0, 0, 0, 100, 100, 100, 0, 0, 0, 0);
             ujKeret->getKimenet()->setStyleSheet("background-color: transparent");
             ujKeret->getKimenet()->setParent(ui->szerkesztoWidgetSzerkeszto);
-            ujKeret->getKimenet()->setIcon(pixmap);
-            ujKeret->getKimenet()->setIconSize(pixmap.size());
+            ujKeret->getKimenet()->setPixmap(pixmap);
+            ujKeret->getKimenet()->resize(pixmap.size());
             ujKeret->getKimenet()->resize(pixmap.size());
             ujKeret->getKimenet()->show();
 
-            connect(ujKeret->getKimenet(), &QPushButton::clicked, [=]{
+            connect(ujKeret->getKimenet(), &Kimenet::clicked, [=]{
                 ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->kepPageSzerkeszto);
 
                 if(jelenlegiProjekt.getJelenlegiElem() != nullptr)
@@ -259,7 +259,7 @@ void MainWindow::on_ujSzovegPushButtonSzerkeszto_clicked()
     ujSzoveg->getKimenet()->setText(QString::fromStdString(ujSzoveg->getTartalom()));
     ujSzoveg->getKimenet()->show();
 
-    connect(ujSzoveg->getKimenet(), &QPushButton::clicked, [=]{
+    connect(ujSzoveg->getKimenet(), &Kimenet::clicked, [=]{
         ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->szovegPageSzerkeszto);
 
         if(jelenlegiProjekt.getJelenlegiElem() != nullptr)
@@ -359,25 +359,20 @@ void MainWindow::on_belyegMeretHorizontalSliderSzerkeszto_valueChanged(int value
     jelenlegiBelyeg->setMeretArany(value);
 
     //belyeg meretenek megvaltoztatasa
-    QPushButton* jelenlegiButton = jelenlegiBelyeg->getKimenet();
-    QSize jelenlegiMeret = jelenlegiBelyeg->getMeret();
-    jelenlegiMeret.setWidth((jelenlegiMeret.width()/100.0)*value);
-    jelenlegiMeret.setHeight((jelenlegiMeret.height()/100.0)*value);
-
-    jelenlegiButton->resize(jelenlegiMeret);
-    jelenlegiButton->setIconSize(jelenlegiMeret);
+    Kimenet* jelenlegiKimenet = jelenlegiBelyeg->getKimenet();
+    jelenlegiBelyeg->kepKeszites();
 
     //tooltip beallitas
     ui->belyegMeretHorizontalSliderSzerkeszto->setToolTip(QString::number(value));
 
     //horizontalis mozgatas
-    unsigned xPont = jelenlegiButton->x();
-    ui->belyegHorizontalisSpinBoxSzerkeszto->setMaximum(ui->szerkesztoWidgetSzerkeszto->width() - jelenlegiButton->width());
+    unsigned xPont = jelenlegiKimenet->x();
+    ui->belyegHorizontalisSpinBoxSzerkeszto->setMaximum(ui->szerkesztoWidgetSzerkeszto->width() - jelenlegiKimenet->width());
     ui->belyegHorizontalisSpinBoxSzerkeszto->setValue(xPont);
 
     //vertikalis mozgatas
-    unsigned yPont = jelenlegiButton->y();
-    ui->belyegVertikalisSpinBoxSzerkeszto->setMaximum(ui->szerkesztoWidgetSzerkeszto->height() - jelenlegiButton->height());
+    unsigned yPont = jelenlegiKimenet->y();
+    ui->belyegVertikalisSpinBoxSzerkeszto->setMaximum(ui->szerkesztoWidgetSzerkeszto->height() - jelenlegiKimenet->height());
     ui->belyegVertikalisSpinBoxSzerkeszto->setValue(yPont);
 }
 
@@ -431,20 +426,20 @@ void MainWindow::on_kepMeretHorizontalSliderSzerkeszto_valueChanged(int value)
     jelenlegiKep->setMeretArany(value);
 
     //kep meretenek megvaltoztatasa
-    QPushButton* jelenlegiButton = jelenlegiKep->getKimenet();
+    QLabel* jelenlegiKimenet = jelenlegiKep->getKimenet();
     jelenlegiKep->kepKeszites();
 
     //tooltip beallitas
     ui->kepMeretHorizontalSliderSzerkeszto->setToolTip(QString::number(value));
 
     //horizontalis mozgatas
-    unsigned xPont = jelenlegiButton->x();
-    ui->kepHorizontalisSpinBoxSzerkeszto->setMaximum(ui->szerkesztoWidgetSzerkeszto->width() - jelenlegiButton->width());
+    unsigned xPont = jelenlegiKimenet->x();
+    ui->kepHorizontalisSpinBoxSzerkeszto->setMaximum(ui->szerkesztoWidgetSzerkeszto->width() - jelenlegiKimenet->width());
     ui->kepHorizontalisSpinBoxSzerkeszto->setValue(xPont);
 
     //vertikalis mozgatas
-    unsigned yPont = jelenlegiButton->y();
-    ui->kepVertikalisSpinBoxSzerkeszto->setMaximum(ui->szerkesztoWidgetSzerkeszto->height() - jelenlegiButton->height());
+    unsigned yPont = jelenlegiKimenet->y();
+    ui->kepVertikalisSpinBoxSzerkeszto->setMaximum(ui->szerkesztoWidgetSzerkeszto->height() - jelenlegiKimenet->height());
     ui->kepVertikalisSpinBoxSzerkeszto->setValue(yPont);
 }
 

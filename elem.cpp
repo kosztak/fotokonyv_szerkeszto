@@ -10,7 +10,7 @@ ElemTipus Elem::getTipus() const
     return tipus;
 }
 
-QPushButton *Elem::getKimenet() const
+Kimenet *Elem::getKimenet() const
 {
     return kimenet;
 }

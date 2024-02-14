@@ -635,10 +635,13 @@ background-color: rgb(255, 255, 255);</string>
                  <property name="orientation">
                   <enum>Qt::Vertical</enum>
                  </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Expanding</enum>
+                 </property>
                  <property name="sizeHint" stdset="0">
                   <size>
                    <width>20</width>
-                   <height>40</height>
+                   <height>10</height>
                   </size>
                  </property>
                 </spacer>
@@ -648,10 +651,13 @@ background-color: rgb(255, 255, 255);</string>
                  <property name="orientation">
                   <enum>Qt::Vertical</enum>
                  </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Expanding</enum>
+                 </property>
                  <property name="sizeHint" stdset="0">
                   <size>
                    <width>20</width>
-                   <height>40</height>
+                   <height>10</height>
                   </size>
                  </property>
                 </spacer>
@@ -661,9 +667,12 @@ background-color: rgb(255, 255, 255);</string>
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Expanding</enum>
+                 </property>
                  <property name="sizeHint" stdset="0">
                   <size>
-                   <width>40</width>
+                   <width>10</width>
                    <height>20</height>
                   </size>
                  </property>
@@ -672,43 +681,38 @@ background-color: rgb(255, 255, 255);</string>
                <item row="1" column="1">
                 <layout class="QHBoxLayout" name="horizontalLayout_5">
                  <item>
-                  <spacer name="horizontalSpacer_8">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
+                  <widget class="QFrame" name="szerkesztoWidgetSzerkeszto">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
                    </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>40</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                 <item>
-                  <widget class="QWidget" name="szerkesztoWidgetSzerkeszto" native="true">
                    <property name="minimumSize">
                     <size>
-                     <width>525</width>
-                     <height>750</height>
+                     <width>425</width>
+                     <height>600</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>425</width>
+                     <height>600</height>
                     </size>
                    </property>
                    <property name="styleSheet">
                     <string notr="true">background-color: rgb(255, 255, 255);</string>
                    </property>
+                   <property name="frameShape">
+                    <enum>QFrame::Box</enum>
+                   </property>
+                   <property name="frameShadow">
+                    <enum>QFrame::Plain</enum>
+                   </property>
+                   <property name="midLineWidth">
+                    <number>1</number>
+                   </property>
                   </widget>
-                 </item>
-                 <item>
-                  <spacer name="horizontalSpacer_9">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>40</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                  </spacer>
                  </item>
                 </layout>
                </item>
@@ -717,9 +721,12 @@ background-color: rgb(255, 255, 255);</string>
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Expanding</enum>
+                 </property>
                  <property name="sizeHint" stdset="0">
                   <size>
-                   <width>40</width>
+                   <width>10</width>
                    <height>20</height>
                   </size>
                  </property>
@@ -929,7 +936,7 @@ background-color: rgb(255, 255, 255);</string>
              <item row="0" column="0">
               <widget class="QStackedWidget" name="tulajdonsagokStackedWidgetSzerkeszto">
                <property name="currentIndex">
-                <number>1</number>
+                <number>2</number>
                </property>
                <widget class="QWidget" name="uresPageSzerkeszto">
                 <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -1020,8 +1027,8 @@ background-color: rgb(255, 255, 255);</string>
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>228</width>
-                        <height>726</height>
+                        <width>156</width>
+                        <height>692</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_17">
@@ -1179,7 +1186,7 @@ background-color: rgb(255, 255, 255);</string>
                            <item>
                             <widget class="QSlider" name="kepMeretHorizontalSliderSzerkeszto">
                              <property name="minimum">
-                              <number>10</number>
+                              <number>20</number>
                              </property>
                              <property name="maximum">
                               <number>150</number>
@@ -1639,6 +1646,18 @@ background-color: rgb(255, 255, 255);</string>
                          <property name="styleSheet">
                           <string notr="true">color: rgb(255, 255, 255);</string>
                          </property>
+                         <property name="frameShape">
+                          <enum>QFrame::NoFrame</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Plain</enum>
+                         </property>
+                         <property name="lineWidth">
+                          <number>1</number>
+                         </property>
+                         <property name="midLineWidth">
+                          <number>0</number>
+                         </property>
                          <property name="text">
                           <string>vertikális:</string>
                          </property>
@@ -1710,10 +1729,10 @@ background-color: rgb(255, 255, 255);</string>
                         <string notr="true"/>
                        </property>
                        <property name="minimum">
-                        <number>10</number>
+                        <number>20</number>
                        </property>
                        <property name="maximum">
-                        <number>100</number>
+                        <number>150</number>
                        </property>
                        <property name="orientation">
                         <enum>Qt::Horizontal</enum>
@@ -2292,8 +2311,8 @@ background-color: rgb(255, 255, 255);</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>224</width>
-                          <height>662</height>
+                          <width>62</width>
+                          <height>16</height>
                          </rect>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_18">

@@ -8,7 +8,7 @@ void Keret::kepKeszites()
     //meretezes
     if(meretArany != 100)
     {
-        ujKep = ujKep.scaled(ujKep.width()*(meretArany/100.0), ujKep.height()*(meretArany/100.0));
+        ujKep = ujKep.scaled(ujKep.width()*(meretArany/100.0), ujKep.height()*(meretArany/100.0), Qt::KeepAspectRatio, Qt::SmoothTransformation);
     }
 
     //szuro felhelyezes
@@ -97,8 +97,9 @@ void Keret::kepKeszites()
         ujKep = QPixmap::fromImage(temp);
     }
 
+    //kep gombra helyezese
     kimenet->resize(ujKep.size());
-    kimenet->setIcon(ujKep);
+    kimenet->setPixmap(ujKep);
 }
 
 const QPixmap &Keret::getKep() const

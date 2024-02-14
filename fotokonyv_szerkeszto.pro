@@ -11,6 +11,7 @@ CONFIG += c++17
 SOURCES += \
     kepvalaszto.cpp \
     keretvalaszto.cpp \
+    kimenet.cpp \
     main.cpp \
     mainwindow.cpp \
     abra.cpp \
@@ -27,6 +28,7 @@ SOURCES += \
 HEADERS += \
     kepvalaszto.h \
     keretvalaszto.h \
+    kimenet.h \
     mainwindow.h \
     abra.h \
     belyeg.h \

@@ -2,7 +2,7 @@
 #define ELEM_H
 
 #include <string>
-#include <QPushButton>
+#include <kimenet.h>
 
 using namespace std;
 
@@ -20,7 +20,7 @@ protected:
     unsigned yKoordinata;
     int dolesszog;
     ElemTipus tipus;
-    QPushButton *kimenet = new QPushButton();
+    Kimenet *kimenet = new Kimenet();
 
 public:
     Elem(unsigned xKoordinata, unsigned yKoordinata, int dolesszog);
@@ -31,7 +31,7 @@ public:
     void forgatas(int szog);
     int getDolesszog() const;
     ElemTipus getTipus() const;
-    QPushButton *getKimenet() const;
+    Kimenet *getKimenet() const;
     virtual void semmi(){}
 };
 
