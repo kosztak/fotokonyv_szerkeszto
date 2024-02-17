@@ -45,7 +45,6 @@ MainWindow::MainWindow(QWidget *parent)
 
                 if(jelenlegiProjekt.getJelenlegiElem() != nullptr)
                 {
-                    cout << jelenlegiProjekt.getJelenlegiElem()->getTipus() << endl;
                     if(jelenlegiProjekt.getJelenlegiElem()->getTipus() != szoveg)
                     {
                         jelenlegiProjekt.getJelenlegiElem()->getKimenet()->setStyleSheet("background-color: transparent");
@@ -257,6 +256,7 @@ void MainWindow::on_ujSzovegPushButtonSzerkeszto_clicked()
     ujSzoveg->getKimenet()->setStyleSheet("background-color: transparent");
     ujSzoveg->getKimenet()->setParent(ui->szerkesztoWidgetSzerkeszto);
     ujSzoveg->getKimenet()->setText(QString::fromStdString(ujSzoveg->getTartalom()));
+    ujSzoveg->getKimenet()->setAlignment(Qt::AlignCenter);
     ujSzoveg->getKimenet()->show();
 
     connect(ujSzoveg->getKimenet(), &Kimenet::clicked, [=]{
@@ -264,14 +264,13 @@ void MainWindow::on_ujSzovegPushButtonSzerkeszto_clicked()
 
         if(jelenlegiProjekt.getJelenlegiElem() != nullptr)
         {
-            cout << jelenlegiProjekt.getJelenlegiElem()->getTipus() << endl;
             if(jelenlegiProjekt.getJelenlegiElem()->getTipus() != szoveg)
             {
                 jelenlegiProjekt.getJelenlegiElem()->getKimenet()->setStyleSheet("background-color: transparent");
             }else{
-                QColor szin = dynamic_cast<Szoveg*>(jelenlegiProjekt.getJelenlegiElem())->getSzin();
-                std::cout << szin.red() << " " << szin.green() << " " << szin.blue() << std::endl;
-                jelenlegiProjekt.getJelenlegiElem()->getKimenet()->setStyleSheet(QString::fromStdString("background-color: transparent; color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
+                Szoveg* jelenlegiSzoveg = dynamic_cast<Szoveg*>(jelenlegiProjekt.getJelenlegiElem());
+                QColor szin = jelenlegiSzoveg->getSzin();
+                jelenlegiSzoveg->getKimenet()->setStyleSheet(QString::fromStdString("background-color: transparent; color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
             }
         }
 
@@ -629,7 +628,7 @@ void MainWindow::on_keretValasztasPushButtonSzerleszto_clicked()
 
 void MainWindow::on_egysegeskeretPushButtonSzerkeszto_clicked()
 {
-    KeretValaszto* k = new KeretValaszto(this, dynamic_cast<Keret*>(jelenlegiProjekt.getJelenlegiElem())->getKeret());
+    KeretValaszto* k = new KeretValaszto(this);
     if(k->exec() == QDialog::Accepted)
     {
         jelenlegiProjekt.getJelenlegiOldal()->egysegesKeret(k->getIndex());
