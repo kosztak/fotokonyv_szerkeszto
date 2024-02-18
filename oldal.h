@@ -32,6 +32,9 @@ public:
     void elemekElrejtese();
     void elemekMutatasa();
     void egysegesKeret(unsigned short index);
+    list<Keret *> getKeretek() const;
+    list<Belyeg *> getBelyegek() const;
+    list<Szoveg *> getSzovegek() const;
 };
 
 #endif // OLDAL_H

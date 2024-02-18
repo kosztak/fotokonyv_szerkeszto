@@ -13,7 +13,7 @@ private:
     QColor szin;
     QFont betutipus;
 public:
-    Szoveg(const unsigned &xKoordinata, const unsigned &yKoordinata, int dolesszog);
+    Szoveg(const unsigned &xKoordinata, const unsigned &yKoordinata, int dolesszog, string tartalom);
     const string &getTartalom() const;
     void setTartalom(const string &newTartalom);
     const QColor &getSzin() const;

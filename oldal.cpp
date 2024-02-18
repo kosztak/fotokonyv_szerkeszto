@@ -56,6 +56,21 @@ void Oldal::egysegesKeret(unsigned short index)
     }
 }
 
+list<Keret *> Oldal::getKeretek() const
+{
+    return keretek;
+}
+
+list<Belyeg *> Oldal::getBelyegek() const
+{
+    return belyegek;
+}
+
+list<Szoveg *> Oldal::getSzovegek() const
+{
+    return szovegek;
+}
+
 Oldal::Oldal(const unsigned &oldalszam): oldalszam(oldalszam)
 {
 }

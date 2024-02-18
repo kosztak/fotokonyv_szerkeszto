@@ -50,6 +50,8 @@ class MainWindow : public QMainWindow
     map<string, string> getProjektek();
     map<string, string> getBelyegek();
     map<string, string> getMintak();
+    void kepFrissites(Keret* ptr);
+    void listaFrissites();
 
 public:
     MainWindow(QWidget *parent = nullptr);
@@ -104,7 +106,7 @@ private slots:
 
     void on_kepSzuroComboBoxSzerkeszto_currentIndexChanged(int index);
 
-    void on_kepTorlesPushButtonSzerkeszto_2_clicked();
+    void on_kepTorlesPushButtonSzerkeszto_clicked();
 
     void on_belyegTorlesPushButtonSzerkeszto_clicked();
 
@@ -124,6 +126,8 @@ private slots:
 
     void on_kepValasztasPushButtonSzerkeszto_clicked();
 
+    void on_elemekPushButtonSzerkeszto_clicked();
+
 private:
     Ui::MainWindow *ui;
 
@@ -140,5 +144,8 @@ private:
     list<Stilus> stilusok;
     list<Elrendezes> elrendezesek;
     QSvgRenderer keretAlapHatter;
+    map<Keret*, QPushButton*> kepekLista;
+    map<Belyeg*, QPushButton*> belyegekLista;
+    map<Szoveg*, QPushButton*> szovegekLista;
 };
 #endif // MAINWINDOW_H

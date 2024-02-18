@@ -61,8 +61,7 @@ void Szoveg::setBetutipus(const QFont &newBetutipus)
     betutipus = newBetutipus;
 }
 
-Szoveg::Szoveg(const unsigned &xKoordinata, const unsigned &yKoordinata, int dolesszog) : Elem(xKoordinata, yKoordinata, dolesszog)
+Szoveg::Szoveg(const unsigned &xKoordinata, const unsigned &yKoordinata, int dolesszog, string tartalom) : Elem(xKoordinata, yKoordinata, dolesszog), tartalom(tartalom)
 {
-    tartalom = "szöveg";
-        tipus = szoveg;
+    tipus = szoveg;
 }
