@@ -15,7 +15,6 @@ MainWindow::MainWindow(QWidget *parent)
     inicializalas();
 
     //belyegek betoltese szerkesztobe
-    int counter = 0;
     for(auto i : belyegek)
     {
         QPushButton *tempbutton = new QPushButton;
@@ -23,11 +22,9 @@ MainWindow::MainWindow(QWidget *parent)
         QPixmap pixmap(QString::fromStdString(i.second));
 
         tempbutton->setIcon(pixmap);
-        tempbutton->setIconSize(QSize(60, 60));
+        tempbutton->setIconSize(QSize(100, 100));
 
-        ui->belyegekGridLayoutSzerkeszto->addWidget(tempbutton, counter/2, counter%2);
-
-        ++counter;
+        ui->belyegekVerticalLayoutSzerkeszto->addWidget(tempbutton);
 
         //funkcio hozzaadas a belyeg gombnak
         connect(tempbutton, &QPushButton::clicked, [=]{
@@ -107,7 +104,7 @@ MainWindow::MainWindow(QWidget *parent)
             });
 
             listaElem->setIcon(pixmap);
-            listaElem->setIconSize(QSize(90, 90));
+            listaElem->setIconSize(QSize(100, 100));
 
             belyegekLista[ujBelyeg] = listaElem;
             ui->belyegListaVerticalLayoutSzerkeszto->addWidget(listaElem);
@@ -118,7 +115,6 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     //mintak betoltese szerkesztobe
-    counter = 0;
     for(auto i : mintak)
     {
         QPushButton *tempbutton = new QPushButton;
@@ -126,11 +122,9 @@ MainWindow::MainWindow(QWidget *parent)
         QPixmap pixmap(QString::fromStdString(i.second));
 
         tempbutton->setIcon(pixmap);
-        tempbutton->setIconSize(QSize(100, 100));
+        tempbutton->setIconSize(QSize(200, 200));
 
-        ui->mintakGridLayoutSzerkeszto->addWidget(tempbutton, counter/2, counter%2);
-
-        ++counter;
+        ui->mintakVerticalLayoutSzerkeszto->addWidget(tempbutton);
 
         //funkcio hozzaadas a minta gombnak
         connect(tempbutton, &QPushButton::clicked, [=]{
@@ -144,7 +138,6 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     //kepek betoltese szerkesztobe
-    counter = 0;
     list<string> kepLista = jelenlegiProjekt.getKepek();
 
     for(string i : kepLista)
@@ -153,11 +146,9 @@ MainWindow::MainWindow(QWidget *parent)
         QPixmap pixmap(QString::fromStdString(i));
 
         tempbutton->setIcon(pixmap);
-        tempbutton->setIconSize(QSize(60, 60));
+        tempbutton->setIconSize(QSize(100, 100));
 
-        ui->kepekGridLayoutSzerkeszto->addWidget(tempbutton, counter/2, counter%2);
-
-        ++counter;
+        ui->kepekVerticalLayoutSzerkeszto->addWidget(tempbutton);
 
         //funkcio hozzaadas a kep gombnak
         connect(tempbutton, &QPushButton::clicked, [=]{
@@ -274,7 +265,7 @@ MainWindow::MainWindow(QWidget *parent)
             });
 
             listaElem->setIcon(pixmap);
-            listaElem->setIconSize(QSize(90, 90));
+            listaElem->setIconSize(QSize(100, 100));
 
             kepekLista[ujKeret] = listaElem;
             ui->kepListaVerticalLayoutSzerkeszto->addWidget(listaElem);
