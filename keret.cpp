@@ -97,6 +97,16 @@ void Keret::kepKeszites()
         ujKep = QPixmap::fromImage(temp);
     }
 
+    //forgatas
+    if(dolesszog != 0)
+    {
+        QSize size = ujKep.size();
+
+        QTransform trans;
+        trans.rotate(dolesszog);
+        ujKep = ujKep.transformed(trans).scaled(size.width(), size.height(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    }
+
     //kep gombra helyezese
     kimenet->resize(ujKep.size());
     kimenet->setPixmap(ujKep);

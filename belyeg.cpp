@@ -12,18 +12,27 @@ void Belyeg::setNev(const string &newNev)
 
 void Belyeg::kepKeszites()
 {
+    QPixmap ujKep = forras;
 
     //meretezes
     if(meretArany != 100)
     {
-        QPixmap ujKep = forras;
-
         ujKep = ujKep.scaled(ujKep.width()*(meretArany/100.0), ujKep.height()*(meretArany/100.0), Qt::KeepAspectRatio, Qt::SmoothTransformation);
-
-        //kep gombra helyezese
-        kimenet->resize(ujKep.size());
-        kimenet->setPixmap(ujKep);
     }
+
+    //forgatas
+    if(dolesszog != 0)
+    {
+        QSize size = ujKep.size();
+
+        QTransform trans;
+        trans.rotate(dolesszog);
+        ujKep = ujKep.transformed(trans).scaled(size.width(), size.height(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    }
+
+    //kep gombra helyezese
+    kimenet->resize(ujKep.size());
+    kimenet->setPixmap(ujKep);
 }
 
 Belyeg::Belyeg(const string &nev, const QSize &meret, const QPixmap &forras, const unsigned &xKoordinata, const unsigned &yKoordinata, int dolesszog, unsigned short meretArany) : Abra(meret, forras, xKoordinata, yKoordinata, dolesszog, meretArany),

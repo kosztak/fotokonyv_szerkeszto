@@ -2,10 +2,8 @@
 #define KERET_H
 
 #include "abra.h"
-
 #include <QPixmap>
 #include <QPainter>
-
 #include <QtSvg/QSvgRenderer>
 
 #include <stdio.h>

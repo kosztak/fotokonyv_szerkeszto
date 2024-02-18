@@ -128,6 +128,10 @@ private slots:
 
     void on_elemekPushButtonSzerkeszto_clicked();
 
+    void on_kepDolesszogHorizontalSliderSzerkeszto_valueChanged(int value);
+
+    void on_belyegDolesszogHorizontalSliderSzerkeszto_valueChanged(int value);
+
 private:
     Ui::MainWindow *ui;
 

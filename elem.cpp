@@ -37,5 +37,5 @@ const unsigned &Elem::getYKoordinata() const
 
 void Elem::forgatas(int szog)
 {
-
+    dolesszog = szog;
 }

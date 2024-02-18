@@ -1002,7 +1002,6 @@ void MainWindow::on_lapozasFelPushButtonSzerkeszto_clicked()
     }
 }
 
-
 void MainWindow::on_keretValasztasPushButtonSzerleszto_clicked()
 {
     KeretValaszto* k = new KeretValaszto(this);
@@ -1026,7 +1025,6 @@ void MainWindow::on_egysegeskeretPushButtonSzerkeszto_clicked()
     }
 }
 
-
 void MainWindow::on_kepValasztasPushButtonSzerkeszto_clicked()
 {
     KepValaszto* k = new KepValaszto(this, jelenlegiProjekt.getKepek());
@@ -1048,4 +1046,49 @@ void MainWindow::on_kepValasztasPushButtonSzerkeszto_clicked()
 void MainWindow::on_elemekPushButtonSzerkeszto_clicked()
 {
     ui->tartalomStackedWidgetSzerkeszto->setCurrentWidget(ui->elemekPageSzerkeszto);
+}
+
+void MainWindow::on_kepDolesszogHorizontalSliderSzerkeszto_valueChanged(int value)
+{
+    //dolesszog beallitasa
+    Keret* jelenlegiKeret = dynamic_cast<Keret*>(jelenlegiProjekt.getJelenlegiElem());
+    jelenlegiProjekt.getJelenlegiElem()->forgatas(value);
+    jelenlegiKeret->kepKeszites();
+
+    //lista elem frissitese
+    kepFrissites(jelenlegiKeret);
+
+    //horizontalis mozgatas
+    unsigned xPont = jelenlegiKeret->getKimenet()->x();
+    ui->kepHorizontalisSpinBoxSzerkeszto->setMaximum(ui->szerkesztoWidgetSzerkeszto->width() - jelenlegiKeret->getKimenet()->width());
+    ui->kepHorizontalisSpinBoxSzerkeszto->setValue(xPont);
+
+    //vertikalis mozgatas
+    unsigned yPont = jelenlegiKeret->getKimenet()->y();
+    ui->kepVertikalisSpinBoxSzerkeszto->setMaximum(ui->szerkesztoWidgetSzerkeszto->height() - jelenlegiKeret->getKimenet()->height());
+    ui->kepVertikalisSpinBoxSzerkeszto->setValue(yPont);
+
+    //tooltip beallitas
+    ui->kepDolesszogHorizontalSliderSzerkeszto->setToolTip(QString::number(value));
+}
+
+void MainWindow::on_belyegDolesszogHorizontalSliderSzerkeszto_valueChanged(int value)
+{
+    //dolesszog beallitasa
+    Belyeg* jelenlegiBelyeg = dynamic_cast<Belyeg*>(jelenlegiProjekt.getJelenlegiElem());
+    jelenlegiProjekt.getJelenlegiElem()->forgatas(value);
+    jelenlegiBelyeg->kepKeszites();
+
+    //horizontalis mozgatas
+    unsigned xPont = jelenlegiBelyeg->getKimenet()->x();
+    ui->kepHorizontalisSpinBoxSzerkeszto->setMaximum(ui->szerkesztoWidgetSzerkeszto->width() - jelenlegiBelyeg->getKimenet()->width());
+    ui->kepHorizontalisSpinBoxSzerkeszto->setValue(xPont);
+
+    //vertikalis mozgatas
+    unsigned yPont = jelenlegiBelyeg->getKimenet()->y();
+    ui->kepVertikalisSpinBoxSzerkeszto->setMaximum(ui->szerkesztoWidgetSzerkeszto->height() - jelenlegiBelyeg->getKimenet()->height());
+    ui->kepVertikalisSpinBoxSzerkeszto->setValue(yPont);
+
+    //tooltip beallitas
+    ui->belyegDolesszogHorizontalSliderSzerkeszto->setToolTip(QString::number(value));
 }
