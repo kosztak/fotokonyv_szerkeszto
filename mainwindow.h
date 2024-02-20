@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QGraphicsScene>
 #include <QImage>
 #include <QPushButton>
 #include <QPixmap>
@@ -12,6 +13,7 @@
 #include <string>
 #include <list>
 #include <map>
+#include "customview.h"
 #include "kimenet.h"
 #include "projekt.h"
 #include "minta.h"
@@ -134,6 +136,10 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+
+    CustomView* graphicsView;
+    QWidget* szerkesztoWidget;
+    QGraphicsScene* scene;
 
     string kijeloltElemQSS = "background-color: transparent;"
                              "border-style: dotted;"

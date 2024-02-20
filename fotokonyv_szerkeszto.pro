@@ -9,6 +9,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    customview.cpp \
     kepvalaszto.cpp \
     keretvalaszto.cpp \
     kimenet.cpp \
@@ -26,6 +27,7 @@ SOURCES += \
     szoveg.cpp
 
 HEADERS += \
+    customview.h \
     kepvalaszto.h \
     keretvalaszto.h \
     kimenet.h \

@@ -20,7 +20,7 @@ void Kimenet::mouseMoveEvent(QMouseEvent *event)
 {
     if(event->buttons() == Qt::LeftButton)
     {
-        QFrame* parent = dynamic_cast<QFrame*>(this->parent());
+        QWidget* parent = dynamic_cast<QWidget*>(this->parent());
         QPoint uj = mapToParent(event->pos() - offset);
         if(uj.x() < 0)
             uj.setX(0);
