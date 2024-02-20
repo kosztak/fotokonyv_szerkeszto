@@ -4,9 +4,6 @@
 #include <QLabel>
 #include <QWidget>
 #include <QMouseEvent>
-#include <QDrag>
-#include <QDropEvent>
-#include <QMimeData>
 #include <QPainter>
 #include <QColor>
 #include <Qt>
@@ -23,7 +20,10 @@ signals:
 
 protected:
     void mousePressEvent(QMouseEvent* event);
+    void mouseMoveEvent(QMouseEvent* event);
 
+private:
+    QPoint offset;
 };
 
 #endif // KIMENET_H

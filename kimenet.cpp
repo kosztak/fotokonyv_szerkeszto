@@ -11,21 +11,29 @@ void Kimenet::mousePressEvent(QMouseEvent* event) {
     if(event->button() == Qt::LeftButton)
     {
         emit clicked();
+        offset = event->pos();
 
-    }else if(event->button() == Qt::RightButton && this->geometry().contains(event->pos()))
+    }
+}
+
+void Kimenet::mouseMoveEvent(QMouseEvent *event)
+{
+    if(event->buttons() == Qt::LeftButton)
     {
-        QDrag *drag = new QDrag(this);
-        QMimeData *mimeData = new QMimeData;
+        QFrame* parent = dynamic_cast<QFrame*>(this->parent());
+        QPoint uj = mapToParent(event->pos() - offset);
+        if(uj.x() < 0)
+            uj.setX(0);
 
-        // mimeData->setData("ptr", );
-        QPixmap pixmap = QPixmap(this->size());
-        QPainter painter = QPainter(&pixmap);
-        pixmap.fill(Qt::transparent);
-        this->render(&painter);
+        if(uj.y() < 0)
+            uj.setY(0);
 
-        drag->setMimeData(mimeData);
-        drag->setPixmap(pixmap);
+        if((uj.x() > (parent->width() - this->width())))
+            uj.setX(parent->width() - this->width());
 
-        Qt::DropAction dropAction = drag->exec();
+        if((uj.y() > (parent->height() - this->height())))
+            uj.setY(parent->height() - this->height());
+
+        this->move(uj);
     }
 }
