@@ -1104,3 +1104,34 @@ void MainWindow::on_belyegDolesszogHorizontalSliderSzerkeszto_valueChanged(int v
     //tooltip beallitas
     ui->belyegDolesszogHorizontalSliderSzerkeszto->setToolTip(QString::number(value));
 }
+
+void MainWindow::on_kepElorehozasPushButtonSzerkeszto_clicked()
+{
+    jelenlegiProjekt.getJelenlegiElem()->getKimenet()->raise();
+}
+
+void MainWindow::on_kepHatrakuldesPushButtonSzerkeszto_clicked()
+{
+    jelenlegiProjekt.getJelenlegiElem()->getKimenet()->lower();
+}
+
+void MainWindow::on_belyegElorehozasPushButtonSzerkeszto_clicked()
+{
+    jelenlegiProjekt.getJelenlegiElem()->getKimenet()->raise();
+}
+
+void MainWindow::on_belyegHatrakuldesPushButtonSzerkeszto_clicked()
+{
+    jelenlegiProjekt.getJelenlegiElem()->getKimenet()->lower();
+}
+
+void MainWindow::on_szovegElorehozasPushButtonSzerkeszto_clicked()
+{
+    jelenlegiProjekt.getJelenlegiElem()->getKimenet()->raise();
+}
+
+
+void MainWindow::on_szovegHatrakuldesPushButtonSzerkeszto_clicked()
+{
+    jelenlegiProjekt.getJelenlegiElem()->getKimenet()->lower();
+}

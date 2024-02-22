@@ -134,6 +134,18 @@ private slots:
 
     void on_belyegDolesszogHorizontalSliderSzerkeszto_valueChanged(int value);
 
+    void on_kepElorehozasPushButtonSzerkeszto_clicked();
+
+    void on_kepHatrakuldesPushButtonSzerkeszto_clicked();
+
+    void on_belyegElorehozasPushButtonSzerkeszto_clicked();
+
+    void on_belyegHatrakuldesPushButtonSzerkeszto_clicked();
+
+    void on_szovegElorehozasPushButtonSzerkeszto_clicked();
+
+    void on_szovegHatrakuldesPushButtonSzerkeszto_clicked();
+
 private:
     Ui::MainWindow *ui;
 
