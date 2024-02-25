@@ -8,8 +8,6 @@
 #include <QImage>
 #include <string>
 
-#include <iostream>
-
 namespace Ui {
 class KeretValaszto;
 }
@@ -36,7 +34,7 @@ private:
 
     //rendszer
     unsigned short index;
-    QSvgRenderer image = QSvgRenderer(QString::fromStdString("./image.svg"));;
+    QSvgRenderer image = QSvgRenderer(QString::fromStdString("./image.svg"));
 };
 
 #endif // KERETVALASZTO_H

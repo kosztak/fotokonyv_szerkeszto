@@ -21,6 +21,7 @@
 #include "elrendezes.h"
 #include "keretvalaszto.h"
 #include "kepvalaszto.h"
+#include "elrendezesvalaszto.h"
 
 #include <iostream>
 #include <QMouseEvent>
@@ -82,8 +83,6 @@ private slots:
 
     void on_belyegekPushButtonSzerkeszto_clicked();
 
-    void on_belyegMeretHorizontalSliderSzerkeszto_valueChanged(int value);
-
     void on_betuszinPushButtonSzerkeszto_clicked();
 
     void on_felkoverCheckBoxSzerkeszto_stateChanged(int arg1);
@@ -95,8 +94,6 @@ private slots:
     void on_kepHorizontalisSpinBoxSzerkeszto_valueChanged(int arg1);
 
     void on_kepVertikalisSpinBoxSzerkeszto_valueChanged(int arg1);
-
-    void on_kepMeretHorizontalSliderSzerkeszto_valueChanged(int value);
 
     void on_kepSzelessegSpinBoxSzerkeszto_valueChanged(int arg1);
 
@@ -130,10 +127,6 @@ private slots:
 
     void on_elemekPushButtonSzerkeszto_clicked();
 
-    void on_kepDolesszogHorizontalSliderSzerkeszto_valueChanged(int value);
-
-    void on_belyegDolesszogHorizontalSliderSzerkeszto_valueChanged(int value);
-
     void on_kepElorehozasPushButtonSzerkeszto_clicked();
 
     void on_kepHatrakuldesPushButtonSzerkeszto_clicked();
@@ -146,6 +139,16 @@ private slots:
 
     void on_szovegHatrakuldesPushButtonSzerkeszto_clicked();
 
+    void on_kepDolesszogSpinBoxSzerkeszto_valueChanged(int arg1);
+
+    void on_kepMeretSpinBoxSzerkeszto_valueChanged(int arg1);
+
+    void on_belyegDolesszogSpinBoxSzerkeszto_valueChanged(int arg1);
+
+    void on_belyegMeretSpinBoxSzerkeszto_valueChanged(int arg1);
+
+    void on_elrendezesPushButtonSzerkeszto_clicked();
+
 private:
     Ui::MainWindow *ui;
 
@@ -155,7 +158,7 @@ private:
 
     string kijeloltElemQSS = "background-color: transparent;"
                              "border-style: dotted;"
-                             "border-width: 2px;"
+                             "border-width: 6px;"
                              "border-color: blue;";
 
     //rendszer
@@ -164,8 +167,8 @@ private:
     map<string, string> belyegek; //nev, eleres
     map<string, string> mintak; //nev, eleres
     list<Stilus> stilusok;
-    list<Elrendezes> elrendezesek;
-    QSvgRenderer keretAlapHatter;
+    map<string ,Elrendezes> elrendezesek;
+    QSvgRenderer keretAlapHatter = QSvgRenderer(QString::fromStdString("./image.svg"));
     map<Keret*, QPushButton*> kepekLista;
     map<Belyeg*, QPushButton*> belyegekLista;
     map<Szoveg*, QPushButton*> szovegekLista;

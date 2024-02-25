@@ -374,7 +374,7 @@ background-color: rgb(255, 255, 255);</string>
                 <string notr="true"/>
                </property>
                <property name="currentIndex">
-                <number>3</number>
+                <number>2</number>
                </property>
                <widget class="QWidget" name="kepekPageSzerkeszto">
                 <layout class="QGridLayout" name="gridLayout_6">
@@ -439,8 +439,8 @@ background-color: rgb(255, 255, 255);</string>
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>64</width>
-                        <height>16</height>
+                        <width>152</width>
+                        <height>724</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_21">
@@ -543,8 +543,8 @@ background-color: rgb(255, 255, 255);</string>
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>64</width>
-                        <height>16</height>
+                        <width>152</width>
+                        <height>812</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_22">
@@ -1226,7 +1226,7 @@ background-color: rgb(255, 255, 255);</string>
              <item row="0" column="0">
               <widget class="QStackedWidget" name="tulajdonsagokStackedWidgetSzerkeszto">
                <property name="currentIndex">
-                <number>0</number>
+                <number>1</number>
                </property>
                <widget class="QWidget" name="uresPageSzerkeszto">
                 <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -1321,7 +1321,7 @@ background-color: rgb(255, 255, 255);</string>
                         <x>0</x>
                         <y>0</y>
                         <width>214</width>
-                        <height>856</height>
+                        <height>882</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_17">
@@ -1486,15 +1486,27 @@ background-color: rgb(255, 255, 255);</string>
                             </widget>
                            </item>
                            <item>
-                            <widget class="QSlider" name="kepMeretHorizontalSliderSzerkeszto">
+                            <widget class="QSpinBox" name="kepMeretSpinBoxSzerkeszto">
+                             <property name="font">
+                              <font>
+                               <pointsize>11</pointsize>
+                              </font>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true">color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);</string>
+                             </property>
+                             <property name="suffix">
+                              <string> %</string>
+                             </property>
                              <property name="minimum">
                               <number>20</number>
                              </property>
                              <property name="maximum">
-                              <number>150</number>
+                              <number>200</number>
                              </property>
-                             <property name="orientation">
-                              <enum>Qt::Horizontal</enum>
+                             <property name="value">
+                              <number>100</number>
                              </property>
                             </widget>
                            </item>
@@ -1522,15 +1534,27 @@ background-color: rgb(255, 255, 255);</string>
                             </widget>
                            </item>
                            <item>
-                            <widget class="QSlider" name="kepDolesszogHorizontalSliderSzerkeszto">
+                            <widget class="QSpinBox" name="kepDolesszogSpinBoxSzerkeszto">
+                             <property name="font">
+                              <font>
+                               <pointsize>11</pointsize>
+                              </font>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true">color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);</string>
+                             </property>
+                             <property name="suffix">
+                              <string> °</string>
+                             </property>
                              <property name="minimum">
                               <number>-180</number>
                              </property>
                              <property name="maximum">
                               <number>180</number>
                              </property>
-                             <property name="orientation">
-                              <enum>Qt::Horizontal</enum>
+                             <property name="singleStep">
+                              <number>5</number>
                              </property>
                             </widget>
                            </item>
@@ -2124,18 +2148,27 @@ background-color: rgb(255, 255, 255);</string>
                       </widget>
                      </item>
                      <item>
-                      <widget class="QSlider" name="belyegMeretHorizontalSliderSzerkeszto">
+                      <widget class="QSpinBox" name="belyegMeretSpinBoxSzerkeszto">
+                       <property name="font">
+                        <font>
+                         <pointsize>11</pointsize>
+                        </font>
+                       </property>
                        <property name="styleSheet">
-                        <string notr="true"/>
+                        <string notr="true">color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);</string>
+                       </property>
+                       <property name="suffix">
+                        <string> %</string>
                        </property>
                        <property name="minimum">
                         <number>20</number>
                        </property>
                        <property name="maximum">
-                        <number>150</number>
+                        <number>200</number>
                        </property>
-                       <property name="orientation">
-                        <enum>Qt::Horizontal</enum>
+                       <property name="value">
+                        <number>100</number>
                        </property>
                       </widget>
                      </item>
@@ -2163,15 +2196,24 @@ background-color: rgb(255, 255, 255);</string>
                       </widget>
                      </item>
                      <item>
-                      <widget class="QSlider" name="belyegDolesszogHorizontalSliderSzerkeszto">
+                      <widget class="QSpinBox" name="belyegDolesszogSpinBoxSzerkeszto">
+                       <property name="font">
+                        <font>
+                         <pointsize>11</pointsize>
+                        </font>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);</string>
+                       </property>
+                       <property name="suffix">
+                        <string> °</string>
+                       </property>
                        <property name="minimum">
                         <number>-180</number>
                        </property>
                        <property name="maximum">
                         <number>180</number>
-                       </property>
-                       <property name="orientation">
-                        <enum>Qt::Horizontal</enum>
                        </property>
                       </widget>
                      </item>
@@ -2936,8 +2978,8 @@ background-color: rgb(255, 255, 255);</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>224</width>
-                          <height>662</height>
+                          <width>98</width>
+                          <height>28</height>
                          </rect>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_18">

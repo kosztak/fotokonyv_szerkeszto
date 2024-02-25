@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     customview.cpp \
+    elrendezesvalaszto.cpp \
     kepvalaszto.cpp \
     keretvalaszto.cpp \
     kimenet.cpp \
@@ -28,6 +29,7 @@ SOURCES += \
 
 HEADERS += \
     customview.h \
+    elrendezesvalaszto.h \
     kepvalaszto.h \
     keretvalaszto.h \
     kimenet.h \
@@ -44,6 +46,7 @@ HEADERS += \
     szoveg.h
 
 FORMS += \
+    elrendezesvalaszto.ui \
     kepvalaszto.ui \
     keretvalaszto.ui \
     mainwindow.ui

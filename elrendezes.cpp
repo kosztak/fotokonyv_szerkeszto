@@ -5,12 +5,11 @@ const unsigned &Elrendezes::getKepekSzama() const
     return kepekSzama;
 }
 
-const list<pair<unsigned, unsigned> > &Elrendezes::getKoordinatak() const
+const list<pair<QPoint, QSize>> &Elrendezes::getElhelyezkedesek() const
 {
-    return koordinatak;
+    return elhelyezkedesek;
 }
 
-Elrendezes::Elrendezes()
-{
-
-}
+Elrendezes::Elrendezes(unsigned int kepekSzama, const list<pair<QPoint, QSize>> &elhelyezkedesek) : kepekSzama(kepekSzama),
+    elhelyezkedesek(elhelyezkedesek)
+{}

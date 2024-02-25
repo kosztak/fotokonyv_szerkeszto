@@ -1,24 +1,5 @@
 #include "stilus.h"
 
-bool Stilus::getElrendezesAktiv() const
-{
-    return elrendezesAktiv;
-}
-
-void Stilus::setElrendezesAktiv(bool ertek)
-{
-    elrendezesAktiv = ertek;
-}
-
-const Elrendezes &Stilus::getElrendezes() const
-{
-    return elrendezes;
-}
-
-void Stilus::setElrendezes(Elrendezes uj)
-{
-}
-
 bool Stilus::getHatterTipus() const
 {
     return hatterTipus;
@@ -50,11 +31,6 @@ void Stilus::setSzin(const QColor &newSzin)
 }
 
 Stilus::Stilus()
-{
-    elrendezes = Elrendezes();
-}
-
-void Stilus::setAktiv(bool ertek)
 {
 
 }
