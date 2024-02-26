@@ -16,8 +16,6 @@ enum ElemTipus
 class Elem
 {
 protected:
-    unsigned xKoordinata;
-    unsigned yKoordinata;
     int dolesszog;
     ElemTipus tipus;
     Kimenet *kimenet = new Kimenet();
@@ -25,9 +23,6 @@ protected:
 public:
     Elem(unsigned xKoordinata, unsigned yKoordinata, int dolesszog);
     virtual ~Elem(){delete kimenet;};
-    void mozgatas(unsigned xPont, unsigned yPont);
-    const unsigned &getXKoordinata() const;
-    const unsigned &getYKoordinata() const;
     void forgatas(int szog);
     int getDolesszog() const;
     ElemTipus getTipus() const;

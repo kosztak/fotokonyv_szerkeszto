@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Elrendezés Választó</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(220, 20, 60);</string>
@@ -119,7 +119,7 @@ background-color: rgb(255, 255, 255);</string>
         <x>0</x>
         <y>0</y>
         <width>448</width>
-        <height>282</height>
+        <height>278</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">

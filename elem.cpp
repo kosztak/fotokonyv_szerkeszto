@@ -16,23 +16,9 @@ Kimenet *Elem::getKimenet() const
 }
 
 Elem::Elem(unsigned xKoordinata, unsigned yKoordinata, int dolesszog):
-    xKoordinata(xKoordinata), yKoordinata(yKoordinata), dolesszog(dolesszog)
+    dolesszog(dolesszog)
 {
-
-}
-
-void Elem::mozgatas(unsigned xPont, unsigned yPont)
-{
-}
-
-const unsigned &Elem::getXKoordinata() const
-{
-    return xKoordinata;
-}
-
-const unsigned &Elem::getYKoordinata() const
-{
-    return yKoordinata;
+    kimenet->move(xKoordinata, yKoordinata);
 }
 
 void Elem::forgatas(int szog)

@@ -11,7 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Fotókönyv Szerkesztő</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../build-fotokonyv_szerkeszto-Desktop_Qt_6_6_0_MinGW_64_bit-Debug/ikonok/icon.png</normaloff>../build-fotokonyv_szerkeszto-Desktop_Qt_6_6_0_MinGW_64_bit-Debug/ikonok/icon.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -247,7 +251,19 @@ background-color: rgb(255, 255, 255);</string>
                 <number>10</number>
                </property>
                <item>
-                <widget class="QPushButton" name="stilusPushButtonSzerkeszto">
+                <widget class="QToolButton" name="stilusToolButtonSzerkeszto">
+                 <property name="minimumSize">
+                  <size>
+                   <width>75</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="baseSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
                  <property name="font">
                   <font>
                    <pointsize>11</pointsize>
@@ -259,6 +275,16 @@ background-color: rgb(255, 255, 255);</string>
                  </property>
                  <property name="text">
                   <string>STÍLUS</string>
+                 </property>
+                 <property name="icon">
+                  <iconset>
+                   <normaloff>../build-fotokonyv_szerkeszto-Desktop_Qt_6_6_0_MinGW_64_bit-Debug/ikonok/brush.png</normaloff>../build-fotokonyv_szerkeszto-Desktop_Qt_6_6_0_MinGW_64_bit-Debug/ikonok/brush.png</iconset>
+                 </property>
+                 <property name="iconSize">
+                  <size>
+                   <width>40</width>
+                   <height>40</height>
+                  </size>
                  </property>
                 </widget>
                </item>
@@ -275,6 +301,10 @@ background-color: rgb(255, 255, 255);</string>
                  </property>
                  <property name="text">
                   <string>KÉPEK</string>
+                 </property>
+                 <property name="icon">
+                  <iconset>
+                   <normaloff>../build-fotokonyv_szerkeszto-Desktop_Qt_6_6_0_MinGW_64_bit-Debug/ikonok/image.png</normaloff>../build-fotokonyv_szerkeszto-Desktop_Qt_6_6_0_MinGW_64_bit-Debug/ikonok/image.png</iconset>
                  </property>
                 </widget>
                </item>
@@ -293,6 +323,10 @@ background-color: rgb(255, 255, 255);</string>
                  <property name="text">
                   <string>BÉLYEGEK</string>
                  </property>
+                 <property name="icon">
+                  <iconset>
+                   <normaloff>../build-fotokonyv_szerkeszto-Desktop_Qt_6_6_0_MinGW_64_bit-Debug/ikonok/post-stamp.png</normaloff>../build-fotokonyv_szerkeszto-Desktop_Qt_6_6_0_MinGW_64_bit-Debug/ikonok/post-stamp.png</iconset>
+                 </property>
                 </widget>
                </item>
                <item>
@@ -308,6 +342,10 @@ background-color: rgb(255, 255, 255);</string>
                  </property>
                  <property name="text">
                   <string>ELEMEK</string>
+                 </property>
+                 <property name="icon">
+                  <iconset>
+                   <normaloff>../build-fotokonyv_szerkeszto-Desktop_Qt_6_6_0_MinGW_64_bit-Debug/ikonok/collage.png</normaloff>../build-fotokonyv_szerkeszto-Desktop_Qt_6_6_0_MinGW_64_bit-Debug/ikonok/collage.png</iconset>
                  </property>
                 </widget>
                </item>
@@ -439,8 +477,8 @@ background-color: rgb(255, 255, 255);</string>
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>152</width>
-                        <height>724</height>
+                        <width>64</width>
+                        <height>16</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_21">
@@ -543,8 +581,8 @@ background-color: rgb(255, 255, 255);</string>
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>152</width>
-                        <height>812</height>
+                        <width>64</width>
+                        <height>16</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_22">
@@ -751,8 +789,8 @@ background-color: rgb(255, 255, 255);</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>150</width>
-                          <height>227</height>
+                          <width>62</width>
+                          <height>16</height>
                          </rect>
                         </property>
                         <layout class="QVBoxLayout" name="verticalLayout_31">
@@ -824,8 +862,8 @@ background-color: rgb(255, 255, 255);</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>150</width>
-                          <height>226</height>
+                          <width>62</width>
+                          <height>16</height>
                          </rect>
                         </property>
                         <layout class="QVBoxLayout" name="verticalLayout_34">
@@ -897,8 +935,8 @@ background-color: rgb(255, 255, 255);</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>150</width>
-                          <height>227</height>
+                          <width>62</width>
+                          <height>16</height>
                          </rect>
                         </property>
                         <layout class="QVBoxLayout" name="verticalLayout_33">
@@ -1226,7 +1264,7 @@ background-color: rgb(255, 255, 255);</string>
              <item row="0" column="0">
               <widget class="QStackedWidget" name="tulajdonsagokStackedWidgetSzerkeszto">
                <property name="currentIndex">
-                <number>1</number>
+                <number>2</number>
                </property>
                <widget class="QWidget" name="uresPageSzerkeszto">
                 <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -1503,7 +1541,7 @@ background-color: rgb(255, 255, 255);</string>
                               <number>20</number>
                              </property>
                              <property name="maximum">
-                              <number>200</number>
+                              <number>300</number>
                              </property>
                              <property name="value">
                               <number>100</number>
@@ -2165,7 +2203,7 @@ background-color: rgb(255, 255, 255);</string>
                         <number>20</number>
                        </property>
                        <property name="maximum">
-                        <number>200</number>
+                        <number>300</number>
                        </property>
                        <property name="value">
                         <number>100</number>
@@ -2978,8 +3016,8 @@ background-color: rgb(255, 255, 255);</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>98</width>
-                          <height>28</height>
+                          <width>62</width>
+                          <height>16</height>
                          </rect>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_18">

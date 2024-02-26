@@ -7,6 +7,10 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    //ablak beallitasok
+    this->setWindowState(Qt::WindowMaximized);
+    ui->stilusToolButtonSzerkeszto->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+
     //szerkeszto widget beallitasa
     szerkesztoWidget = new QWidget;
     szerkesztoWidget->resize(1240, 1754);
@@ -1194,6 +1198,8 @@ void MainWindow::on_elrendezesPushButtonSzerkeszto_clicked()
             }
         }
 
+        ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->uresPageSzerkeszto);
+
         //elrendezes alkalmazasa
         Elrendezes jelenlegiElrendezes = elrendezesek.at(e->getValasztas());
 
@@ -1207,7 +1213,41 @@ void MainWindow::on_elrendezesPushButtonSzerkeszto_clicked()
             jelenlegiKimenet->move(jelenlegiPoz->first);
 
             //meretezes
+            unsigned szelArany = ((jelenlegiPoz->second.width()*1.0)/(jelenlegiKimenet->width()*1.0))*100.0;
+            unsigned magArany = ((jelenlegiPoz->second.height()*1.0)/(jelenlegiKimenet->height()*1.0))*100.0;
 
+            if(szelArany >= magArany)
+            {
+                if((szelArany/100.0)*i->getMeretArany() > 300)
+                {
+                    i->setMeretArany(300);
+                }else{
+                    i->setMeretArany((szelArany/100.0)*i->getMeretArany());
+                }
+
+                i->kepKeszites();
+                if(jelenlegiKimenet->height() > jelenlegiPoz->second.height())
+                {
+                    i->setMagassag((jelenlegiPoz->second.height()/(jelenlegiKimenet->height()*1.0))*i->getMagassag());
+                    i->kepKeszites();
+                }
+            }else{
+                if((magArany/100.0)*i->getMeretArany() > 300)
+                {
+                    i->setMeretArany(300);
+                }else{
+                    i->setMeretArany((magArany/100.0)*i->getMeretArany());
+                }
+
+                i->kepKeszites();
+                if(jelenlegiKimenet->width() > jelenlegiPoz->second.width())
+                {
+                    i->setSzelesseg((jelenlegiPoz->second.width()/(jelenlegiKimenet->width()*1.0))*i->getSzelesseg());
+                    i->kepKeszites();
+                }
+            }
+
+            // i->kepKeszites();
 
             jelenlegiPoz++;
         }
