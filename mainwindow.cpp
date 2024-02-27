@@ -10,10 +10,14 @@ MainWindow::MainWindow(QWidget *parent)
     //ablak beallitasok
     this->setWindowState(Qt::WindowMaximized);
     ui->stilusToolButtonSzerkeszto->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+    ui->kepekToolButtonSzerkeszto->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+    ui->belyegekToolButtonSzerkeszto->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+    ui->elemekToolButtonSzerkeszto->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
 
     //szerkeszto widget beallitasa
     szerkesztoWidget = new QWidget;
     szerkesztoWidget->resize(1240, 1754);
+    szerkesztoWidget->setObjectName("szerkesztoWidget");
 
     scene = new QGraphicsScene;
     scene->addWidget(szerkesztoWidget);
@@ -149,7 +153,7 @@ MainWindow::MainWindow(QWidget *parent)
             jelenlegiProjekt.getJelenlegiOldal()->getStilus()->setMinta(ujMinta);
             jelenlegiProjekt.getJelenlegiOldal()->getStilus()->setHatterTipus(1);
 
-            szerkesztoWidget->setStyleSheet(QString::fromStdString("QWidget#szerkesztoWidgetSzerkeszto{border-image: url(" + i.second + ") 0 0 0 0 stretch stretch;}"));
+            szerkesztoWidget->setStyleSheet(QString::fromStdString("QWidget#szerkesztoWidget{border-image: url(" + i.second + ") 0 0 0 0 stretch stretch;}"));
         });
     }
 
@@ -297,19 +301,17 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_stilusPushButtonSzerkeszto_clicked()
+void MainWindow::on_stilusToolButtonSzerkeszto_clicked()
 {
     ui->tartalomStackedWidgetSzerkeszto->setCurrentWidget(ui->stilusPageSzerkeszto);
 }
 
-
-void MainWindow::on_kepekPushButtonSzerkeszto_clicked()
+void MainWindow::on_kepekToolButtonSzerkeszto_clicked()
 {
     ui->tartalomStackedWidgetSzerkeszto->setCurrentWidget(ui->kepekPageSzerkeszto);
 }
 
-
-void MainWindow::on_belyegekPushButtonSzerkeszto_clicked()
+void MainWindow::on_belyegekToolButtonSzerkeszto_clicked()
 {
     ui->tartalomStackedWidgetSzerkeszto->setCurrentWidget(ui->belyegekPageSzerkeszto);
 }
@@ -773,9 +775,16 @@ void MainWindow::on_betuszinPushButtonSzerkeszto_clicked()
 
 void MainWindow::on_felkoverCheckBoxSzerkeszto_stateChanged(int arg1)
 {
+    //gomb beallitasa
     QFont font = jelenlegiProjekt.getJelenlegiElem()->getKimenet()->font();
     font.setBold(arg1);
-    jelenlegiProjekt.getJelenlegiElem()->getKimenet()->setFont(font);
+    Szoveg* jelenlegiSzoveg = dynamic_cast<Szoveg*>(jelenlegiProjekt.getJelenlegiElem());
+    jelenlegiSzoveg->getKimenet()->setFont(font);
+    jelenlegiSzoveg->getKimenet()->adjustSize();
+
+    //mozgatas
+    ui->szovegHorizontalisSpinBoxSzerkeszto->setMaximum(szerkesztoWidget->width() - jelenlegiSzoveg->getKimenet()->width());
+    ui->szovegVertikalisSpinBoxSzerkeszto->setMaximum(szerkesztoWidget->height() - jelenlegiSzoveg->getKimenet()->height());
 }
 
 void MainWindow::on_doltCheckBoxSzerkeszto_stateChanged(int arg1)
@@ -1064,7 +1073,7 @@ void MainWindow::on_kepValasztasPushButtonSzerkeszto_clicked()
     }
 }
 
-void MainWindow::on_elemekPushButtonSzerkeszto_clicked()
+void MainWindow::on_elemekToolButtonSzerkeszto_clicked()
 {
     ui->tartalomStackedWidgetSzerkeszto->setCurrentWidget(ui->elemekPageSzerkeszto);
 }

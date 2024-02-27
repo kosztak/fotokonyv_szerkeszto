@@ -102,6 +102,12 @@
              </property>
              <item>
               <widget class="QPushButton" name="mentesPushButtonSzerkeszto">
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>25</height>
+                </size>
+               </property>
                <property name="font">
                 <font>
                  <pointsize>11</pointsize>
@@ -109,7 +115,8 @@
                </property>
                <property name="styleSheet">
                 <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                </property>
                <property name="text">
                 <string>MENTÉS</string>
@@ -118,6 +125,12 @@ background-color: rgb(255, 255, 255);</string>
              </item>
              <item>
               <widget class="QPushButton" name="mentesMaskentPushButtonSzerkeszto">
+               <property name="minimumSize">
+                <size>
+                 <width>150</width>
+                 <height>25</height>
+                </size>
+               </property>
                <property name="font">
                 <font>
                  <pointsize>11</pointsize>
@@ -125,7 +138,8 @@ background-color: rgb(255, 255, 255);</string>
                </property>
                <property name="styleSheet">
                 <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                </property>
                <property name="text">
                 <string>MENTÉS MÁSKÉNT</string>
@@ -134,6 +148,12 @@ background-color: rgb(255, 255, 255);</string>
              </item>
              <item>
               <widget class="QPushButton" name="bezarasPushButtonSzerkeszto">
+               <property name="minimumSize">
+                <size>
+                 <width>150</width>
+                 <height>25</height>
+                </size>
+               </property>
                <property name="font">
                 <font>
                  <pointsize>11</pointsize>
@@ -141,7 +161,8 @@ background-color: rgb(255, 255, 255);</string>
                </property>
                <property name="styleSheet">
                 <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                </property>
                <property name="text">
                 <string>PROJEKT BEZÁRÁSA</string>
@@ -157,6 +178,12 @@ background-color: rgb(255, 255, 255);</string>
              </item>
              <item>
               <widget class="QPushButton" name="ujSzovegPushButtonSzerkeszto">
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>25</height>
+                </size>
+               </property>
                <property name="font">
                 <font>
                  <pointsize>11</pointsize>
@@ -164,7 +191,8 @@ background-color: rgb(255, 255, 255);</string>
                </property>
                <property name="styleSheet">
                 <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                </property>
                <property name="text">
                 <string>ÚJ SZÖVEG</string>
@@ -252,10 +280,16 @@ background-color: rgb(255, 255, 255);</string>
                </property>
                <item>
                 <widget class="QToolButton" name="stilusToolButtonSzerkeszto">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="minimumSize">
                   <size>
                    <width>75</width>
-                   <height>0</height>
+                   <height>75</height>
                   </size>
                  </property>
                  <property name="baseSize">
@@ -267,11 +301,14 @@ background-color: rgb(255, 255, 255);</string>
                  <property name="font">
                   <font>
                    <pointsize>11</pointsize>
+                   <bold>false</bold>
                   </font>
                  </property>
                  <property name="styleSheet">
                   <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;
+</string>
                  </property>
                  <property name="text">
                   <string>STÍLUS</string>
@@ -289,7 +326,19 @@ background-color: rgb(255, 255, 255);</string>
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="kepekPushButtonSzerkeszto">
+                <widget class="QToolButton" name="kepekToolButtonSzerkeszto">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>75</width>
+                   <height>75</height>
+                  </size>
+                 </property>
                  <property name="font">
                   <font>
                    <pointsize>11</pointsize>
@@ -297,7 +346,8 @@ background-color: rgb(255, 255, 255);</string>
                  </property>
                  <property name="styleSheet">
                   <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                  </property>
                  <property name="text">
                   <string>KÉPEK</string>
@@ -306,10 +356,28 @@ background-color: rgb(255, 255, 255);</string>
                   <iconset>
                    <normaloff>../build-fotokonyv_szerkeszto-Desktop_Qt_6_6_0_MinGW_64_bit-Debug/ikonok/image.png</normaloff>../build-fotokonyv_szerkeszto-Desktop_Qt_6_6_0_MinGW_64_bit-Debug/ikonok/image.png</iconset>
                  </property>
+                 <property name="iconSize">
+                  <size>
+                   <width>40</width>
+                   <height>40</height>
+                  </size>
+                 </property>
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="belyegekPushButtonSzerkeszto">
+                <widget class="QToolButton" name="belyegekToolButtonSzerkeszto">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>75</width>
+                   <height>75</height>
+                  </size>
+                 </property>
                  <property name="font">
                   <font>
                    <pointsize>11</pointsize>
@@ -318,7 +386,8 @@ background-color: rgb(255, 255, 255);</string>
                  </property>
                  <property name="styleSheet">
                   <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                  </property>
                  <property name="text">
                   <string>BÉLYEGEK</string>
@@ -327,10 +396,28 @@ background-color: rgb(255, 255, 255);</string>
                   <iconset>
                    <normaloff>../build-fotokonyv_szerkeszto-Desktop_Qt_6_6_0_MinGW_64_bit-Debug/ikonok/post-stamp.png</normaloff>../build-fotokonyv_szerkeszto-Desktop_Qt_6_6_0_MinGW_64_bit-Debug/ikonok/post-stamp.png</iconset>
                  </property>
+                 <property name="iconSize">
+                  <size>
+                   <width>40</width>
+                   <height>40</height>
+                  </size>
+                 </property>
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="elemekPushButtonSzerkeszto">
+                <widget class="QToolButton" name="elemekToolButtonSzerkeszto">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>75</width>
+                   <height>75</height>
+                  </size>
+                 </property>
                  <property name="font">
                   <font>
                    <pointsize>11</pointsize>
@@ -338,7 +425,8 @@ background-color: rgb(255, 255, 255);</string>
                  </property>
                  <property name="styleSheet">
                   <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                  </property>
                  <property name="text">
                   <string>ELEMEK</string>
@@ -346,6 +434,12 @@ background-color: rgb(255, 255, 255);</string>
                  <property name="icon">
                   <iconset>
                    <normaloff>../build-fotokonyv_szerkeszto-Desktop_Qt_6_6_0_MinGW_64_bit-Debug/ikonok/collage.png</normaloff>../build-fotokonyv_szerkeszto-Desktop_Qt_6_6_0_MinGW_64_bit-Debug/ikonok/collage.png</iconset>
+                 </property>
+                 <property name="iconSize">
+                  <size>
+                   <width>40</width>
+                   <height>40</height>
+                  </size>
                  </property>
                 </widget>
                </item>
@@ -412,7 +506,7 @@ background-color: rgb(255, 255, 255);</string>
                 <string notr="true"/>
                </property>
                <property name="currentIndex">
-                <number>2</number>
+                <number>0</number>
                </property>
                <widget class="QWidget" name="kepekPageSzerkeszto">
                 <layout class="QGridLayout" name="gridLayout_6">
@@ -450,6 +544,18 @@ background-color: rgb(255, 255, 255);</string>
                    </property>
                    <item>
                     <widget class="QPushButton" name="kepHozzaadasPushButtonSzerkeszto">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>25</height>
+                      </size>
+                     </property>
                      <property name="font">
                       <font>
                        <pointsize>11</pointsize>
@@ -457,7 +563,8 @@ background-color: rgb(255, 255, 255);</string>
                      </property>
                      <property name="styleSheet">
                       <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                      </property>
                      <property name="text">
                       <string>KÉP HOZZÁADÁS</string>
@@ -477,8 +584,8 @@ background-color: rgb(255, 255, 255);</string>
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>64</width>
-                        <height>16</height>
+                        <width>152</width>
+                        <height>774</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_21">
@@ -515,22 +622,6 @@ background-color: rgb(255, 255, 255);</string>
                        </item>
                       </layout>
                      </widget>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QPushButton" name="kepProjektTorlesPushButtonSzerkeszto">
-                     <property name="font">
-                      <font>
-                       <pointsize>11</pointsize>
-                      </font>
-                     </property>
-                     <property name="styleSheet">
-                      <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
-                     </property>
-                     <property name="text">
-                      <string>KÉP TÖRLÉS</string>
-                     </property>
                     </widget>
                    </item>
                   </layout>
@@ -581,8 +672,8 @@ background-color: rgb(255, 255, 255);</string>
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>64</width>
-                        <height>16</height>
+                        <width>152</width>
+                        <height>815</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_22">
@@ -661,6 +752,18 @@ background-color: rgb(255, 255, 255);</string>
                    </property>
                    <item>
                     <widget class="QPushButton" name="hatterPushButtonSzerkeszto">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>25</height>
+                      </size>
+                     </property>
                      <property name="font">
                       <font>
                        <pointsize>11</pointsize>
@@ -668,7 +771,8 @@ background-color: rgb(255, 255, 255);</string>
                      </property>
                      <property name="styleSheet">
                       <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                      </property>
                      <property name="text">
                       <string>HÁTTÉR</string>
@@ -677,6 +781,18 @@ background-color: rgb(255, 255, 255);</string>
                    </item>
                    <item>
                     <widget class="QPushButton" name="elrendezesPushButtonSzerkeszto">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>25</height>
+                      </size>
+                     </property>
                      <property name="font">
                       <font>
                        <pointsize>11</pointsize>
@@ -684,7 +800,8 @@ background-color: rgb(255, 255, 255);</string>
                      </property>
                      <property name="styleSheet">
                       <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                      </property>
                      <property name="text">
                       <string>ELRENDEZÉS</string>
@@ -693,6 +810,18 @@ background-color: rgb(255, 255, 255);</string>
                    </item>
                    <item>
                     <widget class="QPushButton" name="egysegeskeretPushButtonSzerkeszto">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>25</height>
+                      </size>
+                     </property>
                      <property name="font">
                       <font>
                        <pointsize>11</pointsize>
@@ -700,7 +829,8 @@ background-color: rgb(255, 255, 255);</string>
                      </property>
                      <property name="styleSheet">
                       <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                      </property>
                      <property name="text">
                       <string>EGYSÉGES KERET</string>
@@ -789,8 +919,8 @@ background-color: rgb(255, 255, 255);</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>62</width>
-                          <height>16</height>
+                          <width>150</width>
+                          <height>228</height>
                          </rect>
                         </property>
                         <layout class="QVBoxLayout" name="verticalLayout_31">
@@ -862,8 +992,8 @@ background-color: rgb(255, 255, 255);</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>62</width>
-                          <height>16</height>
+                          <width>150</width>
+                          <height>227</height>
                          </rect>
                         </property>
                         <layout class="QVBoxLayout" name="verticalLayout_34">
@@ -935,8 +1065,8 @@ background-color: rgb(255, 255, 255);</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>62</width>
-                          <height>16</height>
+                          <width>150</width>
+                          <height>228</height>
                          </rect>
                         </property>
                         <layout class="QVBoxLayout" name="verticalLayout_33">
@@ -1109,10 +1239,21 @@ background-color: rgb(255, 255, 255);</string>
                    </property>
                    <property name="styleSheet">
                     <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                    </property>
                    <property name="text">
-                    <string>&lt;&lt;</string>
+                    <string/>
+                   </property>
+                   <property name="icon">
+                    <iconset>
+                     <normaloff>../build-fotokonyv_szerkeszto-Desktop_Qt_6_6_0_MinGW_64_bit-Debug/ikonok/left.png</normaloff>../build-fotokonyv_szerkeszto-Desktop_Qt_6_6_0_MinGW_64_bit-Debug/ikonok/left.png</iconset>
+                   </property>
+                   <property name="iconSize">
+                    <size>
+                     <width>25</width>
+                     <height>25</height>
+                    </size>
                    </property>
                   </widget>
                  </item>
@@ -1145,6 +1286,12 @@ background-color: rgb(255, 255, 255);</string>
                      <width>30</width>
                      <height>16777215</height>
                     </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>11</pointsize>
+                     <bold>true</bold>
+                    </font>
                    </property>
                    <property name="styleSheet">
                     <string notr="true">color: rgb(0, 0, 0);</string>
@@ -1195,10 +1342,21 @@ background-color: rgb(255, 255, 255);</string>
                    </property>
                    <property name="styleSheet">
                     <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                    </property>
                    <property name="text">
-                    <string>&gt;&gt;</string>
+                    <string/>
+                   </property>
+                   <property name="icon">
+                    <iconset>
+                     <normaloff>../build-fotokonyv_szerkeszto-Desktop_Qt_6_6_0_MinGW_64_bit-Debug/ikonok/right.png</normaloff>../build-fotokonyv_szerkeszto-Desktop_Qt_6_6_0_MinGW_64_bit-Debug/ikonok/right.png</iconset>
+                   </property>
+                   <property name="iconSize">
+                    <size>
+                     <width>25</width>
+                     <height>25</height>
+                    </size>
                    </property>
                   </widget>
                  </item>
@@ -1264,7 +1422,7 @@ background-color: rgb(255, 255, 255);</string>
              <item row="0" column="0">
               <widget class="QStackedWidget" name="tulajdonsagokStackedWidgetSzerkeszto">
                <property name="currentIndex">
-                <number>2</number>
+                <number>3</number>
                </property>
                <widget class="QWidget" name="uresPageSzerkeszto">
                 <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -1357,9 +1515,9 @@ background-color: rgb(255, 255, 255);</string>
                       <property name="geometry">
                        <rect>
                         <x>0</x>
-                        <y>0</y>
+                        <y>-106</y>
                         <width>214</width>
-                        <height>882</height>
+                        <height>843</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_17">
@@ -1459,6 +1617,12 @@ background-color: rgb(255, 255, 255);</string>
                              </item>
                              <item row="0" column="1">
                               <widget class="QSpinBox" name="kepHorizontalisSpinBoxSzerkeszto">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>0</width>
+                                 <height>25</height>
+                                </size>
+                               </property>
                                <property name="font">
                                 <font>
                                  <pointsize>11</pointsize>
@@ -1466,7 +1630,8 @@ background-color: rgb(255, 255, 255);</string>
                                </property>
                                <property name="styleSheet">
                                 <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                                </property>
                                <property name="suffix">
                                 <string> px</string>
@@ -1475,6 +1640,12 @@ background-color: rgb(255, 255, 255);</string>
                              </item>
                              <item row="1" column="1">
                               <widget class="QSpinBox" name="kepVertikalisSpinBoxSzerkeszto">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>0</width>
+                                 <height>25</height>
+                                </size>
+                               </property>
                                <property name="font">
                                 <font>
                                  <pointsize>11</pointsize>
@@ -1482,7 +1653,8 @@ background-color: rgb(255, 255, 255);</string>
                                </property>
                                <property name="styleSheet">
                                 <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                                </property>
                                <property name="suffix">
                                 <string> px</string>
@@ -1525,6 +1697,12 @@ background-color: rgb(255, 255, 255);</string>
                            </item>
                            <item>
                             <widget class="QSpinBox" name="kepMeretSpinBoxSzerkeszto">
+                             <property name="minimumSize">
+                              <size>
+                               <width>0</width>
+                               <height>25</height>
+                              </size>
+                             </property>
                              <property name="font">
                               <font>
                                <pointsize>11</pointsize>
@@ -1532,7 +1710,8 @@ background-color: rgb(255, 255, 255);</string>
                              </property>
                              <property name="styleSheet">
                               <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                              </property>
                              <property name="suffix">
                               <string> %</string>
@@ -1573,6 +1752,12 @@ background-color: rgb(255, 255, 255);</string>
                            </item>
                            <item>
                             <widget class="QSpinBox" name="kepDolesszogSpinBoxSzerkeszto">
+                             <property name="minimumSize">
+                              <size>
+                               <width>0</width>
+                               <height>25</height>
+                              </size>
+                             </property>
                              <property name="font">
                               <font>
                                <pointsize>11</pointsize>
@@ -1580,7 +1765,8 @@ background-color: rgb(255, 255, 255);</string>
                              </property>
                              <property name="styleSheet">
                               <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                              </property>
                              <property name="suffix">
                               <string> °</string>
@@ -1626,6 +1812,12 @@ background-color: rgb(255, 255, 255);</string>
                              </property>
                              <item>
                               <widget class="QPushButton" name="kepHatrakuldesPushButtonSzerkeszto">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>0</width>
+                                 <height>25</height>
+                                </size>
+                               </property>
                                <property name="font">
                                 <font>
                                  <pointsize>11</pointsize>
@@ -1633,7 +1825,8 @@ background-color: rgb(255, 255, 255);</string>
                                </property>
                                <property name="styleSheet">
                                 <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                                </property>
                                <property name="text">
                                 <string>HÁTRAKÜLDÉS</string>
@@ -1642,6 +1835,12 @@ background-color: rgb(255, 255, 255);</string>
                              </item>
                              <item>
                               <widget class="QPushButton" name="kepElorehozasPushButtonSzerkeszto">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>0</width>
+                                 <height>25</height>
+                                </size>
+                               </property>
                                <property name="font">
                                 <font>
                                  <pointsize>11</pointsize>
@@ -1649,7 +1848,8 @@ background-color: rgb(255, 255, 255);</string>
                                </property>
                                <property name="styleSheet">
                                 <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                                </property>
                                <property name="text">
                                 <string>ELŐREHOZÁS</string>
@@ -1727,6 +1927,12 @@ background-color: rgb(255, 255, 255);</string>
                              </item>
                              <item row="0" column="1">
                               <widget class="QSpinBox" name="kepSzelessegSpinBoxSzerkeszto">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>0</width>
+                                 <height>25</height>
+                                </size>
+                               </property>
                                <property name="font">
                                 <font>
                                  <pointsize>11</pointsize>
@@ -1734,7 +1940,8 @@ background-color: rgb(255, 255, 255);</string>
                                </property>
                                <property name="styleSheet">
                                 <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                                </property>
                                <property name="suffix">
                                 <string> %</string>
@@ -1749,6 +1956,12 @@ background-color: rgb(255, 255, 255);</string>
                              </item>
                              <item row="1" column="1">
                               <widget class="QSpinBox" name="kepMagassagSpinBoxSzerkeszto">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>0</width>
+                                 <height>25</height>
+                                </size>
+                               </property>
                                <property name="font">
                                 <font>
                                  <pointsize>11</pointsize>
@@ -1756,7 +1969,8 @@ background-color: rgb(255, 255, 255);</string>
                                </property>
                                <property name="styleSheet">
                                 <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                                </property>
                                <property name="suffix">
                                 <string> %</string>
@@ -1814,6 +2028,12 @@ background-color: rgb(255, 255, 255);</string>
                              </item>
                              <item row="0" column="1">
                               <widget class="QSpinBox" name="keparanyHorizontalisSpinBoxSzerkeszto">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>0</width>
+                                 <height>25</height>
+                                </size>
+                               </property>
                                <property name="font">
                                 <font>
                                  <pointsize>11</pointsize>
@@ -1821,7 +2041,8 @@ background-color: rgb(255, 255, 255);</string>
                                </property>
                                <property name="styleSheet">
                                 <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                                </property>
                                <property name="suffix">
                                 <string> px</string>
@@ -1830,6 +2051,12 @@ background-color: rgb(255, 255, 255);</string>
                              </item>
                              <item row="1" column="1">
                               <widget class="QSpinBox" name="keparanyVertikalisSpinBoxSzerkeszto">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>0</width>
+                                 <height>25</height>
+                                </size>
+                               </property>
                                <property name="font">
                                 <font>
                                  <pointsize>11</pointsize>
@@ -1837,7 +2064,8 @@ background-color: rgb(255, 255, 255);</string>
                                </property>
                                <property name="styleSheet">
                                 <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                                </property>
                                <property name="suffix">
                                 <string> px</string>
@@ -1870,6 +2098,12 @@ background-color: rgb(255, 255, 255);</string>
                            </item>
                            <item>
                             <widget class="QComboBox" name="kepSzuroComboBoxSzerkeszto">
+                             <property name="minimumSize">
+                              <size>
+                               <width>0</width>
+                               <height>25</height>
+                              </size>
+                             </property>
                              <property name="font">
                               <font>
                                <pointsize>11</pointsize>
@@ -1877,7 +2111,8 @@ background-color: rgb(255, 255, 255);</string>
                              </property>
                              <property name="styleSheet">
                               <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                              </property>
                              <item>
                               <property name="text">
@@ -1923,6 +2158,12 @@ background-color: rgb(255, 255, 255);</string>
                            </item>
                            <item>
                             <widget class="QPushButton" name="kepValasztasPushButtonSzerkeszto">
+                             <property name="minimumSize">
+                              <size>
+                               <width>0</width>
+                               <height>25</height>
+                              </size>
+                             </property>
                              <property name="font">
                               <font>
                                <pointsize>11</pointsize>
@@ -1930,7 +2171,8 @@ background-color: rgb(255, 255, 255);</string>
                              </property>
                              <property name="styleSheet">
                               <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                              </property>
                              <property name="text">
                               <string>VÁLASZTÁS</string>
@@ -1961,6 +2203,12 @@ background-color: rgb(255, 255, 255);</string>
                            </item>
                            <item>
                             <widget class="QPushButton" name="keretValasztasPushButtonSzerleszto">
+                             <property name="minimumSize">
+                              <size>
+                               <width>0</width>
+                               <height>25</height>
+                              </size>
+                             </property>
                              <property name="font">
                               <font>
                                <pointsize>11</pointsize>
@@ -1968,7 +2216,8 @@ background-color: rgb(255, 255, 255);</string>
                              </property>
                              <property name="styleSheet">
                               <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                              </property>
                              <property name="text">
                               <string>VÁLASZTÁS</string>
@@ -2001,6 +2250,12 @@ background-color: rgb(255, 255, 255);</string>
                    </item>
                    <item>
                     <widget class="QPushButton" name="kepTorlesPushButtonSzerkeszto">
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>25</height>
+                      </size>
+                     </property>
                      <property name="font">
                       <font>
                        <pointsize>11</pointsize>
@@ -2009,7 +2264,8 @@ background-color: rgb(255, 255, 255);</string>
                      </property>
                      <property name="styleSheet">
                       <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                      </property>
                      <property name="text">
                       <string>TÖRLÉS</string>
@@ -2130,6 +2386,12 @@ background-color: rgb(255, 255, 255);</string>
                        </item>
                        <item row="0" column="1">
                         <widget class="QSpinBox" name="belyegHorizontalisSpinBoxSzerkeszto">
+                         <property name="minimumSize">
+                          <size>
+                           <width>0</width>
+                           <height>25</height>
+                          </size>
+                         </property>
                          <property name="font">
                           <font>
                            <pointsize>11</pointsize>
@@ -2137,7 +2399,8 @@ background-color: rgb(255, 255, 255);</string>
                          </property>
                          <property name="styleSheet">
                           <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                          </property>
                          <property name="suffix">
                           <string> px</string>
@@ -2146,6 +2409,12 @@ background-color: rgb(255, 255, 255);</string>
                        </item>
                        <item row="1" column="1">
                         <widget class="QSpinBox" name="belyegVertikalisSpinBoxSzerkeszto">
+                         <property name="minimumSize">
+                          <size>
+                           <width>0</width>
+                           <height>25</height>
+                          </size>
+                         </property>
                          <property name="font">
                           <font>
                            <pointsize>11</pointsize>
@@ -2153,7 +2422,8 @@ background-color: rgb(255, 255, 255);</string>
                          </property>
                          <property name="styleSheet">
                           <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                          </property>
                          <property name="suffix">
                           <string> px</string>
@@ -2187,6 +2457,12 @@ background-color: rgb(255, 255, 255);</string>
                      </item>
                      <item>
                       <widget class="QSpinBox" name="belyegMeretSpinBoxSzerkeszto">
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>25</height>
+                        </size>
+                       </property>
                        <property name="font">
                         <font>
                          <pointsize>11</pointsize>
@@ -2194,7 +2470,8 @@ background-color: rgb(255, 255, 255);</string>
                        </property>
                        <property name="styleSheet">
                         <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                        </property>
                        <property name="suffix">
                         <string> %</string>
@@ -2235,6 +2512,12 @@ background-color: rgb(255, 255, 255);</string>
                      </item>
                      <item>
                       <widget class="QSpinBox" name="belyegDolesszogSpinBoxSzerkeszto">
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>25</height>
+                        </size>
+                       </property>
                        <property name="font">
                         <font>
                          <pointsize>11</pointsize>
@@ -2242,7 +2525,8 @@ background-color: rgb(255, 255, 255);</string>
                        </property>
                        <property name="styleSheet">
                         <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                        </property>
                        <property name="suffix">
                         <string> °</string>
@@ -2285,6 +2569,12 @@ background-color: rgb(255, 255, 255);</string>
                        </property>
                        <item>
                         <widget class="QPushButton" name="belyegElorehozasPushButtonSzerkeszto">
+                         <property name="minimumSize">
+                          <size>
+                           <width>0</width>
+                           <height>25</height>
+                          </size>
+                         </property>
                          <property name="font">
                           <font>
                            <pointsize>11</pointsize>
@@ -2292,7 +2582,8 @@ background-color: rgb(255, 255, 255);</string>
                          </property>
                          <property name="styleSheet">
                           <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                          </property>
                          <property name="text">
                           <string>ELŐREHOZÁS</string>
@@ -2301,6 +2592,12 @@ background-color: rgb(255, 255, 255);</string>
                        </item>
                        <item>
                         <widget class="QPushButton" name="belyegHatrakuldesPushButtonSzerkeszto">
+                         <property name="minimumSize">
+                          <size>
+                           <width>0</width>
+                           <height>25</height>
+                          </size>
+                         </property>
                          <property name="font">
                           <font>
                            <pointsize>11</pointsize>
@@ -2308,7 +2605,8 @@ background-color: rgb(255, 255, 255);</string>
                          </property>
                          <property name="styleSheet">
                           <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                          </property>
                          <property name="text">
                           <string>HÁTRAKÜLDÉS</string>
@@ -2337,6 +2635,12 @@ background-color: rgb(255, 255, 255);</string>
                    </item>
                    <item>
                     <widget class="QPushButton" name="belyegTorlesPushButtonSzerkeszto">
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>25</height>
+                      </size>
+                     </property>
                      <property name="font">
                       <font>
                        <pointsize>11</pointsize>
@@ -2344,7 +2648,8 @@ background-color: rgb(255, 255, 255);</string>
                      </property>
                      <property name="styleSheet">
                       <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                      </property>
                      <property name="text">
                       <string>TÖRLÉS</string>
@@ -2401,9 +2706,9 @@ background-color: rgb(255, 255, 255);</string>
                       <property name="geometry">
                        <rect>
                         <x>0</x>
-                        <y>0</y>
-                        <width>216</width>
-                        <height>818</height>
+                        <y>-79</y>
+                        <width>214</width>
+                        <height>801</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_24">
@@ -2500,6 +2805,12 @@ background-color: rgb(255, 255, 255);</string>
                              </item>
                              <item row="0" column="1">
                               <widget class="QSpinBox" name="szovegHorizontalisSpinBoxSzerkeszto">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>0</width>
+                                 <height>25</height>
+                                </size>
+                               </property>
                                <property name="font">
                                 <font>
                                  <pointsize>11</pointsize>
@@ -2507,7 +2818,8 @@ background-color: rgb(255, 255, 255);</string>
                                </property>
                                <property name="styleSheet">
                                 <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                                </property>
                                <property name="suffix">
                                 <string> px</string>
@@ -2516,6 +2828,12 @@ background-color: rgb(255, 255, 255);</string>
                              </item>
                              <item row="1" column="1">
                               <widget class="QSpinBox" name="szovegVertikalisSpinBoxSzerkeszto">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>0</width>
+                                 <height>25</height>
+                                </size>
+                               </property>
                                <property name="font">
                                 <font>
                                  <pointsize>11</pointsize>
@@ -2523,7 +2841,8 @@ background-color: rgb(255, 255, 255);</string>
                                </property>
                                <property name="styleSheet">
                                 <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                                </property>
                                <property name="suffix">
                                 <string> px</string>
@@ -2562,6 +2881,12 @@ background-color: rgb(255, 255, 255);</string>
                              </property>
                              <item>
                               <widget class="QPushButton" name="szovegElorehozasPushButtonSzerkeszto">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>0</width>
+                                 <height>25</height>
+                                </size>
+                               </property>
                                <property name="font">
                                 <font>
                                  <pointsize>11</pointsize>
@@ -2569,7 +2894,8 @@ background-color: rgb(255, 255, 255);</string>
                                </property>
                                <property name="styleSheet">
                                 <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                                </property>
                                <property name="text">
                                 <string>ELŐREHOZÁS</string>
@@ -2578,6 +2904,12 @@ background-color: rgb(255, 255, 255);</string>
                              </item>
                              <item>
                               <widget class="QPushButton" name="szovegHatrakuldesPushButtonSzerkeszto">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>0</width>
+                                 <height>25</height>
+                                </size>
+                               </property>
                                <property name="font">
                                 <font>
                                  <pointsize>11</pointsize>
@@ -2585,7 +2917,8 @@ background-color: rgb(255, 255, 255);</string>
                                </property>
                                <property name="styleSheet">
                                 <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                                </property>
                                <property name="text">
                                 <string>HÁTRAKÜLDÉS</string>
@@ -2680,6 +3013,12 @@ li.checked::marker { content: &quot;\2612&quot;; }
                                <verstretch>0</verstretch>
                               </sizepolicy>
                              </property>
+                             <property name="minimumSize">
+                              <size>
+                               <width>0</width>
+                               <height>25</height>
+                              </size>
+                             </property>
                              <property name="font">
                               <font>
                                <pointsize>11</pointsize>
@@ -2688,7 +3027,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
                              </property>
                              <property name="styleSheet">
                               <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                              </property>
                              <property name="suffix">
                               <string> pt</string>
@@ -2720,9 +3060,21 @@ background-color: rgb(255, 255, 255);</string>
                            </item>
                            <item>
                             <widget class="QFontComboBox" name="betutipusComboBoxSzerkeszto">
+                             <property name="minimumSize">
+                              <size>
+                               <width>0</width>
+                               <height>25</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <pointsize>11</pointsize>
+                              </font>
+                             </property>
                              <property name="styleSheet">
                               <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                              </property>
                             </widget>
                            </item>
@@ -2835,6 +3187,12 @@ background-color: rgb(255, 255, 255);</string>
                                <verstretch>0</verstretch>
                               </sizepolicy>
                              </property>
+                             <property name="minimumSize">
+                              <size>
+                               <width>0</width>
+                               <height>25</height>
+                              </size>
+                             </property>
                              <property name="font">
                               <font>
                                <pointsize>11</pointsize>
@@ -2842,7 +3200,8 @@ background-color: rgb(255, 255, 255);</string>
                              </property>
                              <property name="styleSheet">
                               <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                              </property>
                              <property name="text">
                               <string>MEGVÁLTOZTAT</string>
@@ -2875,6 +3234,12 @@ background-color: rgb(255, 255, 255);</string>
                    </item>
                    <item>
                     <widget class="QPushButton" name="szovegTorlesPushButtonSzerkeszto">
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>25</height>
+                      </size>
+                     </property>
                      <property name="font">
                       <font>
                        <pointsize>11</pointsize>
@@ -2882,7 +3247,8 @@ background-color: rgb(255, 255, 255);</string>
                      </property>
                      <property name="styleSheet">
                       <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                      </property>
                      <property name="text">
                       <string>TÖRLÉS</string>
@@ -2970,7 +3336,8 @@ background-color: rgb(255, 255, 255);</string>
                        </property>
                        <property name="styleSheet">
                         <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                        </property>
                        <property name="text">
                         <string>MEGVÁLTOZTAT</string>
@@ -3016,8 +3383,8 @@ background-color: rgb(255, 255, 255);</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>62</width>
-                          <height>16</height>
+                          <width>224</width>
+                          <height>678</height>
                          </rect>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_18">

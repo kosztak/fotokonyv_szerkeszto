@@ -77,11 +77,11 @@ private slots:
 
     void on_betutipusComboBoxSzerkeszto_currentIndexChanged(int index);
 
-    void on_stilusPushButtonSzerkeszto_clicked();
+    void on_stilusToolButtonSzerkeszto_clicked();
 
-    void on_kepekPushButtonSzerkeszto_clicked();
+    void on_kepekToolButtonSzerkeszto_clicked();
 
-    void on_belyegekPushButtonSzerkeszto_clicked();
+    void on_belyegekToolButtonSzerkeszto_clicked();
 
     void on_betuszinPushButtonSzerkeszto_clicked();
 
@@ -125,7 +125,7 @@ private slots:
 
     void on_kepValasztasPushButtonSzerkeszto_clicked();
 
-    void on_elemekPushButtonSzerkeszto_clicked();
+    void on_elemekToolButtonSzerkeszto_clicked();
 
     void on_kepElorehozasPushButtonSzerkeszto_clicked();
 
