@@ -25,6 +25,7 @@ MainWindow::MainWindow(QWidget *parent)
     graphicsView = new CustomView();
     ui->dummyGridLayoutSzerkeszto->addWidget(graphicsView);
     graphicsView->setScene(scene);
+    graphicsView->setStyleSheet("background-color: rgb(249, 219, 189);");
     graphicsView->setFrameStyle(QFrame::NoFrame);
 
     //stacked widget beallitas
@@ -39,6 +40,7 @@ MainWindow::MainWindow(QWidget *parent)
     {
         QPushButton *tempbutton = new QPushButton;
         tempbutton->setAutoFillBackground(true);
+        tempbutton->setStyleSheet("border: 3px outset #c2c2c2;");
         QPixmap pixmap(QString::fromStdString(i.second));
 
         tempbutton->setIcon(pixmap);
@@ -91,6 +93,7 @@ MainWindow::MainWindow(QWidget *parent)
             //lista elem
             QPushButton* listaElem = new QPushButton;
             listaElem->setAutoFillBackground(true);
+            listaElem->setStyleSheet("border: 3px outset #c2c2c2;");
 
             connect(listaElem, &QPushButton::clicked, [=]{
                 ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->belyegPageSzerkeszto);
@@ -139,6 +142,7 @@ MainWindow::MainWindow(QWidget *parent)
     {
         QPushButton *tempbutton = new QPushButton;
         tempbutton->setAutoFillBackground(true);
+        tempbutton->setStyleSheet("border: 3px outset #c2c2c2;");
         QPixmap pixmap(QString::fromStdString(i.second));
 
         tempbutton->setIcon(pixmap);
@@ -163,6 +167,7 @@ MainWindow::MainWindow(QWidget *parent)
     for(string i : kepLista)
     {
         QPushButton *tempbutton = new QPushButton;
+        tempbutton->setStyleSheet("border: 3px outset #c2c2c2;");
         QPixmap pixmap(QString::fromStdString(i));
 
         tempbutton->setIcon(pixmap);
@@ -234,6 +239,8 @@ MainWindow::MainWindow(QWidget *parent)
             //lista elem
             QPushButton* listaElem = new QPushButton;
             listaElem->setAutoFillBackground(true);
+            listaElem->setStyleSheet("border: 3px outset #c2c2c2;");
+
             connect(listaElem, &QPushButton::clicked, [=]{
                 ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->kepPageSzerkeszto);
 
