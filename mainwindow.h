@@ -166,7 +166,6 @@ private:
     map<string, string> projektek; //nev, eleres
     map<string, string> belyegek; //nev, eleres
     map<string, string> mintak; //nev, eleres
-    list<Stilus> stilusok;
     map<string ,Elrendezes> elrendezesek;
     QSvgRenderer keretAlapHatter = QSvgRenderer(QString::fromStdString("./image.svg"));
     map<Keret*, QPushButton*> kepekLista;

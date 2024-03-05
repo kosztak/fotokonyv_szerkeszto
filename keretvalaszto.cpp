@@ -16,6 +16,7 @@ void KeretValaszto::inicializalas()
 {
     QPushButton *tempbutton = new QPushButton();
     tempbutton->setAutoFillBackground(true);
+    tempbutton->setStyleSheet("background-color: #ffffff; border: 3px outset #c2c2c2;");
 
     QPixmap pixmap(128, 128);
     QPainter imagePainter(&pixmap);
@@ -37,6 +38,7 @@ void KeretValaszto::inicializalas()
     {
         tempbutton = new QPushButton();
         tempbutton->setAutoFillBackground(true);
+        tempbutton->setStyleSheet("background-color: #ffffff; border: 3px outset #c2c2c2;");
 
         QImage temp = pixmap.toImage().convertToFormat(QImage::Format_ARGB32);
 

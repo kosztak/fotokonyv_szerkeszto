@@ -17,6 +17,7 @@ void KepValaszto::inicializalas()
     for(auto i : kepLista)
     {
         QPushButton *tempbutton = new QPushButton;
+        tempbutton->setStyleSheet("background-color: #ffffff; border: 3px outset #c2c2c2;");
         QPixmap pixmap(QString::fromStdString(i));
 
         tempbutton->setIconSize(QSize(128, 128));

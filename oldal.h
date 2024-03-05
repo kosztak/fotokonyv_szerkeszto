@@ -20,7 +20,7 @@ private:
     unsigned oldalszam;
 public:
     Oldal(const unsigned &oldalszam);
-    Stilus *getStilus();
+    Stilus* getStilus();
     void stilusAlkalmazas();
     void belyegHozzaadas(Belyeg *ujBelyeg);
     void belyegTorles(Belyeg *belyeg);
@@ -32,9 +32,9 @@ public:
     void elemekElrejtese();
     void elemekMutatasa();
     void egysegesKeret(unsigned short index);
-    list<Keret *> getKeretek() const;
-    list<Belyeg *> getBelyegek() const;
-    list<Szoveg *> getSzovegek() const;
+    list<Keret*> getKeretek() const;
+    list<Belyeg*> getBelyegek() const;
+    list<Szoveg*> getSzovegek() const;
 };
 
 #endif // OLDAL_H

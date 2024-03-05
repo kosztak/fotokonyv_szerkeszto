@@ -14,7 +14,11 @@
    <string>Kép Választó</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(220, 20, 60);</string>
+   <string notr="true">QDialog#kepValaszto
+{
+background-color: rgb(220, 20, 60);
+border: 3px outset #bb1133;
+}</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
@@ -34,6 +38,13 @@
    </property>
    <item>
     <widget class="QScrollArea" name="scrollArea">
+     <property name="styleSheet">
+      <string notr="true">QScrollArea#scrollArea
+{
+background-color: rgb(249, 219, 189);
+border: 4px inset #f5c28f;
+}</string>
+     </property>
      <property name="widgetResizable">
       <bool>true</bool>
      </property>
@@ -42,8 +53,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>448</width>
-        <height>218</height>
+        <width>442</width>
+        <height>213</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -102,17 +113,25 @@
      </item>
      <item>
       <widget class="QPushButton" name="valasztPushButton">
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>27</height>
+        </size>
+       </property>
        <property name="font">
         <font>
-         <pointsize>11</pointsize>
+         <pointsize>13</pointsize>
         </font>
        </property>
        <property name="styleSheet">
         <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border: 2px outset #c2c2c2;
+border-radius: 5px;</string>
        </property>
        <property name="text">
-        <string>VÁLASZT</string>
+        <string>Választ</string>
        </property>
       </widget>
      </item>
@@ -131,17 +150,25 @@ background-color: rgb(255, 255, 255);</string>
      </item>
      <item>
       <widget class="QPushButton" name="megsePushButton">
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>27</height>
+        </size>
+       </property>
        <property name="font">
         <font>
-         <pointsize>11</pointsize>
+         <pointsize>13</pointsize>
         </font>
        </property>
        <property name="styleSheet">
         <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border: 2px outset #c2c2c2;
+border-radius: 5px;</string>
        </property>
        <property name="text">
-        <string>MÉGSE</string>
+        <string>Mégse</string>
        </property>
       </widget>
      </item>

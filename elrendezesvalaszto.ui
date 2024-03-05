@@ -54,14 +54,14 @@
       <widget class="QLabel" name="label">
        <property name="font">
         <font>
-         <pointsize>11</pointsize>
+         <pointsize>13</pointsize>
         </font>
        </property>
        <property name="styleSheet">
         <string notr="true">color: rgb(255, 255, 255);</string>
        </property>
        <property name="text">
-        <string>KÉPEK SZÁMA:</string>
+        <string>Képek száma:</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -70,6 +70,12 @@
      </item>
      <item>
       <widget class="QSpinBox" name="kepekSzamaSpinBox">
+       <property name="minimumSize">
+        <size>
+         <width>40</width>
+         <height>27</height>
+        </size>
+       </property>
        <property name="font">
         <font>
          <pointsize>11</pointsize>
@@ -77,7 +83,9 @@
        </property>
        <property name="styleSheet">
         <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border: 2px outset #c2c2c2;
+border-radius: 5px;</string>
        </property>
        <property name="suffix">
         <string/>
@@ -119,7 +127,7 @@ background-color: rgb(255, 255, 255);</string>
         <x>0</x>
         <y>0</y>
         <width>448</width>
-        <height>278</height>
+        <height>280</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
@@ -178,17 +186,31 @@ background-color: rgb(255, 255, 255);</string>
      </item>
      <item>
       <widget class="QPushButton" name="megsePushButton">
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>27</height>
+        </size>
+       </property>
+       <property name="baseSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="font">
         <font>
-         <pointsize>11</pointsize>
+         <pointsize>13</pointsize>
         </font>
        </property>
        <property name="styleSheet">
         <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+background-color: rgb(255, 255, 255);
+border: 2px outset #c2c2c2;
+border-radius: 5px;</string>
        </property>
        <property name="text">
-        <string>MÉGSE</string>
+        <string>Mégse</string>
        </property>
       </widget>
      </item>
