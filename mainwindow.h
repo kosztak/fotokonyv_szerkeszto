@@ -10,9 +10,12 @@
 #include <QColor>
 #include <QPalette>
 #include <QtSvg/QSvgRenderer>
+#include <QGraphicsBlurEffect>
+#include <QtPrintSupport/QPrinter>
 #include <string>
 #include <list>
 #include <map>
+
 #include "customview.h"
 #include "kimenet.h"
 #include "projekt.h"
@@ -22,6 +25,7 @@
 #include "keretvalaszto.h"
 #include "kepvalaszto.h"
 #include "elrendezesvalaszto.h"
+#include "exportwindow.h"
 
 #include <iostream>
 #include <QMouseEvent>
@@ -148,6 +152,34 @@ private slots:
     void on_belyegMeretSpinBoxSzerkeszto_valueChanged(int arg1);
 
     void on_elrendezesPushButtonSzerkeszto_clicked();
+
+    void on_ujProjektPushButtonFomenu_clicked();
+
+    void on_projektBetoltesePushButtonFomenu_clicked();
+
+    void on_belyegekPushButtonFomenu_clicked();
+
+    void on_mintakPushButtonFomenu_clicked();
+
+    void on_projektTorlesePushButtonFomenu_clicked();
+
+    void on_kilepesPushButtonFomenu_clicked();
+
+    void on_bezarasPushButtonSzerkeszto_clicked();
+
+    void on_ujBelyegPushButtonBelyeg_clicked();
+
+    void on_belyegTorlesePushButtonBelyeg_clicked();
+
+    void on_visszalepesPushButtonBelyeg_clicked();
+
+    void on_ujMintaPushButtonMinta_clicked();
+
+    void on_mintaTorlesePushButtonMinta_clicked();
+
+    void on_visszalepesPushButtonMinta_clicked();
+
+    void on_exportalasPushButtonSzerkeszto_clicked();
 
 private:
     Ui::MainWindow *ui;

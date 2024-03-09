@@ -18,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent)
     szerkesztoWidget = new QWidget;
     szerkesztoWidget->resize(1240, 1754);
     szerkesztoWidget->setObjectName("szerkesztoWidget");
+    szerkesztoWidget->setStyleSheet("background-color: #ffffff");
 
     scene = new QGraphicsScene;
     scene->addWidget(szerkesztoWidget);
@@ -29,6 +30,7 @@ MainWindow::MainWindow(QWidget *parent)
     graphicsView->setFrameStyle(QFrame::NoFrame);
 
     //stacked widget beallitas
+    ui->kepernyoStackedWidget->setCurrentWidget(ui->fomenuKepernyoPage);
     ui->tartalomStackedWidgetSzerkeszto->setCurrentWidget(ui->stilusPageSzerkeszto);
     ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->uresPageSzerkeszto);
 
@@ -1156,11 +1158,11 @@ void MainWindow::on_lapozasLePushButtonSzerkeszto_clicked()
             Minta minta = jelenlegiProjekt.getJelenlegiOldal()->getStilus()->getMinta();
 
             //minta beallitas
-            szerkesztoWidget->setStyleSheet(QString::fromStdString("QWidget#szerkesztoWidgetSzerkeszto{border-image: url(" + minta.getEleresiUt() + ") 0 0 0 0 stretch stretch;}"));
+            szerkesztoWidget->setStyleSheet(QString::fromStdString("QWidget#szerkesztoWidget{border-image: url(" + minta.getEleresiUt() + ") 0 0 0 0 stretch stretch;}"));
         }
 
         //oldal beállítása
-        ui->oldalszamLabelSzerkeszto->setText(QString::fromStdString(to_string((ui->oldalszamLabelSzerkeszto->text().toInt())-1)));
+        ui->oldalszamLabelSzerkeszto->setText(QString::fromStdString("" + to_string(jelenlegiProjekt.getJelenlegiOldal()->getOldalszam()) + "/" + to_string(jelenlegiProjekt.getOldalszam())));
 
         //listak frissitese
         listaFrissites();
@@ -1184,11 +1186,11 @@ void MainWindow::on_lapozasFelPushButtonSzerkeszto_clicked()
             Minta minta = jelenlegiProjekt.getJelenlegiOldal()->getStilus()->getMinta();
 
             //minta beallitas
-            szerkesztoWidget->setStyleSheet(QString::fromStdString("QWidget#szerkesztoWidgetSzerkeszto{border-image: url(" + minta.getEleresiUt() + ") 0 0 0 0 stretch stretch;}"));
+            szerkesztoWidget->setStyleSheet(QString::fromStdString("QWidget#szerkesztoWidget{border-image: url(" + minta.getEleresiUt() + ") 0 0 0 0 stretch stretch;}"));
         }
 
         //oldal beállítása
-        ui->oldalszamLabelSzerkeszto->setText(QString::fromStdString(to_string((ui->oldalszamLabelSzerkeszto->text().toInt())+1)));
+        ui->oldalszamLabelSzerkeszto->setText(QString::fromStdString("" + to_string(jelenlegiProjekt.getJelenlegiOldal()->getOldalszam()) + "/" + to_string(jelenlegiProjekt.getOldalszam())));
 
         //listak frissitese
         listaFrissites();
@@ -1408,4 +1410,152 @@ void MainWindow::on_elrendezesPushButtonSzerkeszto_clicked()
     }
 }
 
+//menu
+void MainWindow::on_bezarasPushButtonSzerkeszto_clicked()
+{
+    ui->kepernyoStackedWidget->setCurrentWidget(ui->fomenuKepernyoPage);
+}
+
+void MainWindow::on_exportalasPushButtonSzerkeszto_clicked()
+{
+    ExportWindow* e = new ExportWindow(this);
+    if(e->exec() == QDialog::Accepted)
+    {
+        unsigned oldalakSzama = jelenlegiProjekt.getOldalszam();
+
+        //jelenlegi elem nullazasa
+        ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->uresPageSzerkeszto);
+
+        jelenlegiProjekt.setJelenlegiElem(nullptr);
+
+        //elore lapozas
+        while(jelenlegiProjekt.getJelenlegiOldal()->getOldalszam() != 1)
+        {
+            ui->lapozasLePushButtonSzerkeszto->click();
+        }
+
+        //exportalas
+        if(e->getTipus())
+        {
+            QPrinter printer;
+            printer.setFullPage(true);
+            printer.setOutputFormat(QPrinter::PdfFormat);
+            printer.setOutputFileName(QString::fromStdString(e->getUtvonal()+ "/" + jelenlegiProjekt.getNev() + ".pdf"));
+
+            //kep nyomtatas
+            QSize oldalMeret(szerkesztoWidget->width()-310, szerkesztoWidget->height()-438);
+            printer.setPageSize(QPageSize(oldalMeret));
+            QPainter painter(&printer);
+
+            while(true)
+            {
+                szerkesztoWidget->render(&painter);
+
+                if(jelenlegiProjekt.getJelenlegiOldal()->getOldalszam() < oldalakSzama)
+                {
+                    ui->lapozasFelPushButtonSzerkeszto->click();
+                    printer.newPage();
+                }else{
+                    break;
+                }
+            }
+
+        }else{
+            QPixmap kimenet(szerkesztoWidget->width(), szerkesztoWidget->height());
+            QPainter painter(&kimenet);
+
+            string kiterjesztes;
+            if(e->getFormatum())
+            {
+                kiterjesztes = "jpg";
+            }else{
+                kiterjesztes = "png";
+            }
+
+            while(true)
+            {
+                szerkesztoWidget->render(&painter);
+
+                QDir dir;
+                dir.mkdir(QString::fromStdString(e->getUtvonal() + "/" + jelenlegiProjekt.getNev()));
+                QFile file(QString::fromStdString(e->getUtvonal() + "/" + jelenlegiProjekt.getNev() + "/" + to_string(jelenlegiProjekt.getJelenlegiOldal()->getOldalszam()) + "." + kiterjesztes));
+                file.open(QIODevice::WriteOnly);
+                kimenet.save(&file);
+                file.close();
+
+                if(jelenlegiProjekt.getJelenlegiOldal()->getOldalszam() < oldalakSzama)
+                {
+                    ui->lapozasFelPushButtonSzerkeszto->click();
+                }else{
+                    break;
+                }
+            }
+        }
+    }
+}
+
 //------------------------------------------------------------------------------------------
+//FOMENU
+void MainWindow::on_ujProjektPushButtonFomenu_clicked()
+{
+    ui->kepernyoStackedWidget->setCurrentWidget(ui->szerkesztoKepernyoPage);
+}
+
+void MainWindow::on_projektBetoltesePushButtonFomenu_clicked()
+{
+    ui->kepernyoStackedWidget->setCurrentWidget(ui->szerkesztoKepernyoPage);
+}
+
+void MainWindow::on_belyegekPushButtonFomenu_clicked()
+{
+    ui->kepernyoStackedWidget->setCurrentWidget(ui->belyegekKepernyoPage);
+}
+
+void MainWindow::on_mintakPushButtonFomenu_clicked()
+{
+    ui->kepernyoStackedWidget->setCurrentWidget(ui->mintakKepernyoPage);
+}
+
+void MainWindow::on_projektTorlesePushButtonFomenu_clicked()
+{
+
+}
+
+void MainWindow::on_kilepesPushButtonFomenu_clicked()
+{
+    QCoreApplication::quit();
+}
+
+//------------------------------------------------------------------------------------------
+//BELYEGEK
+void MainWindow::on_ujBelyegPushButtonBelyeg_clicked()
+{
+
+}
+
+void MainWindow::on_belyegTorlesePushButtonBelyeg_clicked()
+{
+
+}
+
+void MainWindow::on_visszalepesPushButtonBelyeg_clicked()
+{
+    ui->kepernyoStackedWidget->setCurrentWidget(ui->fomenuKepernyoPage);
+}
+
+//------------------------------------------------------------------------------------------
+//MINTAK
+void MainWindow::on_ujMintaPushButtonMinta_clicked()
+{
+
+}
+
+void MainWindow::on_mintaTorlesePushButtonMinta_clicked()
+{
+
+}
+
+void MainWindow::on_visszalepesPushButtonMinta_clicked()
+{
+    ui->kepernyoStackedWidget->setCurrentWidget(ui->fomenuKepernyoPage);
+}

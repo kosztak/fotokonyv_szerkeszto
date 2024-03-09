@@ -86,9 +86,14 @@ bool Projekt::lapozas(const bool &fel)
 
 Projekt::Projekt()
 {
-    oldalszam = 2;
+    nev = "teszt";
+
+    oldalszam = 5;
     oldalak.push_back(Oldal(1));
     oldalak.push_back(Oldal(2));
+    oldalak.push_back(Oldal(3));
+    oldalak.push_back(Oldal(4));
+    oldalak.push_back(Oldal(5));
 
     jelenlegiOldal = &(*(oldalak.begin()));
 }

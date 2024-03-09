@@ -1,4 +1,4 @@
-QT       += core gui svg
+QT       += core gui svg printsupport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -11,6 +11,7 @@ CONFIG += c++17
 SOURCES += \
     customview.cpp \
     elrendezesvalaszto.cpp \
+    exportwindow.cpp \
     kepvalaszto.cpp \
     keretvalaszto.cpp \
     kimenet.cpp \
@@ -30,6 +31,7 @@ SOURCES += \
 HEADERS += \
     customview.h \
     elrendezesvalaszto.h \
+    exportwindow.h \
     kepvalaszto.h \
     keretvalaszto.h \
     kimenet.h \
@@ -47,6 +49,7 @@ HEADERS += \
 
 FORMS += \
     elrendezesvalaszto.ui \
+    exportwindow.ui \
     kepvalaszto.ui \
     keretvalaszto.ui \
     mainwindow.ui
