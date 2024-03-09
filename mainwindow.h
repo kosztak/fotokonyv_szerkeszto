@@ -190,7 +190,7 @@ private:
 
     string kijeloltElemQSS = "background-color: transparent;"
                              "border-style: dotted;"
-                             "border-width: 6px;"
+                             "border-width: 5px;"
                              "border-color: blue;";
 
     //rendszer

@@ -84,6 +84,8 @@ void KeretValaszto::inicializalas()
             index = i;
         });
     }
+
+    index = 1000;
 }
 
 unsigned short KeretValaszto::getIndex()

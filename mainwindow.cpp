@@ -724,12 +724,15 @@ void MainWindow::on_keretValasztasPushButtonSzerleszto_clicked()
     KeretValaszto* k = new KeretValaszto(this);
     if(k->exec() == QDialog::Accepted)
     {
-        Keret* jelenlegiKeret = dynamic_cast<Keret*>(jelenlegiProjekt.getJelenlegiElem());
-        jelenlegiKeret->setKeret(k->getIndex());
-        jelenlegiKeret->kepKeszites();
+        if(k->getIndex() != 1000)
+        {
+            Keret* jelenlegiKeret = dynamic_cast<Keret*>(jelenlegiProjekt.getJelenlegiElem());
+            jelenlegiKeret->setKeret(k->getIndex());
+            jelenlegiKeret->kepKeszites();
 
-        //lista elem frissitese
-        kepFrissites(jelenlegiKeret);
+            //lista elem frissitese
+            kepFrissites(jelenlegiKeret);
+        }
     }
 }
 
@@ -1202,7 +1205,8 @@ void MainWindow::on_egysegeskeretPushButtonSzerkeszto_clicked()
     KeretValaszto* k = new KeretValaszto(this);
     if(k->exec() == QDialog::Accepted)
     {
-        jelenlegiProjekt.getJelenlegiOldal()->egysegesKeret(k->getIndex());
+        if(k->getIndex() != 1000)
+            jelenlegiProjekt.getJelenlegiOldal()->egysegesKeret(k->getIndex());
     }
 }
 
