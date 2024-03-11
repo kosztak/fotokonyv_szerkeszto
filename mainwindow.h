@@ -12,6 +12,10 @@
 #include <QtSvg/QSvgRenderer>
 #include <QGraphicsBlurEffect>
 #include <QtPrintSupport/QPrinter>
+#include <QFile>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <string>
 #include <list>
 #include <map>

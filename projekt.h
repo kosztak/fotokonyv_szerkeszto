@@ -29,7 +29,7 @@ public:
     void setNev(const string &newNev);
     const unsigned &getOldalszam() const;
     void setOldalszam(const unsigned &newOldalszam);
-    void oldalHozzaadas(unsigned meret);
+    void oldalHozzaadas(Oldal oldal);
     void oldalTorles(unsigned index);
     const list<string> &getKepek() const;
     void addKep(string eleres);

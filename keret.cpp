@@ -112,11 +112,6 @@ void Keret::kepKeszites()
     kimenet->setPixmap(ujKep);
 }
 
-const QPixmap &Keret::getKep() const
-{
-    return kep;
-}
-
 void Keret::setKeret(unsigned short index)
 {
     kepKeret = index;
@@ -178,6 +173,12 @@ void Keret::setSzuro(unsigned short newSzuro)
 }
 
 Keret::Keret(const QSize &meret, const QPixmap &forras, const unsigned &xKoordinata, const unsigned &yKoordinata, int dolesszog, unsigned short meretArany, unsigned short szelesseg, unsigned short magassag, unsigned kepXKoordinata, unsigned kepYKoordinata, unsigned short szuro, unsigned short kepKeret) : Abra(meret, forras, xKoordinata, yKoordinata, dolesszog, meretArany),
+    szelesseg(szelesseg), magassag(magassag), kepXKoordinata(kepXKoordinata), kepYKoordinata(kepYKoordinata), szuro(szuro), kepKeret(kepKeret)
+{
+    tipus = keret;
+}
+
+Keret::Keret(const QSize &meret, const string &eleres, const unsigned &xKoordinata, const unsigned &yKoordinata, int dolesszog, unsigned short meretArany, unsigned short szelesseg, unsigned short magassag, unsigned kepXKoordinata, unsigned kepYKoordinata, unsigned short szuro, unsigned short kepKeret) : Abra(meret, eleres, xKoordinata, yKoordinata, dolesszog, meretArany),
     szelesseg(szelesseg), magassag(magassag), kepXKoordinata(kepXKoordinata), kepYKoordinata(kepYKoordinata), szuro(szuro), kepKeret(kepKeret)
 {
     tipus = keret;

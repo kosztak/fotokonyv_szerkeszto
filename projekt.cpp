@@ -20,9 +20,10 @@ void Projekt::setOldalszam(const unsigned &newOldalszam)
     oldalszam = newOldalszam;
 }
 
-void Projekt::oldalHozzaadas(unsigned meret)
+void Projekt::oldalHozzaadas(Oldal oldal)
 {
-
+    oldalak.push_back(oldal);
+    ++oldalszam;
 }
 
 void Projekt::oldalTorles(unsigned index)
@@ -86,14 +87,14 @@ bool Projekt::lapozas(const bool &fel)
 
 Projekt::Projekt()
 {
-    nev = "teszt";
+    // nev = "teszt";
 
-    oldalszam = 5;
-    oldalak.push_back(Oldal(1));
-    oldalak.push_back(Oldal(2));
-    oldalak.push_back(Oldal(3));
-    oldalak.push_back(Oldal(4));
-    oldalak.push_back(Oldal(5));
+    // oldalszam = 5;
+    // oldalak.push_back(Oldal(1));
+    // oldalak.push_back(Oldal(2));
+    // oldalak.push_back(Oldal(3));
+    // oldalak.push_back(Oldal(4));
+    // oldalak.push_back(Oldal(5));
 
     jelenlegiOldal = &(*(oldalak.begin()));
 }

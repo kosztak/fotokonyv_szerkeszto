@@ -8,7 +8,7 @@ class Stilus
 {
 private:
     bool hatterTipus = 0; //0 = szin, 1 = minta
-    Minta minta = Minta("", "", QPixmap());
+    Minta minta = Minta("", "");
     QColor szin = Qt::white;
 public:
     Stilus();

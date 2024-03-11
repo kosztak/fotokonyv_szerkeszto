@@ -20,7 +20,7 @@ const QPixmap &Minta::getKep() const
     return kep;
 }
 
-Minta::Minta(const string &nev, const string &eleresiUt, const QPixmap &kep) : nev(nev),
+Minta::Minta(const string &nev, const string &eleresiUt) : nev(nev),
     eleresiUt(eleresiUt),
-    kep(kep)
+    kep(QPixmap(QString::fromStdString(eleresiUt)))
 {}

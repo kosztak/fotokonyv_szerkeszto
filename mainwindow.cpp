@@ -52,7 +52,7 @@ MainWindow::MainWindow(QWidget *parent)
 
         //funkcio hozzaadas a belyeg gombnak
         connect(tempbutton, &QPushButton::clicked, [=]{
-            Belyeg *ujBelyeg = new Belyeg(i.first, pixmap.size(), pixmap, 0, 0, 0, 100);
+            Belyeg *ujBelyeg = new Belyeg(i.first, pixmap.size(), i.second, 0, 0, 0, 100);
             ujBelyeg->getKimenet()->setStyleSheet("background-color: transparent");
             ujBelyeg->getKimenet()->setParent(szerkesztoWidget);
             ujBelyeg->getKimenet()->setPixmap(pixmap);
@@ -154,7 +154,7 @@ MainWindow::MainWindow(QWidget *parent)
 
         //funkcio hozzaadas a minta gombnak
         connect(tempbutton, &QPushButton::clicked, [=]{
-            Minta ujMinta = Minta(i.first, i.second, pixmap);
+            Minta ujMinta = Minta(i.first, i.second);
 
             jelenlegiProjekt.getJelenlegiOldal()->getStilus()->setMinta(ujMinta);
             jelenlegiProjekt.getJelenlegiOldal()->getStilus()->setHatterTipus(1);
@@ -179,7 +179,7 @@ MainWindow::MainWindow(QWidget *parent)
 
         //funkcio hozzaadas a kep gombnak
         connect(tempbutton, &QPushButton::clicked, [=]{
-            Keret *ujKeret = new Keret(pixmap.size(), pixmap, 0, 0, 0, 100, 100, 100, 0, 0, 0, 0);
+            Keret *ujKeret = new Keret(pixmap.size(), i, 0, 0, 0, 100, 100, 100, 0, 0, 0, 0);
             ujKeret->getKimenet()->setStyleSheet("background-color: transparent");
             ujKeret->getKimenet()->setParent(szerkesztoWidget);
             ujKeret->getKimenet()->setPixmap(pixmap);
@@ -312,21 +312,43 @@ MainWindow::~MainWindow()
 
 //RENDSZER
 void MainWindow::inicializalas()
-{    
-    //belyegek
-    belyegek["ball"] = "./belyegek/ball.png";
-    belyegek["dog"] = "./belyegek/dog.png";
+{
+    QFile file("./adatok/rendszer.json");
+    if(file.open(QIODevice::ReadOnly))
+    {
+        QJsonDocument document = QJsonDocument::fromJson(file.readAll());
+        QJsonObject object = document.object();
 
-    //mintak
-    mintak["beige"] = "./mintak/beige.jpg";
-    mintak["blue"] = "./mintak/blue.png";
+        //projektek
+        QJsonArray projektArray = object["projektek"].toArray();
+        for(auto it = projektArray.begin(); it != projektArray.end(); ++it)
+        {
+            QJsonObject projektObject = it->toObject();
+            projektek[projektObject["nev"].toString().toStdString()] = projektObject["eleres"].toString().toStdString();
+        }
+
+        //belyegek
+        QJsonArray belyegArray = object["belyegek"].toArray();
+        for(auto it = belyegArray.begin(); it != belyegArray.end(); ++it)
+        {
+            QJsonObject belyegObject = it->toObject();
+            belyegek[belyegObject["nev"].toString().toStdString()] = belyegObject["eleres"].toString().toStdString();
+        }
+
+        //mintak
+        QJsonArray mintaArray = object["mintak"].toArray();
+        for(auto it = mintaArray.begin(); it != mintaArray.end(); ++it)
+        {
+            QJsonObject mintaObject = it->toObject();
+            mintak[mintaObject["nev"].toString().toStdString()] = mintaObject["eleres"].toString().toStdString();
+        }
+
+
+        file.close();
+    }
 
     //projekt
     jelenlegiProjekt = Projekt();
-
-    //kepek
-    jelenlegiProjekt.addKep("./kepek/cat.jpg");
-    jelenlegiProjekt.addKep("./kepek/flower.png");
 
     //elrendezesek
     unsigned short szegely = 50;
@@ -1507,6 +1529,40 @@ void MainWindow::on_ujProjektPushButtonFomenu_clicked()
 
 void MainWindow::on_projektBetoltesePushButtonFomenu_clicked()
 {
+    QFile file("./projektek/test/test.json");
+    if(file.open(QIODevice::ReadOnly))
+    {
+        QJsonDocument document = QJsonDocument::fromJson(file.readAll());
+        QJsonObject projektObject = document.object();
+
+        Projekt projekt;
+        projekt.setNev(projektObject["nev"].toString().toStdString());
+
+        QJsonArray oldalArray = projektObject["oldalak"].toArray();
+        for(auto it = oldalArray.begin(); it != oldalArray.end(); ++it)
+        {
+            QJsonObject oldalObject = it->toObject();
+            Oldal oldal(oldalObject["oldalszam"].toInt());
+            QJsonObject stilusObject = oldalObject["stilus"].toObject();
+            QJsonObject mintaObject = stilusObject["minta"].toObject();
+            QJsonObject szinObject = stilusObject["szin"].toObject();
+
+            //stilus beallitasa
+            oldal.getStilus()->setHatterTipus(stilusObject["hatterTipus"].toBool());
+            oldal.getStilus()->setMinta(Minta(mintaObject["nev"].toString().toStdString(), mintaObject["eleres"].toString().toStdString()));
+            oldal.getStilus()->setSzin(QColor(szinObject["piros"].toInt(), szinObject["zold"].toInt(), szinObject["kek"].toInt()));
+
+            //keretek beallisata
+            QJsonArray keretArray = oldalObject["keretek"].toArray();
+            for(auto it2 = keretArray.begin(); it2 != keretArray.end(); ++it2)
+            {
+                QJsonObject keretObject = it->toObject();
+                QJsonObject meretobject = keretObject["meret"].toObject();
+                oldal.keretHozzaadas(new Keret(QSize(meretobject["szelesseg"].toInt(), meretobject["magassag"].toInt()), keretObject["eleres"].toString(), keretObject["x"].toInt(), keretObject["y"].toInt(), keretObject["dolesszog"].toInt(), keretObject["meretArany"].toInt(), keretObject["szelesseg"].toInt(), keretObject["magassag"].toInt(), keretObject["kepXKoordinata"].toInt(), keretObject["kepYKoordinata"].toInt(), keretObject["szuro"].toInt(), keretObject["kepKeret"].toInt()));
+            }
+        }
+    }
+
     ui->kepernyoStackedWidget->setCurrentWidget(ui->szerkesztoKepernyoPage);
 }
 

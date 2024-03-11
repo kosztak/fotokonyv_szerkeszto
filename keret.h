@@ -11,7 +11,6 @@
 class Keret : public Abra
 {
 private:
-    QPixmap kep;
     unsigned short szelesseg;
     unsigned short magassag;
     unsigned kepXKoordinata;
@@ -21,8 +20,8 @@ private:
 
 public:
     Keret(const QSize &meret, const QPixmap &forras, const unsigned &xKoordinata, const unsigned &yKoordinata, int dolesszog, unsigned short meretArany, unsigned short szelesseg, unsigned short magassag, unsigned kepXKoordinata, unsigned kepYKoordinata, unsigned short szuro, unsigned short kepKeret);
+    Keret(const QSize &meret, const string &eleres, const unsigned &xKoordinata, const unsigned &yKoordinata, int dolesszog, unsigned short meretArany, unsigned short szelesseg, unsigned short magassag, unsigned kepXKoordinata, unsigned kepYKoordinata, unsigned short szuro, unsigned short kepKeret);
     void kepKeszites();
-    const QPixmap &getKep() const;
     void setKeret(unsigned short index);
     unsigned short getKeret() const;
     void setXKoordinata(int ertek);

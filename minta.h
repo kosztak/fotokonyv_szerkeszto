@@ -13,7 +13,7 @@ private:
     string eleresiUt;
     QPixmap kep;
 public:
-    Minta(const string &nev, const string &eleresiUt, const QPixmap &kep);
+    Minta(const string &nev, const string &eleresiUt);
     const string &getNev() const;
     void setNev(const string &newNev);
     const string &getEleresiUt() const;

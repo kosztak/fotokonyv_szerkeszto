@@ -40,3 +40,9 @@ Belyeg::Belyeg(const string &nev, const QSize &meret, const QPixmap &forras, con
 {
     tipus = belyeg;
 }
+
+Belyeg::Belyeg(const string &nev, const QSize &meret, const string &eleres, const unsigned int &xKoordinata, const unsigned int &yKoordinata, int dolesszog, unsigned short meretArany) : Abra(meret, eleres, xKoordinata, yKoordinata, dolesszog, meretArany),
+    nev(nev)
+{
+    tipus = belyeg;
+}

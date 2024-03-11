@@ -30,3 +30,12 @@ Abra::Abra(const QSize &meret, const QPixmap &forras, const unsigned &xKoordinat
     forras(forras),
     meretArany(meretArany)
 {}
+
+Abra::Abra(const QSize &meret, const string &eleres, const unsigned int &xKoordinata, const unsigned int &yKoordinata, int dolesszog, unsigned short meretArany) : Elem(xKoordinata, yKoordinata, dolesszog),
+    meret(meret),
+    forras(QPixmap(QString::fromStdString(eleres))),
+    eleres(eleres),
+    meretArany(meretArany)
+{
+
+}
