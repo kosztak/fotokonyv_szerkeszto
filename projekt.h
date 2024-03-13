@@ -14,22 +14,20 @@ class Projekt
 {
 private:
     string nev;
-    string elresiUt;
+    string eleresiUt;
     unsigned oldalszam;
-    vector<Oldal> oldalak;
+    vector<Oldal*> oldalak;
     list<string> kepek;
-    Oldal* jelenlegiOldal;
+    Oldal* jelenlegiOldal = nullptr;
     Elem* jelenlegiElem = nullptr;
-    ElemTipus jelenlegiElemTipus;
 public:
-    Projekt();
-    // Projekt(const string &nev, const string &eleresiUt, unsigned &oldalszam, );
+    Projekt(const string &nev, const string &eleresiUt);
 
     const string &getNev() const;
     void setNev(const string &newNev);
     const unsigned &getOldalszam() const;
     void setOldalszam(const unsigned &newOldalszam);
-    void oldalHozzaadas(Oldal oldal);
+    void oldalHozzaadas(Oldal* oldal);
     void oldalTorles(unsigned index);
     const list<string> &getKepek() const;
     void addKep(string eleres);
@@ -38,6 +36,7 @@ public:
     Elem* getJelenlegiElem() const;
     void setJelenlegiElem(Elem *newJelenlegiElem);
     bool lapozas(const bool &fel);
+    string getEleresiUt() const;
 };
 
 #endif // PROJEKT_H

@@ -40,7 +40,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="szerkesztoKepernyoPage">
        <layout class="QVBoxLayout" name="verticalLayout">
@@ -1569,7 +1569,7 @@ border: 3px outset #bb1133;
                 </size>
                </property>
                <property name="currentIndex">
-                <number>4</number>
+                <number>3</number>
                </property>
                <widget class="QWidget" name="uresPageSzerkeszto">
                 <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -3326,6 +3326,9 @@ background-color: rgb(255, 255, 255);
 border: 2px inset #c2c2c2;
 border-radius: 5px;</string>
                              </property>
+                             <property name="fontFilters">
+                              <set>QFontComboBox::MonospacedFonts|QFontComboBox::ProportionalFonts|QFontComboBox::ScalableFonts</set>
+                             </property>
                             </widget>
                            </item>
                           </layout>
@@ -4589,8 +4592,8 @@ border: 4px inset #f5c28f;
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>610</width>
-                  <height>674</height>
+                  <width>478</width>
+                  <height>16</height>
                  </rect>
                 </property>
                 <property name="styleSheet">

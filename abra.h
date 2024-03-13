@@ -22,6 +22,7 @@ public:
     void setForras(const string &eleres);
     unsigned short getMeretArany() const;
     void setMeretArany(unsigned short newMeretArany);
+    string getEleres() const;
 };
 
 #endif // ABRA_H

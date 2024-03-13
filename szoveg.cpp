@@ -59,9 +59,12 @@ void Szoveg::setDolt(bool ertek)
 void Szoveg::setBetutipus(const QFont &newBetutipus)
 {
     betutipus = newBetutipus;
+    kimenet->setFont(newBetutipus);
+    kimenet->adjustSize();
 }
 
 Szoveg::Szoveg(const unsigned &xKoordinata, const unsigned &yKoordinata, int dolesszog, string tartalom) : Elem(xKoordinata, yKoordinata, dolesszog), tartalom(tartalom)
 {
     tipus = szoveg;
+    kimenet->setText(QString::fromStdString(tartalom));
 }

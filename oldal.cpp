@@ -61,7 +61,7 @@ list<Keret*> Oldal::getKeretek() const
     return keretek;
 }
 
-list<Belyeg *> Oldal::getBelyegek() const
+list<Belyeg*> Oldal::getBelyegek() const
 {
     return belyegek;
 }

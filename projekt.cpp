@@ -20,10 +20,13 @@ void Projekt::setOldalszam(const unsigned &newOldalszam)
     oldalszam = newOldalszam;
 }
 
-void Projekt::oldalHozzaadas(Oldal oldal)
+void Projekt::oldalHozzaadas(Oldal* oldal)
 {
     oldalak.push_back(oldal);
     ++oldalszam;
+
+    if(jelenlegiOldal == nullptr)
+        jelenlegiOldal = oldal;
 }
 
 void Projekt::oldalTorles(unsigned index)
@@ -59,7 +62,6 @@ Elem* Projekt::getJelenlegiElem() const
 void Projekt::setJelenlegiElem(Elem *newJelenlegiElem)
 {
     jelenlegiElem = newJelenlegiElem;
-    // jelenlegiElemTipus = newJelenlegiElem->getTipus();
 }
 
 bool Projekt::lapozas(const bool &fel)
@@ -69,10 +71,10 @@ bool Projekt::lapozas(const bool &fel)
         Oldal* ujOldal;
         if(fel)
         {
-            ujOldal = &oldalak[jelenlegiOldal->getOldalszam()];
+            ujOldal = oldalak[jelenlegiOldal->getOldalszam()];
 
         }else{
-            ujOldal = &oldalak[jelenlegiOldal->getOldalszam()-2];
+            ujOldal = oldalak[jelenlegiOldal->getOldalszam()-2];
         }
 
         //regi elemek elrejtése
@@ -82,19 +84,19 @@ bool Projekt::lapozas(const bool &fel)
         ujOldal->elemekMutatasa();
 
         jelenlegiOldal = ujOldal;
+
+        return true;
     }
+
+    return false;
 }
 
-Projekt::Projekt()
+string Projekt::getEleresiUt() const
 {
-    // nev = "teszt";
+    return eleresiUt;
+}
 
-    // oldalszam = 5;
-    // oldalak.push_back(Oldal(1));
-    // oldalak.push_back(Oldal(2));
-    // oldalak.push_back(Oldal(3));
-    // oldalak.push_back(Oldal(4));
-    // oldalak.push_back(Oldal(5));
+Projekt::Projekt(const string &nev, const string &eleresiUt) : nev(nev), eleresiUt(eleresiUt)
+{
 
-    jelenlegiOldal = &(*(oldalak.begin()));
 }

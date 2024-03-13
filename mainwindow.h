@@ -198,7 +198,7 @@ private:
                              "border-color: blue;";
 
     //rendszer
-    Projekt jelenlegiProjekt;
+    Projekt* jelenlegiProjekt = nullptr;
     map<string, string> projektek; //nev, eleres
     map<string, string> belyegek; //nev, eleres
     map<string, string> mintak; //nev, eleres
