@@ -185,6 +185,10 @@ private slots:
 
     void on_exportalasPushButtonSzerkeszto_clicked();
 
+    void on_oldalHozaadasPushButtonSzerkeszto_clicked();
+
+    void on_oldalTorlesPushButtonSzerkeszto_clicked();
+
 private:
     Ui::MainWindow *ui;
 

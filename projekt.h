@@ -3,6 +3,7 @@
 
 #include <string>
 #include <list>
+#include <algorithm>
 #include "oldal.h"
 #include "keret.h"
 #include "belyeg.h"
@@ -15,7 +16,7 @@ class Projekt
 private:
     string nev;
     string eleresiUt;
-    unsigned oldalszam;
+    unsigned oldalszam = 0;
     vector<Oldal*> oldalak;
     list<string> kepek;
     Oldal* jelenlegiOldal = nullptr;
@@ -29,7 +30,7 @@ public:
     const unsigned &getOldalszam() const;
     void setOldalszam(const unsigned &newOldalszam);
     void oldalHozzaadas(Oldal* oldal);
-    void oldalTorles(unsigned index);
+    void oldalTorles();
     const list<string> &getKepek() const;
     void addKep(string eleres);
     Oldal* getJelenlegiOldal() const;

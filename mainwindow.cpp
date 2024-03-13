@@ -181,7 +181,9 @@ void MainWindow::listaFrissites()
     for(auto i: keretLista)
     {
         QPushButton* listaElem = new QPushButton;
+        listaElem->setStyleSheet("background-color: #ffffff; border: 3px outset #c2c2c2;");
         listaElem->setAutoFillBackground(true);
+
         connect(listaElem, &QPushButton::clicked, [=]{
             ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->kepPageSzerkeszto);
 
@@ -243,6 +245,7 @@ void MainWindow::listaFrissites()
     for(auto i: belyegLista)
     {
         QPushButton* listaElem = new QPushButton;
+        listaElem->setStyleSheet("background-color: #ffffff; border: 3px outset #c2c2c2;");
         listaElem->setAutoFillBackground(true);
 
         connect(listaElem, &QPushButton::clicked, [=]{
@@ -287,7 +290,9 @@ void MainWindow::listaFrissites()
     for(auto i: szovegLista)
     {
         QPushButton* listaElem = new QPushButton;
+        listaElem->setStyleSheet("background-color: #ffffff; border: 3px outset #c2c2c2; color: #000000");
         listaElem->setAutoFillBackground(true);
+
         connect(listaElem, &QPushButton::clicked, [=]{
             ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->szovegPageSzerkeszto);
 
@@ -307,7 +312,7 @@ void MainWindow::listaFrissites()
             QColor szin = i->getSzin();
             i->getKimenet()->setStyleSheet(QString::fromStdString(kijeloltElemQSS + "color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
 
-            ui->betuszinWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
+            ui->betuszinWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + "); border: 3px inset #bb1133;"));
 
             //szoveg
             ui->szovegTextEditSzerkeszto->setText(QString::fromStdString(i->getTartalom()));
@@ -325,8 +330,6 @@ void MainWindow::listaFrissites()
             //betumeret
             ui->betumeretSpinBoxSzerkeszto->setValue(i->getKimenet()->font().pointSize());
         });
-
-        listaElem->setStyleSheet("color: rgb(255,255,255)");
 
         unsigned short hatar = 15;
         QString text = QString::fromStdString(i->getTartalom()).split("\n").constFirst();
@@ -675,7 +678,7 @@ void MainWindow::on_ujSzovegPushButtonSzerkeszto_clicked()
         ujSzoveg->getKimenet()->setStyleSheet(QString::fromStdString(kijeloltElemQSS + "color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
 
         //betuszin
-        ui->betuszinWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
+        ui->betuszinWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + "); border: 3px inset #bb1133;"));
 
         //szoveg
         ui->szovegTextEditSzerkeszto->setText(QString::fromStdString(ujSzoveg->getTartalom()));
@@ -728,7 +731,7 @@ void MainWindow::on_ujSzovegPushButtonSzerkeszto_clicked()
         QColor szin = ujSzoveg->getSzin();
         ujSzoveg->getKimenet()->setStyleSheet(QString::fromStdString(kijeloltElemQSS + "color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
 
-        ui->betuszinWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
+        ui->betuszinWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + "); border: 3px inset #bb1133;"));
 
         //szoveg
         ui->szovegTextEditSzerkeszto->setText(QString::fromStdString(ujSzoveg->getTartalom()));
@@ -828,7 +831,7 @@ void MainWindow::on_betuszinPushButtonSzerkeszto_clicked()
     jelenlegiProjekt->getJelenlegiElem()->getKimenet()->setStyleSheet(QString::fromStdString(kijeloltElemQSS + "color: rgba(" + to_string(ujSzin.red()) + "," + to_string(ujSzin.green()) + "," + to_string(ujSzin.blue()) + "," + to_string(ujSzin.alphaF()) + ");"));
 
     //hatterszin
-    ui->betuszinWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(ujSzin.red()) + "," + to_string(ujSzin.green()) + "," + to_string(ujSzin.blue()) + "," + to_string(ujSzin.alphaF()) + ");"));
+    ui->betuszinWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(ujSzin.red()) + "," + to_string(ujSzin.green()) + "," + to_string(ujSzin.blue()) + "," + to_string(ujSzin.alphaF()) + "); border: 3px inset #bb1133;"));
 }
 
 void MainWindow::on_felkoverCheckBoxSzerkeszto_stateChanged(int arg1)
@@ -898,7 +901,7 @@ void MainWindow::on_hatterszinMegvaltoztatPushButtonSzerkeszto_clicked()
     szerkesztoWidget->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(ujSzin.red()) + "," + to_string(ujSzin.green()) + "," + to_string(ujSzin.blue()) + "," + to_string(ujSzin.alphaF()) + ");"));
 
     //hatterszin
-    ui->hatterszinWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(ujSzin.red()) + "," + to_string(ujSzin.green()) + "," + to_string(ujSzin.blue()) + "," + to_string(ujSzin.alphaF()) + ");"));
+    ui->hatterszinWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(ujSzin.red()) + "," + to_string(ujSzin.green()) + "," + to_string(ujSzin.blue()) + "," + to_string(ujSzin.alphaF()) + "); border: 3px inset #bb1133;"));
 }
 
 void MainWindow::on_hatterPushButtonSzerkeszto_clicked()
@@ -907,7 +910,7 @@ void MainWindow::on_hatterPushButtonSzerkeszto_clicked()
 
     //hatterszin
     QColor szin = jelenlegiProjekt->getJelenlegiOldal()->getStilus()->getSzin();
-    ui->hatterszinWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
+    ui->hatterszinWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + "); border: 3px inset #bb1133;"));
 }
 
 void MainWindow::on_lapozasLePushButtonSzerkeszto_clicked()
@@ -922,7 +925,7 @@ void MainWindow::on_lapozasLePushButtonSzerkeszto_clicked()
             szerkesztoWidget->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
 
             //hatterszin
-            ui->hatterszinWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
+            ui->hatterszinWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + "); border: 3px inset #bb1133;"));
         }else{
             Minta minta = jelenlegiProjekt->getJelenlegiOldal()->getStilus()->getMinta();
 
@@ -950,7 +953,7 @@ void MainWindow::on_lapozasFelPushButtonSzerkeszto_clicked()
             szerkesztoWidget->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
 
             //hatterszin
-            ui->hatterszinWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
+            ui->hatterszinWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + "); border: 3px inset #bb1133;"));
         }else{
             Minta minta = jelenlegiProjekt->getJelenlegiOldal()->getStilus()->getMinta();
 
@@ -1177,6 +1180,54 @@ void MainWindow::on_elrendezesPushButtonSzerkeszto_clicked()
             //keret projekthez adas
             jelenlegiProjekt->getJelenlegiOldal()->keretHozzaadas(ujKeret);
         }
+    }
+}
+
+void MainWindow::on_oldalHozaadasPushButtonSzerkeszto_clicked()
+{
+    if(jelenlegiProjekt->getOldalszam() < 200)
+    {
+        //oldal letrehozasa
+        Oldal* ujOldal = new Oldal(jelenlegiProjekt->getOldalszam()+1);
+        jelenlegiProjekt->oldalHozzaadas(ujOldal);
+
+        //oldal beállítása
+        ui->oldalszamLabelSzerkeszto->setText(QString::fromStdString("" + to_string(jelenlegiProjekt->getJelenlegiOldal()->getOldalszam()) + "/" + to_string(jelenlegiProjekt->getOldalszam())));
+    }else{
+        QMessageBox::warning(this, "Figyelmeztetés!", "A projekt oldalszáma már elérte a maximális mennyiséget! Nem lehet több oldalt adni hozzá!");
+    }
+}
+
+void MainWindow::on_oldalTorlesPushButtonSzerkeszto_clicked()
+{
+    if(jelenlegiProjekt->getOldalszam() > 1)
+    {
+        //oldal torles
+        jelenlegiProjekt->oldalTorles();
+
+        //oldal beállítása
+        if(jelenlegiProjekt->getJelenlegiOldal()->getStilus()->getHatterTipus() == 0)
+        {
+            QColor szin = jelenlegiProjekt->getJelenlegiOldal()->getStilus()->getSzin();
+
+            //oldalszin
+            szerkesztoWidget->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
+
+            //hatterszin
+            ui->hatterszinWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + "); border: 3px inset #bb1133;"));
+        }else{
+            Minta minta = jelenlegiProjekt->getJelenlegiOldal()->getStilus()->getMinta();
+
+            //minta beallitas
+            szerkesztoWidget->setStyleSheet(QString::fromStdString("QWidget#szerkesztoWidget{border-image: url(" + minta.getEleresiUt() + ") 0 0 0 0 stretch stretch;}"));
+        }
+
+        ui->oldalszamLabelSzerkeszto->setText(QString::fromStdString("" + to_string(jelenlegiProjekt->getJelenlegiOldal()->getOldalszam()) + "/" + to_string(jelenlegiProjekt->getOldalszam())));
+
+        //listak frissitese
+        listaFrissites();
+    }else{
+        QMessageBox::warning(this, "Figyelmeztetés!", "A projekt oldalszáma már elérte a minimális mennyiséget! Nem lehet több oldalt Törölni!");
     }
 }
 
@@ -1475,7 +1526,7 @@ void MainWindow::on_projektBetoltesePushButtonFomenu_clicked()
                     szoveg->getKimenet()->setStyleSheet(QString::fromStdString(kijeloltElemQSS + "color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
 
                     //betuszin
-                    ui->betuszinWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
+                    ui->betuszinWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + "); border: 3px inset #bb1133;"));
 
                     //szoveg
                     ui->szovegTextEditSzerkeszto->setText(QString::fromStdString(szoveg->getTartalom()));

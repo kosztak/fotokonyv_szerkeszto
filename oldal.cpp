@@ -71,6 +71,11 @@ list<Szoveg*> Oldal::getSzovegek() const
     return szovegek;
 }
 
+void Oldal::setOldalszam(unsigned int newOldalszam)
+{
+    oldalszam = newOldalszam;
+}
+
 Oldal::Oldal(const unsigned &oldalszam): oldalszam(oldalszam)
 {
 }

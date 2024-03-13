@@ -29,9 +29,30 @@ void Projekt::oldalHozzaadas(Oldal* oldal)
         jelenlegiOldal = oldal;
 }
 
-void Projekt::oldalTorles(unsigned index)
+void Projekt::oldalTorles()
 {
+    auto it = find_if(oldalak.begin(), oldalak.end(), [&](Oldal* temp){
+        return temp == jelenlegiOldal;
+    });
 
+    oldalak.erase(remove(oldalak.begin(), oldalak.end(), jelenlegiOldal), oldalak.end());
+    Oldal* regiOldal = jelenlegiOldal;
+
+    if(jelenlegiOldal->getOldalszam() == 1)
+    {
+        lapozas(true);
+    }else{
+        lapozas(false);
+    }
+
+    for(; it != oldalak.end(); ++it)
+    {
+        (*it)->setOldalszam((*it)->getOldalszam()-1);
+    }
+
+    --oldalszam;
+
+    delete regiOldal;
 }
 
 const list<string> &Projekt::getKepek() const

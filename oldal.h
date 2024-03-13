@@ -37,6 +37,7 @@ public:
     list<Keret*> getKeretek() const;
     list<Belyeg*> getBelyegek() const;
     list<Szoveg*> getSzovegek() const;
+    void setOldalszam(unsigned int newOldalszam);
 };
 
 #endif // OLDAL_H
