@@ -1183,6 +1183,30 @@ void MainWindow::on_elrendezesPushButtonSzerkeszto_clicked()
 //menu
 void MainWindow::on_bezarasPushButtonSzerkeszto_clicked()
 {
+    //jelenlegi projekt torlese
+    delete jelenlegiProjekt;
+    jelenlegiProjekt = nullptr;
+
+    //regi elemek torlese
+    for(auto i: kepekLista)
+    {
+        delete i.second;
+    }
+    kepekLista.clear();
+
+    for(auto i: belyegekLista)
+    {
+        delete i.second;
+    }
+    belyegekLista.clear();
+
+    for(auto i: szovegekLista)
+    {
+        delete i.second;
+    }
+    szovegekLista.clear();
+
+    //fomenu betoltese
     ui->kepernyoStackedWidget->setCurrentWidget(ui->fomenuKepernyoPage);
 }
 
@@ -1776,6 +1800,9 @@ void MainWindow::on_projektBetoltesePushButtonFomenu_clicked()
                 jelenlegiProjekt->getJelenlegiOldal()->keretHozzaadas(ujKeret);
             });
         }
+
+        //oldal beállítása
+        ui->oldalszamLabelSzerkeszto->setText(QString::fromStdString("" + to_string(jelenlegiProjekt->getJelenlegiOldal()->getOldalszam()) + "/" + to_string(jelenlegiProjekt->getOldalszam())));
 
         //szerkeszto oldal betoltese
         ui->kepernyoStackedWidget->setCurrentWidget(ui->szerkesztoKepernyoPage);

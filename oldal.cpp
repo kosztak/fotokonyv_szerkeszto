@@ -75,6 +75,24 @@ Oldal::Oldal(const unsigned &oldalszam): oldalszam(oldalszam)
 {
 }
 
+Oldal::~Oldal()
+{
+    for(auto k: keretek)
+    {
+        delete k;
+    }
+
+    for(auto b: belyegek)
+    {
+        delete b;
+    }
+
+    for(auto s: szovegek)
+    {
+        delete s;
+    }
+}
+
 Stilus* Oldal::getStilus()
 {
     return &stilus;

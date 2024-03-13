@@ -20,6 +20,8 @@ private:
     unsigned oldalszam;
 public:
     Oldal(const unsigned &oldalszam);
+    ~Oldal();
+
     Stilus* getStilus();
     void stilusAlkalmazas();
     void belyegHozzaadas(Belyeg *ujBelyeg);

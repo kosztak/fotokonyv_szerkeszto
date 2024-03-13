@@ -140,30 +140,6 @@ border-radius: 5px;</string>
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="mentesMaskentPushButtonSzerkeszto">
-               <property name="minimumSize">
-                <size>
-                 <width>140</width>
-                 <height>27</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>13</pointsize>
-                </font>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);
-border: 2px outset #c2c2c2;
-border-radius: 5px;</string>
-               </property>
-               <property name="text">
-                <string>Mentés másként</string>
-               </property>
-              </widget>
-             </item>
-             <item>
               <widget class="QPushButton" name="exportalasPushButtonSzerkeszto">
                <property name="minimumSize">
                 <size>

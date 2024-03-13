@@ -22,6 +22,7 @@ private:
     Elem* jelenlegiElem = nullptr;
 public:
     Projekt(const string &nev, const string &eleresiUt);
+    ~Projekt();
 
     const string &getNev() const;
     void setNev(const string &newNev);

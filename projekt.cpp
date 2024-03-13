@@ -100,3 +100,11 @@ Projekt::Projekt(const string &nev, const string &eleresiUt) : nev(nev), eleresi
 {
 
 }
+
+Projekt::~Projekt()
+{
+    for(auto o: oldalak)
+    {
+        delete o;
+    }
+}

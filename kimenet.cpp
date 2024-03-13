@@ -5,7 +5,9 @@ Kimenet::Kimenet(QWidget* parent, Qt::WindowFlags f)
 
 }
 
-Kimenet::~Kimenet() {}
+Kimenet::~Kimenet() {
+
+}
 
 void Kimenet::mousePressEvent(QMouseEvent* event) {
     if(event->button() == Qt::LeftButton)
