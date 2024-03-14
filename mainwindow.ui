@@ -40,7 +40,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="szerkesztoKepernyoPage">
        <layout class="QVBoxLayout" name="verticalLayout">
@@ -1593,7 +1593,7 @@ border: 3px outset #bb1133;
                 </size>
                </property>
                <property name="currentIndex">
-                <number>4</number>
+                <number>2</number>
                </property>
                <widget class="QWidget" name="uresPageSzerkeszto">
                 <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -2755,6 +2755,9 @@ border-radius: 5px;</string>
                        </property>
                        <property name="maximum">
                         <number>180</number>
+                       </property>
+                       <property name="singleStep">
+                        <number>5</number>
                        </property>
                       </widget>
                      </item>

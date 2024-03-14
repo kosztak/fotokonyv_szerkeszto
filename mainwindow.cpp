@@ -1448,6 +1448,9 @@ void MainWindow::on_projektBetoltesePushButtonFomenu_clicked()
                         //meretezes
                         ui->kepMeretSpinBoxSzerkeszto->setValue(keret->getMeretArany());
 
+                        //dolesszog
+                        ui->kepDolesszogSpinBoxSzerkeszto->setValue(keret->getDolesszog());
+
                         //aranyok
                         unsigned szel = keret->getSzelesseg();
                         ui->kepSzelessegSpinBoxSzerkeszto->setValue(szel);
@@ -1509,6 +1512,9 @@ void MainWindow::on_projektBetoltesePushButtonFomenu_clicked()
 
                         //meretezes
                         ui->belyegMeretSpinBoxSzerkeszto->setValue(belyeg->getMeretArany());
+
+                        //dolesszog
+                        ui->belyegDolesszogSpinBoxSzerkeszto->setValue(belyeg->getDolesszog());
                     });
                 }
                 // list<Belyeg*> lista = projekt.getJelenlegiOldal()->getBelyegek();
@@ -1671,6 +1677,9 @@ void MainWindow::on_projektBetoltesePushButtonFomenu_clicked()
 
                         //meretezes
                         ui->belyegMeretSpinBoxSzerkeszto->setValue(ujBelyeg->getMeretArany());
+
+                        //dolesszog
+                        ui->belyegDolesszogSpinBoxSzerkeszto->setValue(ujBelyeg->getDolesszog());
                     });
 
                     //lista elem
@@ -1749,7 +1758,6 @@ void MainWindow::on_projektBetoltesePushButtonFomenu_clicked()
             list<string> kepLista = jelenlegiProjekt->getKepek();
             for(string i : kepLista)
             {
-                cout << i << endl;
                 QPushButton *tempbutton = new QPushButton;
                 tempbutton->setStyleSheet("border: 3px outset #c2c2c2;");
                 QPixmap pixmap(QString::fromStdString(i));
@@ -1801,6 +1809,9 @@ void MainWindow::on_projektBetoltesePushButtonFomenu_clicked()
 
                         //meretezes
                         ui->kepMeretSpinBoxSzerkeszto->setValue(ujKeret->getMeretArany());
+
+                        //dolesszog
+                        ui->kepDolesszogSpinBoxSzerkeszto->setValue(ujKeret->getDolesszog());
 
                         //aranyok
                         unsigned szel = ujKeret->getSzelesseg();
