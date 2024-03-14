@@ -79,6 +79,31 @@ void MainWindow::inicializalas()
         file.close();
     }
 
+    //projekt gombok elkeszitese
+    for(auto p: projektek)
+    {
+        //gomb beallitasa
+        QPushButton* button = new QPushButton();
+        button->setText(QString::fromStdString("  " + p.first));
+        button->setStyleSheet("text-align: left; font-size: 24pt; font-weight: bold; color: #000000; background-color: rgb(249, 219, 189); border: 4px outset #f5c28f;");
+        button->setAutoFillBackground(true);
+
+        projektekLista[p.first] = button;
+        ui->projektekVerticalLayoutFomenu->addWidget(button);
+
+        //gomb funkcio hozaadas
+        connect(button, &QPushButton::clicked, [=](){
+            if(kivalasztottProjekt.second != nullptr)
+            {
+                kivalasztottProjekt.second->setStyleSheet("text-align: left; font-size: 24pt; font-weight: bold; color: #000000; background-color: rgb(249, 219, 189); border: 4px outset #f5c28f;");
+            }
+
+            kivalasztottProjekt = pair<string, QPushButton*>(p.second, button);
+
+            button->setStyleSheet("text-align: left; font-size: 24pt; font-weight: bold; color: #000000; background-color: rgb(249, 219, 189); border: 4px inset #f5c28f;");
+        });
+    }
+
     //elrendezesek
     unsigned short szegely = 50;
     {
@@ -1257,6 +1282,13 @@ void MainWindow::on_bezarasPushButtonSzerkeszto_clicked()
     }
     szovegekLista.clear();
 
+    //regi gombok torlese
+    for(auto i: gombok)
+    {
+        delete i;
+    }
+    gombok.clear();
+
     //fomenu betoltese
     ui->kepernyoStackedWidget->setCurrentWidget(ui->fomenuKepernyoPage);
 }
@@ -1348,517 +1380,523 @@ void MainWindow::on_ujProjektPushButtonFomenu_clicked()
 
 void MainWindow::on_projektBetoltesePushButtonFomenu_clicked()
 {
-    string projektEleres = "./projektek/test/test.json";
-    QFile file(QString::fromStdString(projektEleres));
-    if(file.open(QIODevice::ReadOnly))
+    if(kivalasztottProjekt.second != nullptr)
     {
-        QJsonDocument document = QJsonDocument::fromJson(file.readAll());
-        QJsonObject projektObject = document.object();
-
-        Projekt* projekt = new Projekt(projektObject["nev"].toString().toStdString(), projektEleres);
-
-        //oldalak beallitatsa
-        QJsonArray oldalArray = projektObject["oldalak"].toArray();
-        for(auto it = oldalArray.begin(); it != oldalArray.end(); ++it)
+        QFile file(QString::fromStdString(kivalasztottProjekt.first));
+        if(file.open(QIODevice::ReadOnly))
         {
-            QJsonObject oldalObject = it->toObject();
-            Oldal* oldal = new Oldal(oldalObject["oldalszam"].toInt());
-            QJsonObject stilusObject = oldalObject["stilus"].toObject();
-            QJsonObject mintaObject = stilusObject["minta"].toObject();
-            QJsonObject szinObject = stilusObject["szin"].toObject();
+            QJsonDocument document = QJsonDocument::fromJson(file.readAll());
+            QJsonObject projektObject = document.object();
 
-            //stilus beallitasa
-            oldal->getStilus()->setHatterTipus(stilusObject["hatterTipus"].toBool());
-            oldal->getStilus()->setMinta(Minta(mintaObject["nev"].toString().toStdString(), mintaObject["eleres"].toString().toStdString()));
-            oldal->getStilus()->setSzin(QColor(szinObject["piros"].toInt(), szinObject["zold"].toInt(), szinObject["kek"].toInt()));
+            Projekt* projekt = new Projekt(projektObject["nev"].toString().toStdString(), kivalasztottProjekt.first);
 
-            //keretek beallisata
-            QJsonArray keretArray = oldalObject["keretek"].toArray();
-            for(auto it2 = keretArray.begin(); it2 != keretArray.end(); ++it2)
+            //oldalak beallitatsa
+            QJsonArray oldalArray = projektObject["oldalak"].toArray();
+            for(auto it = oldalArray.begin(); it != oldalArray.end(); ++it)
             {
-                QJsonObject keretObject = it2->toObject();
-                QJsonObject meretObject = keretObject["meret"].toObject();
-                Keret* keret = new Keret(QSize(meretObject["szelesseg"].toInt(), meretObject["magassag"].toInt()), keretObject["eleres"].toString().toStdString(), keretObject["x"].toInt(), keretObject["y"].toInt(), keretObject["dolesszog"].toInt(), keretObject["meretArany"].toInt(), keretObject["szelesseg"].toInt(), keretObject["magassag"].toInt(), keretObject["kepXKoordinata"].toInt(), keretObject["kepYKoordinata"].toInt(), keretObject["szuro"].toInt(), keretObject["kepKeret"].toInt());
-                oldal->keretHozzaadas(keret);
-                keret->kepKeszites();
-                keret->getKimenet()->setParent(szerkesztoWidget);
-                keret->getKimenet()->show();
+                QJsonObject oldalObject = it->toObject();
+                Oldal* oldal = new Oldal(oldalObject["oldalszam"].toInt());
+                QJsonObject stilusObject = oldalObject["stilus"].toObject();
+                QJsonObject mintaObject = stilusObject["minta"].toObject();
+                QJsonObject szinObject = stilusObject["szin"].toObject();
 
-                //kimenet funkcio
-                connect(keret->getKimenet(), &Kimenet::clicked, [=]{
-                    ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->kepPageSzerkeszto);
+                //stilus beallitasa
+                oldal->getStilus()->setHatterTipus(stilusObject["hatterTipus"].toBool());
+                oldal->getStilus()->setMinta(Minta(mintaObject["nev"].toString().toStdString(), mintaObject["eleres"].toString().toStdString()));
+                oldal->getStilus()->setSzin(QColor(szinObject["piros"].toInt(), szinObject["zold"].toInt(), szinObject["kek"].toInt()));
 
-                    if(jelenlegiProjekt->getJelenlegiElem() != nullptr)
-                    {
-                        if(jelenlegiProjekt->getJelenlegiElem()->getTipus() != szoveg)
+                //keretek beallisata
+                QJsonArray keretArray = oldalObject["keretek"].toArray();
+                for(auto it2 = keretArray.begin(); it2 != keretArray.end(); ++it2)
+                {
+                    QJsonObject keretObject = it2->toObject();
+                    QJsonObject meretObject = keretObject["meret"].toObject();
+                    Keret* keret = new Keret(QSize(meretObject["szelesseg"].toInt(), meretObject["magassag"].toInt()), keretObject["eleres"].toString().toStdString(), keretObject["x"].toInt(), keretObject["y"].toInt(), keretObject["dolesszog"].toInt(), keretObject["meretArany"].toInt(), keretObject["szelesseg"].toInt(), keretObject["magassag"].toInt(), keretObject["kepXKoordinata"].toInt(), keretObject["kepYKoordinata"].toInt(), keretObject["szuro"].toInt(), keretObject["kepKeret"].toInt());
+                    oldal->keretHozzaadas(keret);
+                    keret->kepKeszites();
+                    keret->getKimenet()->setParent(szerkesztoWidget);
+
+                    //kimenet funkcio
+                    connect(keret->getKimenet(), &Kimenet::clicked, [=]{
+                        ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->kepPageSzerkeszto);
+
+                        if(jelenlegiProjekt->getJelenlegiElem() != nullptr)
                         {
-                            jelenlegiProjekt->getJelenlegiElem()->getKimenet()->setStyleSheet("background-color: transparent");
-                        }else{
-                            QColor szin = dynamic_cast<Szoveg*>(jelenlegiProjekt->getJelenlegiElem())->getSzin();
-                            jelenlegiProjekt->getJelenlegiElem()->getKimenet()->setStyleSheet(QString::fromStdString("background-color: transparent; color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
+                            if(jelenlegiProjekt->getJelenlegiElem()->getTipus() != szoveg)
+                            {
+                                jelenlegiProjekt->getJelenlegiElem()->getKimenet()->setStyleSheet("background-color: transparent");
+                            }else{
+                                QColor szin = dynamic_cast<Szoveg*>(jelenlegiProjekt->getJelenlegiElem())->getSzin();
+                                jelenlegiProjekt->getJelenlegiElem()->getKimenet()->setStyleSheet(QString::fromStdString("background-color: transparent; color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
+                            }
                         }
-                    }
 
-                    jelenlegiProjekt->setJelenlegiElem(keret);
-                    keret->getKimenet()->setStyleSheet(QString::fromStdString(kijeloltElemQSS));
+                        jelenlegiProjekt->setJelenlegiElem(keret);
+                        keret->getKimenet()->setStyleSheet(QString::fromStdString(kijeloltElemQSS));
 
 
-                    //horizontalis mozgatas
-                    unsigned xPont = keret->getKimenet()->x();
-                    ui->kepHorizontalisSpinBoxSzerkeszto->setMaximum(szerkesztoWidget->width() - keret->getKimenet()->width());
-                    ui->kepHorizontalisSpinBoxSzerkeszto->setValue(xPont);
+                        //horizontalis mozgatas
+                        unsigned xPont = keret->getKimenet()->x();
+                        ui->kepHorizontalisSpinBoxSzerkeszto->setMaximum(szerkesztoWidget->width() - keret->getKimenet()->width());
+                        ui->kepHorizontalisSpinBoxSzerkeszto->setValue(xPont);
 
-                    //vertikalis mozgatas
-                    unsigned yPont = keret->getKimenet()->y();
-                    ui->kepVertikalisSpinBoxSzerkeszto->setMaximum(szerkesztoWidget->height() - keret->getKimenet()->height());
-                    ui->kepVertikalisSpinBoxSzerkeszto->setValue(yPont);
+                        //vertikalis mozgatas
+                        unsigned yPont = keret->getKimenet()->y();
+                        ui->kepVertikalisSpinBoxSzerkeszto->setMaximum(szerkesztoWidget->height() - keret->getKimenet()->height());
+                        ui->kepVertikalisSpinBoxSzerkeszto->setValue(yPont);
 
-                    //meretezes
-                    ui->kepMeretSpinBoxSzerkeszto->setValue(keret->getMeretArany());
+                        //meretezes
+                        ui->kepMeretSpinBoxSzerkeszto->setValue(keret->getMeretArany());
 
-                    //aranyok
-                    unsigned szel = keret->getSzelesseg();
-                    ui->kepSzelessegSpinBoxSzerkeszto->setValue(szel);
+                        //aranyok
+                        unsigned szel = keret->getSzelesseg();
+                        ui->kepSzelessegSpinBoxSzerkeszto->setValue(szel);
 
-                    unsigned mag = keret->getMagassag();
-                    ui->kepMagassagSpinBoxSzerkeszto->setValue(mag);
+                        unsigned mag = keret->getMagassag();
+                        ui->kepMagassagSpinBoxSzerkeszto->setValue(mag);
 
-                    unsigned xKoor = keret->getKepXKoordinata();
-                    ui->keparanyHorizontalisSpinBoxSzerkeszto->setMaximum(keret->getMeret().width()*(1-szel/100.0));
-                    ui->keparanyHorizontalisSpinBoxSzerkeszto->setValue(xKoor);
+                        unsigned xKoor = keret->getKepXKoordinata();
+                        ui->keparanyHorizontalisSpinBoxSzerkeszto->setMaximum(keret->getMeret().width()*(1-szel/100.0));
+                        ui->keparanyHorizontalisSpinBoxSzerkeszto->setValue(xKoor);
 
-                    unsigned yKoor = keret->getKepYKoordinata();
-                    ui->keparanyVertikalisSpinBoxSzerkeszto->setMaximum(keret->getMeret().height()*(1-mag/100.0));
-                    ui->keparanyVertikalisSpinBoxSzerkeszto->setValue(yKoor);
+                        unsigned yKoor = keret->getKepYKoordinata();
+                        ui->keparanyVertikalisSpinBoxSzerkeszto->setMaximum(keret->getMeret().height()*(1-mag/100.0));
+                        ui->keparanyVertikalisSpinBoxSzerkeszto->setValue(yKoor);
 
-                    //szuro
-                    ui->kepSzuroComboBoxSzerkeszto->setCurrentIndex(keret->getSzuro());
+                        //szuro
+                        ui->kepSzuroComboBoxSzerkeszto->setCurrentIndex(keret->getSzuro());
+                    });
+                }
+
+                //belyegek beallitasa
+                QJsonArray belyegArray = oldalObject["belyegek"].toArray();
+                for(auto it2 = belyegArray.begin(); it2 != belyegArray.end(); ++it2)
+                {
+                    QJsonObject belyegObject = it2->toObject();
+                    QJsonObject meretObject = belyegObject["meret"].toObject();
+                    Belyeg* belyeg = new Belyeg(belyegObject["nev"].toString().toStdString(), QSize(meretObject["szelesseg"].toInt(), meretObject["magassag"].toInt()), belyegObject["eleres"].toString().toStdString(), belyegObject["x"].toInt(), belyegObject["y"].toInt(), belyegObject["dolesszog"].toInt(), belyegObject["meretArany"].toInt());
+                    oldal->belyegHozzaadas(belyeg);
+                    belyeg->kepKeszites();
+                    belyeg->getKimenet()->setParent(szerkesztoWidget);
+
+                    //kimenet funkcio
+                    connect(belyeg->getKimenet(), &Kimenet::clicked, [=]{
+                        ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->belyegPageSzerkeszto);
+
+                        if(jelenlegiProjekt->getJelenlegiElem() != nullptr)
+                        {
+                            if(jelenlegiProjekt->getJelenlegiElem()->getTipus() != szoveg)
+                            {
+                                jelenlegiProjekt->getJelenlegiElem()->getKimenet()->setStyleSheet("background-color: transparent");
+                            }else{
+                                QColor szin = dynamic_cast<Szoveg*>(jelenlegiProjekt->getJelenlegiElem())->getSzin();
+                                jelenlegiProjekt->getJelenlegiElem()->getKimenet()->setStyleSheet(QString::fromStdString("background-color: transparent; color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
+                            }
+                        }
+
+                        jelenlegiProjekt->setJelenlegiElem(belyeg);
+                        belyeg->getKimenet()->setStyleSheet(QString::fromStdString(kijeloltElemQSS));
+
+                        //horizontalis mozgatas
+                        unsigned xPont = belyeg->getKimenet()->x();
+                        ui->belyegHorizontalisSpinBoxSzerkeszto->setMaximum(szerkesztoWidget->width() - belyeg->getKimenet()->width());
+                        ui->belyegHorizontalisSpinBoxSzerkeszto->setValue(xPont);
+
+                        //vertikalis mozgatas
+                        unsigned yPont = belyeg->getKimenet()->y();
+                        ui->belyegVertikalisSpinBoxSzerkeszto->setMaximum(szerkesztoWidget->height() - belyeg->getKimenet()->height());
+                        ui->belyegVertikalisSpinBoxSzerkeszto->setValue(yPont);
+
+                        //meretezes
+                        ui->belyegMeretSpinBoxSzerkeszto->setValue(belyeg->getMeretArany());
+                    });
+                }
+                // list<Belyeg*> lista = projekt.getJelenlegiOldal()->getBelyegek();
+
+                //szovegek beallitasa
+                QJsonArray szovegArray = oldalObject["szovegek"].toArray();
+                for(auto it2 = szovegArray.begin(); it2 != szovegArray.end(); ++it2)
+                {
+                    QJsonObject szovegObject = it2->toObject();
+                    QJsonObject szinObject = szovegObject["szin"].toObject();
+                    Szoveg* szoveg = new Szoveg(szovegObject["x"].toInt(), szovegObject["y"].toInt(), szovegObject["dolesszog"].toInt(), szovegObject["tartalom"].toString().toStdString());
+                    QColor szin(szinObject["piros"].toInt(), szinObject["zold"].toInt(), szinObject["kek"].toInt());
+                    szoveg->setSzin(szin);
+                    szoveg->getKimenet()->setStyleSheet(QString::fromStdString("color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
+
+                    QFont font = szoveg->getBetutipus();
+                    font.setPointSize(szovegObject["betumeret"].toInt());
+                    font.setFamily(szovegObject["betutipus"].toString());
+                    font.setBold(szovegObject["felkover"].toBool());
+                    font.setItalic(szovegObject["dolt"].toBool());
+                    font.setUnderline(szovegObject["alahuzott"].toBool());
+                    szoveg->setBetutipus(font);
+
+                    oldal->szovegHozzaadas(szoveg);
+                    szoveg->getKimenet()->setParent(szerkesztoWidget);
+
+                    //kimenet funkcio
+                    connect(szoveg->getKimenet(), &Kimenet::clicked, [=]{
+                        ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->szovegPageSzerkeszto);
+
+                        if(jelenlegiProjekt->getJelenlegiElem() != nullptr)
+                        {
+                            if(jelenlegiProjekt->getJelenlegiElem()->getTipus() != ElemTipus::szoveg)
+                            {
+                                jelenlegiProjekt->getJelenlegiElem()->getKimenet()->setStyleSheet("background-color: transparent");
+                            }else{
+                                Szoveg* jelenlegiSzoveg = dynamic_cast<Szoveg*>(jelenlegiProjekt->getJelenlegiElem());
+                                QColor szin = jelenlegiSzoveg->getSzin();
+                                jelenlegiSzoveg->getKimenet()->setStyleSheet(QString::fromStdString("background-color: transparent; color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
+                            }
+                        }
+
+                        jelenlegiProjekt->setJelenlegiElem(szoveg);
+                        QColor szin = szoveg->getSzin();
+                        szoveg->getKimenet()->setStyleSheet(QString::fromStdString(kijeloltElemQSS + "color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
+
+                        //betuszin
+                        ui->betuszinWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + "); border: 3px inset #bb1133;"));
+
+                        //szoveg
+                        ui->szovegTextEditSzerkeszto->setText(QString::fromStdString(szoveg->getTartalom()));
+
+                        //horizontalis mozgatas
+                        unsigned xPont = szoveg->getKimenet()->x();
+                        ui->szovegHorizontalisSpinBoxSzerkeszto->setMaximum(szerkesztoWidget->width() - szoveg->getKimenet()->width());
+                        ui->szovegHorizontalisSpinBoxSzerkeszto->setValue(xPont);
+
+                        //vertikalis mozgatas
+                        unsigned yPont = szoveg->getKimenet()->y();
+                        ui->szovegVertikalisSpinBoxSzerkeszto->setMaximum(szerkesztoWidget->height() - szoveg->getKimenet()->height());
+                        ui->szovegVertikalisSpinBoxSzerkeszto->setValue(yPont);
+
+                        //betumeret
+                        ui->betumeretSpinBoxSzerkeszto->setValue(szoveg->getKimenet()->font().pointSize());
+
+                        //betutipus
+                        ui->betutipusComboBoxSzerkeszto->setCurrentFont(szoveg->getBetutipus());
+
+                        //felkover
+                        ui->felkoverCheckBoxSzerkeszto->setChecked(szoveg->getBetutipus().bold());
+
+                        //dolt
+                        ui->doltCheckBoxSzerkeszto->setChecked(szoveg->getBetutipus().italic());
+
+                        //alahuzott
+                        ui->alahuzottCheckBoxSzerkeszto->setChecked(szoveg->getBetutipus().underline());
+                    });
+                }
+
+                //oldal hozzaadas
+                projekt->oldalHozzaadas(oldal);
+            }
+
+            //kepek betoltese
+            QJsonArray kepekArray = projektObject["kepek"].toArray();
+            for(auto it = kepekArray.begin(); it != kepekArray.end(); ++it)
+            {
+                projekt->addKep(it->toString().toStdString());
+            }
+
+            //projekt alkalmazasa
+            if(jelenlegiProjekt != nullptr)
+            {
+                delete jelenlegiProjekt;
+            }
+            jelenlegiProjekt = projekt;
+            listaFrissites();
+            jelenlegiProjekt->getJelenlegiOldal()->elemekMutatasa();
+
+            //oldal hatter beallitasa
+            if(projekt->getJelenlegiOldal()->getStilus()->getHatterTipus())
+            {
+                szerkesztoWidget->setStyleSheet(QString::fromStdString("QWidget#szerkesztoWidget{border-image: url(" + projekt->getJelenlegiOldal()->getStilus()->getMinta().getEleresiUt() + ") 0 0 0 0 stretch stretch;}"));
+            }else{
+                QColor szin = projekt->getJelenlegiOldal()->getStilus()->getSzin();
+                szerkesztoWidget->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
+            }
+
+            //belyegek betoltese szerkesztobe
+            for(auto i : belyegek)
+            {
+                QPushButton *tempbutton = new QPushButton;
+                tempbutton->setAutoFillBackground(true);
+                tempbutton->setStyleSheet("border: 3px outset #c2c2c2;");
+                QPixmap pixmap(QString::fromStdString(i.second));
+
+                tempbutton->setIcon(pixmap);
+                tempbutton->setIconSize(QSize(100, 100));
+
+                ui->belyegekVerticalLayoutSzerkeszto->addWidget(tempbutton);
+                gombok.push_back(tempbutton);
+
+                //funkcio hozzaadas a belyeg gombnak
+                connect(tempbutton, &QPushButton::clicked, [=]{
+                    Belyeg *ujBelyeg = new Belyeg(i.first, pixmap.size(), i.second, 0, 0, 0, 100);
+                    ujBelyeg->getKimenet()->setStyleSheet("background-color: transparent");
+                    ujBelyeg->getKimenet()->setParent(szerkesztoWidget);
+                    ujBelyeg->getKimenet()->setPixmap(pixmap);
+                    ujBelyeg->getKimenet()->resize(pixmap.size());
+                    ujBelyeg->getKimenet()->resize(pixmap.size());
+                    ujBelyeg->getKimenet()->show();
+
+                    //kimenet funkcio
+                    connect(ujBelyeg->getKimenet(), &Kimenet::clicked, [=]{
+                        ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->belyegPageSzerkeszto);
+
+                        if(jelenlegiProjekt->getJelenlegiElem() != nullptr)
+                        {
+                            if(jelenlegiProjekt->getJelenlegiElem()->getTipus() != szoveg)
+                            {
+                                jelenlegiProjekt->getJelenlegiElem()->getKimenet()->setStyleSheet("background-color: transparent");
+                            }else{
+                                QColor szin = dynamic_cast<Szoveg*>(jelenlegiProjekt->getJelenlegiElem())->getSzin();
+                                jelenlegiProjekt->getJelenlegiElem()->getKimenet()->setStyleSheet(QString::fromStdString("background-color: transparent; color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
+                            }
+                        }
+
+                        jelenlegiProjekt->setJelenlegiElem(ujBelyeg);
+                        ujBelyeg->getKimenet()->setStyleSheet(QString::fromStdString(kijeloltElemQSS));
+
+                        //horizontalis mozgatas
+                        unsigned xPont = ujBelyeg->getKimenet()->x();
+                        ui->belyegHorizontalisSpinBoxSzerkeszto->setMaximum(szerkesztoWidget->width() - ujBelyeg->getKimenet()->width());
+                        ui->belyegHorizontalisSpinBoxSzerkeszto->setValue(xPont);
+
+                        //vertikalis mozgatas
+                        unsigned yPont = ujBelyeg->getKimenet()->y();
+                        ui->belyegVertikalisSpinBoxSzerkeszto->setMaximum(szerkesztoWidget->height() - ujBelyeg->getKimenet()->height());
+                        ui->belyegVertikalisSpinBoxSzerkeszto->setValue(yPont);
+
+                        //meretezes
+                        ui->belyegMeretSpinBoxSzerkeszto->setValue(ujBelyeg->getMeretArany());
+                    });
+
+                    //lista elem
+                    QPushButton* listaElem = new QPushButton;
+                    listaElem->setAutoFillBackground(true);
+                    listaElem->setStyleSheet("border: 3px outset #c2c2c2;");
+
+                    connect(listaElem, &QPushButton::clicked, [=]{
+                        ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->belyegPageSzerkeszto);
+
+                        if(jelenlegiProjekt->getJelenlegiElem() != nullptr)
+                        {
+                            if(jelenlegiProjekt->getJelenlegiElem()->getTipus() != szoveg)
+                            {
+                                jelenlegiProjekt->getJelenlegiElem()->getKimenet()->setStyleSheet("background-color: transparent");
+                            }else{
+                                QColor szin = dynamic_cast<Szoveg*>(jelenlegiProjekt->getJelenlegiElem())->getSzin();
+                                jelenlegiProjekt->getJelenlegiElem()->getKimenet()->setStyleSheet(QString::fromStdString("background-color: transparent; color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
+                            }
+                        }
+
+                        jelenlegiProjekt->setJelenlegiElem(ujBelyeg);
+                        ujBelyeg->getKimenet()->setStyleSheet(QString::fromStdString(kijeloltElemQSS));
+
+                        //horizontalis mozgatas
+                        unsigned xPont = ujBelyeg->getKimenet()->x();
+                        ui->belyegHorizontalisSpinBoxSzerkeszto->setMaximum(szerkesztoWidget->width() - ujBelyeg->getKimenet()->width());
+                        ui->belyegHorizontalisSpinBoxSzerkeszto->setValue(xPont);
+
+                        //vertikalis mozgatas
+                        unsigned yPont = ujBelyeg->getKimenet()->y();
+                        ui->belyegVertikalisSpinBoxSzerkeszto->setMaximum(szerkesztoWidget->height() - ujBelyeg->getKimenet()->height());
+                        ui->belyegVertikalisSpinBoxSzerkeszto->setValue(yPont);
+
+                        //meretezes
+                        ui->belyegMeretSpinBoxSzerkeszto->setValue(ujBelyeg->getMeretArany());
+                    });
+
+                    listaElem->setIcon(pixmap);
+                    listaElem->setIconSize(QSize(100, 100));
+
+                    belyegekLista[ujBelyeg] = listaElem;
+                    ui->belyegListaVerticalLayoutSzerkeszto->addWidget(listaElem);
+
+                    //belyeg projekthez adas
+                    jelenlegiProjekt->getJelenlegiOldal()->belyegHozzaadas(ujBelyeg);
                 });
             }
 
-            //belyegek beallitasa
-            QJsonArray belyegArray = oldalObject["belyegek"].toArray();
-            for(auto it2 = belyegArray.begin(); it2 != belyegArray.end(); ++it2)
+            //mintak betoltese szerkesztobe
+            for(auto i : mintak)
             {
-                QJsonObject belyegObject = it2->toObject();
-                QJsonObject meretObject = belyegObject["meret"].toObject();
-                Belyeg* belyeg = new Belyeg(belyegObject["nev"].toString().toStdString(), QSize(meretObject["szelesseg"].toInt(), meretObject["magassag"].toInt()), belyegObject["eleres"].toString().toStdString(), belyegObject["x"].toInt(), belyegObject["y"].toInt(), belyegObject["dolesszog"].toInt(), belyegObject["meretArany"].toInt());
-                oldal->belyegHozzaadas(belyeg);
-                belyeg->kepKeszites();
-                belyeg->getKimenet()->setParent(szerkesztoWidget);
-                belyeg->getKimenet()->show();
+                QPushButton *tempbutton = new QPushButton;
+                tempbutton->setAutoFillBackground(true);
+                tempbutton->setStyleSheet("border: 3px outset #c2c2c2;");
+                QPixmap pixmap(QString::fromStdString(i.second));
 
-                //kimenet funkcio
-                connect(belyeg->getKimenet(), &Kimenet::clicked, [=]{
-                    ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->belyegPageSzerkeszto);
+                tempbutton->setIcon(pixmap);
+                tempbutton->setIconSize(QSize(200, 200));
 
-                    if(jelenlegiProjekt->getJelenlegiElem() != nullptr)
-                    {
-                        if(jelenlegiProjekt->getJelenlegiElem()->getTipus() != szoveg)
-                        {
-                            jelenlegiProjekt->getJelenlegiElem()->getKimenet()->setStyleSheet("background-color: transparent");
-                        }else{
-                            QColor szin = dynamic_cast<Szoveg*>(jelenlegiProjekt->getJelenlegiElem())->getSzin();
-                            jelenlegiProjekt->getJelenlegiElem()->getKimenet()->setStyleSheet(QString::fromStdString("background-color: transparent; color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
-                        }
-                    }
+                ui->mintakVerticalLayoutSzerkeszto->addWidget(tempbutton);
+                gombok.push_back(tempbutton);
 
-                    jelenlegiProjekt->setJelenlegiElem(belyeg);
-                    belyeg->getKimenet()->setStyleSheet(QString::fromStdString(kijeloltElemQSS));
+                //funkcio hozzaadas a minta gombnak
+                connect(tempbutton, &QPushButton::clicked, [=]{
+                    Minta ujMinta = Minta(i.first, i.second);
 
-                    //horizontalis mozgatas
-                    unsigned xPont = belyeg->getKimenet()->x();
-                    ui->belyegHorizontalisSpinBoxSzerkeszto->setMaximum(szerkesztoWidget->width() - belyeg->getKimenet()->width());
-                    ui->belyegHorizontalisSpinBoxSzerkeszto->setValue(xPont);
+                    jelenlegiProjekt->getJelenlegiOldal()->getStilus()->setMinta(ujMinta);
+                    jelenlegiProjekt->getJelenlegiOldal()->getStilus()->setHatterTipus(1);
 
-                    //vertikalis mozgatas
-                    unsigned yPont = belyeg->getKimenet()->y();
-                    ui->belyegVertikalisSpinBoxSzerkeszto->setMaximum(szerkesztoWidget->height() - belyeg->getKimenet()->height());
-                    ui->belyegVertikalisSpinBoxSzerkeszto->setValue(yPont);
-
-                    //meretezes
-                    ui->belyegMeretSpinBoxSzerkeszto->setValue(belyeg->getMeretArany());
-                });
-            }
-            // list<Belyeg*> lista = projekt.getJelenlegiOldal()->getBelyegek();
-
-            //szovegek beallitasa
-            QJsonArray szovegArray = oldalObject["szovegek"].toArray();
-            for(auto it2 = szovegArray.begin(); it2 != szovegArray.end(); ++it2)
-            {
-                QJsonObject szovegObject = it2->toObject();
-                QJsonObject szinObject = szovegObject["szin"].toObject();
-                Szoveg* szoveg = new Szoveg(szovegObject["x"].toInt(), szovegObject["y"].toInt(), szovegObject["dolesszog"].toInt(), szovegObject["tartalom"].toString().toStdString());
-                QColor szin(szinObject["piros"].toInt(), szinObject["zold"].toInt(), szinObject["kek"].toInt());
-                szoveg->setSzin(szin);
-                szoveg->getKimenet()->setStyleSheet(QString::fromStdString("color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
-
-                QFont font = szoveg->getBetutipus();
-                font.setPointSize(szovegObject["betumeret"].toInt());
-                font.setFamily(szovegObject["betutipus"].toString());
-                font.setBold(szovegObject["felkover"].toBool());
-                font.setItalic(szovegObject["dolt"].toBool());
-                font.setUnderline(szovegObject["alahuzott"].toBool());
-                szoveg->setBetutipus(font);
-
-                oldal->szovegHozzaadas(szoveg);
-                szoveg->getKimenet()->setParent(szerkesztoWidget);
-                szoveg->getKimenet()->show();
-
-                //kimenet funkcio
-                connect(szoveg->getKimenet(), &Kimenet::clicked, [=]{
-                    ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->szovegPageSzerkeszto);
-
-                    if(jelenlegiProjekt->getJelenlegiElem() != nullptr)
-                    {
-                        if(jelenlegiProjekt->getJelenlegiElem()->getTipus() != ElemTipus::szoveg)
-                        {
-                            jelenlegiProjekt->getJelenlegiElem()->getKimenet()->setStyleSheet("background-color: transparent");
-                        }else{
-                            Szoveg* jelenlegiSzoveg = dynamic_cast<Szoveg*>(jelenlegiProjekt->getJelenlegiElem());
-                            QColor szin = jelenlegiSzoveg->getSzin();
-                            jelenlegiSzoveg->getKimenet()->setStyleSheet(QString::fromStdString("background-color: transparent; color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
-                        }
-                    }
-
-                    jelenlegiProjekt->setJelenlegiElem(szoveg);
-                    QColor szin = szoveg->getSzin();
-                    szoveg->getKimenet()->setStyleSheet(QString::fromStdString(kijeloltElemQSS + "color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
-
-                    //betuszin
-                    ui->betuszinWidgetSzerkeszto->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + "); border: 3px inset #bb1133;"));
-
-                    //szoveg
-                    ui->szovegTextEditSzerkeszto->setText(QString::fromStdString(szoveg->getTartalom()));
-
-                    //horizontalis mozgatas
-                    unsigned xPont = szoveg->getKimenet()->x();
-                    ui->szovegHorizontalisSpinBoxSzerkeszto->setMaximum(szerkesztoWidget->width() - szoveg->getKimenet()->width());
-                    ui->szovegHorizontalisSpinBoxSzerkeszto->setValue(xPont);
-
-                    //vertikalis mozgatas
-                    unsigned yPont = szoveg->getKimenet()->y();
-                    ui->szovegVertikalisSpinBoxSzerkeszto->setMaximum(szerkesztoWidget->height() - szoveg->getKimenet()->height());
-                    ui->szovegVertikalisSpinBoxSzerkeszto->setValue(yPont);
-
-                    //betumeret
-                    ui->betumeretSpinBoxSzerkeszto->setValue(szoveg->getKimenet()->font().pointSize());
-
-                    //betutipus
-                    ui->betutipusComboBoxSzerkeszto->setCurrentFont(szoveg->getBetutipus());
-
-                    //felkover
-                    ui->felkoverCheckBoxSzerkeszto->setChecked(szoveg->getBetutipus().bold());
-
-                    //dolt
-                    ui->doltCheckBoxSzerkeszto->setChecked(szoveg->getBetutipus().italic());
-
-                    //alahuzott
-                    ui->alahuzottCheckBoxSzerkeszto->setChecked(szoveg->getBetutipus().underline());
+                    szerkesztoWidget->setStyleSheet(QString::fromStdString("QWidget#szerkesztoWidget{border-image: url(" + i.second + ") 0 0 0 0 stretch stretch;}"));
                 });
             }
 
-            //oldal hozzaadas
-            projekt->oldalHozzaadas(oldal);
-        }
+            //kepek betoltese szerkesztobe
+            list<string> kepLista = jelenlegiProjekt->getKepek();
+            for(string i : kepLista)
+            {
+                cout << i << endl;
+                QPushButton *tempbutton = new QPushButton;
+                tempbutton->setStyleSheet("border: 3px outset #c2c2c2;");
+                QPixmap pixmap(QString::fromStdString(i));
 
-        //kepek betoltese
-        QJsonArray kepekArray = projektObject["kepek"].toArray();
-        for(auto it = kepekArray.begin(); it != kepekArray.end(); ++it)
-        {
-            projekt->addKep(it->toString().toStdString());
-        }
+                tempbutton->setIcon(pixmap);
+                tempbutton->setIconSize(QSize(100, 100));
 
-        //projekt alkalmazasa
-        if(jelenlegiProjekt != nullptr)
-        {
-            delete jelenlegiProjekt;
-        }
-        jelenlegiProjekt = projekt;
-        listaFrissites();
+                ui->kepekVerticalLayoutSzerkeszto->addWidget(tempbutton);
+                gombok.push_back(tempbutton);
 
-        //oldal hatter beallitasa
-        if(projekt->getJelenlegiOldal()->getStilus()->getHatterTipus())
-        {
-            szerkesztoWidget->setStyleSheet(QString::fromStdString("QWidget#szerkesztoWidget{border-image: url(" + projekt->getJelenlegiOldal()->getStilus()->getMinta().getEleresiUt() + ") 0 0 0 0 stretch stretch;}"));
-        }else{
-            QColor szin = projekt->getJelenlegiOldal()->getStilus()->getSzin();
-            szerkesztoWidget->setStyleSheet(QString::fromStdString("background-color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
-        }
+                //funkcio hozzaadas a kep gombnak
+                connect(tempbutton, &QPushButton::clicked, [=]{
+                    Keret *ujKeret = new Keret(pixmap.size(), i, 0, 0, 0, 100, 100, 100, 0, 0, 0, 0);
+                    ujKeret->getKimenet()->setStyleSheet("background-color: transparent");
+                    ujKeret->getKimenet()->setParent(szerkesztoWidget);
+                    ujKeret->getKimenet()->setPixmap(pixmap);
+                    ujKeret->getKimenet()->resize(pixmap.size());
+                    ujKeret->getKimenet()->resize(pixmap.size());
+                    ujKeret->getKimenet()->show();
 
-        //belyegek betoltese szerkesztobe
-        for(auto i : belyegek)
-        {
-            QPushButton *tempbutton = new QPushButton;
-            tempbutton->setAutoFillBackground(true);
-            tempbutton->setStyleSheet("border: 3px outset #c2c2c2;");
-            QPixmap pixmap(QString::fromStdString(i.second));
+                    //kimenet funkcio
+                    connect(ujKeret->getKimenet(), &Kimenet::clicked, [=]{
+                        ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->kepPageSzerkeszto);
 
-            tempbutton->setIcon(pixmap);
-            tempbutton->setIconSize(QSize(100, 100));
-
-            ui->belyegekVerticalLayoutSzerkeszto->addWidget(tempbutton);
-
-            //funkcio hozzaadas a belyeg gombnak
-            connect(tempbutton, &QPushButton::clicked, [=]{
-                Belyeg *ujBelyeg = new Belyeg(i.first, pixmap.size(), i.second, 0, 0, 0, 100);
-                ujBelyeg->getKimenet()->setStyleSheet("background-color: transparent");
-                ujBelyeg->getKimenet()->setParent(szerkesztoWidget);
-                ujBelyeg->getKimenet()->setPixmap(pixmap);
-                ujBelyeg->getKimenet()->resize(pixmap.size());
-                ujBelyeg->getKimenet()->resize(pixmap.size());
-                ujBelyeg->getKimenet()->show();
-
-                //kimenet funkcio
-                connect(ujBelyeg->getKimenet(), &Kimenet::clicked, [=]{
-                    ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->belyegPageSzerkeszto);
-
-                    if(jelenlegiProjekt->getJelenlegiElem() != nullptr)
-                    {
-                        if(jelenlegiProjekt->getJelenlegiElem()->getTipus() != szoveg)
+                        if(jelenlegiProjekt->getJelenlegiElem() != nullptr)
                         {
-                            jelenlegiProjekt->getJelenlegiElem()->getKimenet()->setStyleSheet("background-color: transparent");
-                        }else{
-                            QColor szin = dynamic_cast<Szoveg*>(jelenlegiProjekt->getJelenlegiElem())->getSzin();
-                            jelenlegiProjekt->getJelenlegiElem()->getKimenet()->setStyleSheet(QString::fromStdString("background-color: transparent; color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
+                            if(jelenlegiProjekt->getJelenlegiElem()->getTipus() != szoveg)
+                            {
+                                jelenlegiProjekt->getJelenlegiElem()->getKimenet()->setStyleSheet("background-color: transparent");
+                            }else{
+                                QColor szin = dynamic_cast<Szoveg*>(jelenlegiProjekt->getJelenlegiElem())->getSzin();
+                                jelenlegiProjekt->getJelenlegiElem()->getKimenet()->setStyleSheet(QString::fromStdString("background-color: transparent; color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
+                            }
                         }
-                    }
 
-                    jelenlegiProjekt->setJelenlegiElem(ujBelyeg);
-                    ujBelyeg->getKimenet()->setStyleSheet(QString::fromStdString(kijeloltElemQSS));
+                        jelenlegiProjekt->setJelenlegiElem(ujKeret);
+                        ujKeret->getKimenet()->setStyleSheet(QString::fromStdString(kijeloltElemQSS));
 
-                    //horizontalis mozgatas
-                    unsigned xPont = ujBelyeg->getKimenet()->x();
-                    ui->belyegHorizontalisSpinBoxSzerkeszto->setMaximum(szerkesztoWidget->width() - ujBelyeg->getKimenet()->width());
-                    ui->belyegHorizontalisSpinBoxSzerkeszto->setValue(xPont);
 
-                    //vertikalis mozgatas
-                    unsigned yPont = ujBelyeg->getKimenet()->y();
-                    ui->belyegVertikalisSpinBoxSzerkeszto->setMaximum(szerkesztoWidget->height() - ujBelyeg->getKimenet()->height());
-                    ui->belyegVertikalisSpinBoxSzerkeszto->setValue(yPont);
+                        //horizontalis mozgatas
+                        unsigned xPont = ujKeret->getKimenet()->x();
+                        ui->kepHorizontalisSpinBoxSzerkeszto->setMaximum(szerkesztoWidget->width() - ujKeret->getKimenet()->width());
+                        ui->kepHorizontalisSpinBoxSzerkeszto->setValue(xPont);
 
-                    //meretezes
-                    ui->belyegMeretSpinBoxSzerkeszto->setValue(ujBelyeg->getMeretArany());
-                });
+                        //vertikalis mozgatas
+                        unsigned yPont = ujKeret->getKimenet()->y();
+                        ui->kepVertikalisSpinBoxSzerkeszto->setMaximum(szerkesztoWidget->height() - ujKeret->getKimenet()->height());
+                        ui->kepVertikalisSpinBoxSzerkeszto->setValue(yPont);
 
-                //lista elem
-                QPushButton* listaElem = new QPushButton;
-                listaElem->setAutoFillBackground(true);
-                listaElem->setStyleSheet("border: 3px outset #c2c2c2;");
+                        //meretezes
+                        ui->kepMeretSpinBoxSzerkeszto->setValue(ujKeret->getMeretArany());
 
-                connect(listaElem, &QPushButton::clicked, [=]{
-                    ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->belyegPageSzerkeszto);
+                        //aranyok
+                        unsigned szel = ujKeret->getSzelesseg();
+                        ui->kepSzelessegSpinBoxSzerkeszto->setValue(szel);
 
-                    if(jelenlegiProjekt->getJelenlegiElem() != nullptr)
-                    {
-                        if(jelenlegiProjekt->getJelenlegiElem()->getTipus() != szoveg)
+                        unsigned mag = ujKeret->getMagassag();
+                        ui->kepMagassagSpinBoxSzerkeszto->setValue(mag);
+
+                        unsigned xKoor = ujKeret->getKepXKoordinata();
+                        ui->keparanyHorizontalisSpinBoxSzerkeszto->setMaximum(ujKeret->getMeret().width()*(1-szel/100.0));
+                        ui->keparanyHorizontalisSpinBoxSzerkeszto->setValue(xKoor);
+
+                        unsigned yKoor = ujKeret->getKepYKoordinata();
+                        ui->keparanyVertikalisSpinBoxSzerkeszto->setMaximum(ujKeret->getMeret().height()*(1-mag/100.0));
+                        ui->keparanyVertikalisSpinBoxSzerkeszto->setValue(yKoor);
+
+                        //szuro
+                        ui->kepSzuroComboBoxSzerkeszto->setCurrentIndex(ujKeret->getSzuro());
+                    });
+
+                    //lista elem
+                    QPushButton* listaElem = new QPushButton;
+                    listaElem->setAutoFillBackground(true);
+                    listaElem->setStyleSheet("border: 3px outset #c2c2c2;");
+
+                    connect(listaElem, &QPushButton::clicked, [=]{
+                        ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->kepPageSzerkeszto);
+
+                        if(jelenlegiProjekt->getJelenlegiElem() != nullptr)
                         {
-                            jelenlegiProjekt->getJelenlegiElem()->getKimenet()->setStyleSheet("background-color: transparent");
-                        }else{
-                            QColor szin = dynamic_cast<Szoveg*>(jelenlegiProjekt->getJelenlegiElem())->getSzin();
-                            jelenlegiProjekt->getJelenlegiElem()->getKimenet()->setStyleSheet(QString::fromStdString("background-color: transparent; color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
+                            if(jelenlegiProjekt->getJelenlegiElem()->getTipus() != szoveg)
+                            {
+                                jelenlegiProjekt->getJelenlegiElem()->getKimenet()->setStyleSheet("background-color: transparent");
+                            }else{
+                                QColor szin = dynamic_cast<Szoveg*>(jelenlegiProjekt->getJelenlegiElem())->getSzin();
+                                jelenlegiProjekt->getJelenlegiElem()->getKimenet()->setStyleSheet(QString::fromStdString("background-color: transparent; color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
+                            }
                         }
-                    }
 
-                    jelenlegiProjekt->setJelenlegiElem(ujBelyeg);
-                    ujBelyeg->getKimenet()->setStyleSheet(QString::fromStdString(kijeloltElemQSS));
+                        jelenlegiProjekt->setJelenlegiElem(ujKeret);
+                        ujKeret->getKimenet()->setStyleSheet(QString::fromStdString(kijeloltElemQSS));
 
-                    //horizontalis mozgatas
-                    unsigned xPont = ujBelyeg->getKimenet()->x();
-                    ui->belyegHorizontalisSpinBoxSzerkeszto->setMaximum(szerkesztoWidget->width() - ujBelyeg->getKimenet()->width());
-                    ui->belyegHorizontalisSpinBoxSzerkeszto->setValue(xPont);
 
-                    //vertikalis mozgatas
-                    unsigned yPont = ujBelyeg->getKimenet()->y();
-                    ui->belyegVertikalisSpinBoxSzerkeszto->setMaximum(szerkesztoWidget->height() - ujBelyeg->getKimenet()->height());
-                    ui->belyegVertikalisSpinBoxSzerkeszto->setValue(yPont);
+                        //horizontalis mozgatas
+                        unsigned xPont = ujKeret->getKimenet()->x();
+                        ui->kepHorizontalisSpinBoxSzerkeszto->setMaximum(szerkesztoWidget->width() - ujKeret->getKimenet()->width());
+                        ui->kepHorizontalisSpinBoxSzerkeszto->setValue(xPont);
 
-                    //meretezes
-                    ui->belyegMeretSpinBoxSzerkeszto->setValue(ujBelyeg->getMeretArany());
+                        //vertikalis mozgatas
+                        unsigned yPont = ujKeret->getKimenet()->y();
+                        ui->kepVertikalisSpinBoxSzerkeszto->setMaximum(szerkesztoWidget->height() - ujKeret->getKimenet()->height());
+                        ui->kepVertikalisSpinBoxSzerkeszto->setValue(yPont);
+
+                        //meretezes
+                        ui->kepMeretSpinBoxSzerkeszto->setValue(ujKeret->getMeretArany());
+
+                        //aranyok
+                        unsigned szel = ujKeret->getSzelesseg();
+                        ui->kepSzelessegSpinBoxSzerkeszto->setValue(szel);
+
+                        unsigned mag = ujKeret->getMagassag();
+                        ui->kepMagassagSpinBoxSzerkeszto->setValue(mag);
+
+                        unsigned xKoor = ujKeret->getKepXKoordinata();
+                        ui->keparanyHorizontalisSpinBoxSzerkeszto->setMaximum(ujKeret->getMeret().width()*(1-szel/100.0));
+                        ui->keparanyHorizontalisSpinBoxSzerkeszto->setValue(xKoor);
+
+                        unsigned yKoor = ujKeret->getKepYKoordinata();
+                        ui->keparanyVertikalisSpinBoxSzerkeszto->setMaximum(ujKeret->getMeret().height()*(1-mag/100.0));
+                        ui->keparanyVertikalisSpinBoxSzerkeszto->setValue(yKoor);
+
+                        //szuro
+                        ui->kepSzuroComboBoxSzerkeszto->setCurrentIndex(ujKeret->getSzuro());
+                    });
+
+                    listaElem->setIcon(pixmap);
+                    listaElem->setIconSize(QSize(100, 100));
+
+                    kepekLista[ujKeret] = listaElem;
+                    ui->kepListaVerticalLayoutSzerkeszto->addWidget(listaElem);
+
+                    //keret projekthez adas
+                    jelenlegiProjekt->getJelenlegiOldal()->keretHozzaadas(ujKeret);
                 });
+            }
 
-                listaElem->setIcon(pixmap);
-                listaElem->setIconSize(QSize(100, 100));
+            //oldal beállítása
+            ui->oldalszamLabelSzerkeszto->setText(QString::fromStdString("" + to_string(jelenlegiProjekt->getJelenlegiOldal()->getOldalszam()) + "/" + to_string(jelenlegiProjekt->getOldalszam())));
 
-                belyegekLista[ujBelyeg] = listaElem;
-                ui->belyegListaVerticalLayoutSzerkeszto->addWidget(listaElem);
+            //szerkeszto oldal betoltese
+            ui->kepernyoStackedWidget->setCurrentWidget(ui->szerkesztoKepernyoPage);
 
-                //belyeg projekthez adas
-                jelenlegiProjekt->getJelenlegiOldal()->belyegHozzaadas(ujBelyeg);
-            });
+            file.close();
         }
-
-        //mintak betoltese szerkesztobe
-        for(auto i : mintak)
-        {
-            QPushButton *tempbutton = new QPushButton;
-            tempbutton->setAutoFillBackground(true);
-            tempbutton->setStyleSheet("border: 3px outset #c2c2c2;");
-            QPixmap pixmap(QString::fromStdString(i.second));
-
-            tempbutton->setIcon(pixmap);
-            tempbutton->setIconSize(QSize(200, 200));
-
-            ui->mintakVerticalLayoutSzerkeszto->addWidget(tempbutton);
-
-            //funkcio hozzaadas a minta gombnak
-            connect(tempbutton, &QPushButton::clicked, [=]{
-                Minta ujMinta = Minta(i.first, i.second);
-
-                jelenlegiProjekt->getJelenlegiOldal()->getStilus()->setMinta(ujMinta);
-                jelenlegiProjekt->getJelenlegiOldal()->getStilus()->setHatterTipus(1);
-
-                szerkesztoWidget->setStyleSheet(QString::fromStdString("QWidget#szerkesztoWidget{border-image: url(" + i.second + ") 0 0 0 0 stretch stretch;}"));
-            });
-        }
-
-        //kepek betoltese szerkesztobe
-        list<string> kepLista = jelenlegiProjekt->getKepek();
-        for(string i : kepLista)
-        {
-            QPushButton *tempbutton = new QPushButton;
-            tempbutton->setStyleSheet("border: 3px outset #c2c2c2;");
-            QPixmap pixmap(QString::fromStdString(i));
-
-            tempbutton->setIcon(pixmap);
-            tempbutton->setIconSize(QSize(100, 100));
-
-            ui->kepekVerticalLayoutSzerkeszto->addWidget(tempbutton);
-
-            //funkcio hozzaadas a kep gombnak
-            connect(tempbutton, &QPushButton::clicked, [=]{
-                Keret *ujKeret = new Keret(pixmap.size(), i, 0, 0, 0, 100, 100, 100, 0, 0, 0, 0);
-                ujKeret->getKimenet()->setStyleSheet("background-color: transparent");
-                ujKeret->getKimenet()->setParent(szerkesztoWidget);
-                ujKeret->getKimenet()->setPixmap(pixmap);
-                ujKeret->getKimenet()->resize(pixmap.size());
-                ujKeret->getKimenet()->resize(pixmap.size());
-                ujKeret->getKimenet()->show();
-
-                //kimenet funkcio
-                connect(ujKeret->getKimenet(), &Kimenet::clicked, [=]{
-                    ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->kepPageSzerkeszto);
-
-                    if(jelenlegiProjekt->getJelenlegiElem() != nullptr)
-                    {
-                        if(jelenlegiProjekt->getJelenlegiElem()->getTipus() != szoveg)
-                        {
-                            jelenlegiProjekt->getJelenlegiElem()->getKimenet()->setStyleSheet("background-color: transparent");
-                        }else{
-                            QColor szin = dynamic_cast<Szoveg*>(jelenlegiProjekt->getJelenlegiElem())->getSzin();
-                            jelenlegiProjekt->getJelenlegiElem()->getKimenet()->setStyleSheet(QString::fromStdString("background-color: transparent; color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
-                        }
-                    }
-
-                    jelenlegiProjekt->setJelenlegiElem(ujKeret);
-                    ujKeret->getKimenet()->setStyleSheet(QString::fromStdString(kijeloltElemQSS));
-
-
-                    //horizontalis mozgatas
-                    unsigned xPont = ujKeret->getKimenet()->x();
-                    ui->kepHorizontalisSpinBoxSzerkeszto->setMaximum(szerkesztoWidget->width() - ujKeret->getKimenet()->width());
-                    ui->kepHorizontalisSpinBoxSzerkeszto->setValue(xPont);
-
-                    //vertikalis mozgatas
-                    unsigned yPont = ujKeret->getKimenet()->y();
-                    ui->kepVertikalisSpinBoxSzerkeszto->setMaximum(szerkesztoWidget->height() - ujKeret->getKimenet()->height());
-                    ui->kepVertikalisSpinBoxSzerkeszto->setValue(yPont);
-
-                    //meretezes
-                    ui->kepMeretSpinBoxSzerkeszto->setValue(ujKeret->getMeretArany());
-
-                    //aranyok
-                    unsigned szel = ujKeret->getSzelesseg();
-                    ui->kepSzelessegSpinBoxSzerkeszto->setValue(szel);
-
-                    unsigned mag = ujKeret->getMagassag();
-                    ui->kepMagassagSpinBoxSzerkeszto->setValue(mag);
-
-                    unsigned xKoor = ujKeret->getKepXKoordinata();
-                    ui->keparanyHorizontalisSpinBoxSzerkeszto->setMaximum(ujKeret->getMeret().width()*(1-szel/100.0));
-                    ui->keparanyHorizontalisSpinBoxSzerkeszto->setValue(xKoor);
-
-                    unsigned yKoor = ujKeret->getKepYKoordinata();
-                    ui->keparanyVertikalisSpinBoxSzerkeszto->setMaximum(ujKeret->getMeret().height()*(1-mag/100.0));
-                    ui->keparanyVertikalisSpinBoxSzerkeszto->setValue(yKoor);
-
-                    //szuro
-                    ui->kepSzuroComboBoxSzerkeszto->setCurrentIndex(ujKeret->getSzuro());
-                });
-
-                //lista elem
-                QPushButton* listaElem = new QPushButton;
-                listaElem->setAutoFillBackground(true);
-                listaElem->setStyleSheet("border: 3px outset #c2c2c2;");
-
-                connect(listaElem, &QPushButton::clicked, [=]{
-                    ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->kepPageSzerkeszto);
-
-                    if(jelenlegiProjekt->getJelenlegiElem() != nullptr)
-                    {
-                        if(jelenlegiProjekt->getJelenlegiElem()->getTipus() != szoveg)
-                        {
-                            jelenlegiProjekt->getJelenlegiElem()->getKimenet()->setStyleSheet("background-color: transparent");
-                        }else{
-                            QColor szin = dynamic_cast<Szoveg*>(jelenlegiProjekt->getJelenlegiElem())->getSzin();
-                            jelenlegiProjekt->getJelenlegiElem()->getKimenet()->setStyleSheet(QString::fromStdString("background-color: transparent; color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
-                        }
-                    }
-
-                    jelenlegiProjekt->setJelenlegiElem(ujKeret);
-                    ujKeret->getKimenet()->setStyleSheet(QString::fromStdString(kijeloltElemQSS));
-
-
-                    //horizontalis mozgatas
-                    unsigned xPont = ujKeret->getKimenet()->x();
-                    ui->kepHorizontalisSpinBoxSzerkeszto->setMaximum(szerkesztoWidget->width() - ujKeret->getKimenet()->width());
-                    ui->kepHorizontalisSpinBoxSzerkeszto->setValue(xPont);
-
-                    //vertikalis mozgatas
-                    unsigned yPont = ujKeret->getKimenet()->y();
-                    ui->kepVertikalisSpinBoxSzerkeszto->setMaximum(szerkesztoWidget->height() - ujKeret->getKimenet()->height());
-                    ui->kepVertikalisSpinBoxSzerkeszto->setValue(yPont);
-
-                    //meretezes
-                    ui->kepMeretSpinBoxSzerkeszto->setValue(ujKeret->getMeretArany());
-
-                    //aranyok
-                    unsigned szel = ujKeret->getSzelesseg();
-                    ui->kepSzelessegSpinBoxSzerkeszto->setValue(szel);
-
-                    unsigned mag = ujKeret->getMagassag();
-                    ui->kepMagassagSpinBoxSzerkeszto->setValue(mag);
-
-                    unsigned xKoor = ujKeret->getKepXKoordinata();
-                    ui->keparanyHorizontalisSpinBoxSzerkeszto->setMaximum(ujKeret->getMeret().width()*(1-szel/100.0));
-                    ui->keparanyHorizontalisSpinBoxSzerkeszto->setValue(xKoor);
-
-                    unsigned yKoor = ujKeret->getKepYKoordinata();
-                    ui->keparanyVertikalisSpinBoxSzerkeszto->setMaximum(ujKeret->getMeret().height()*(1-mag/100.0));
-                    ui->keparanyVertikalisSpinBoxSzerkeszto->setValue(yKoor);
-
-                    //szuro
-                    ui->kepSzuroComboBoxSzerkeszto->setCurrentIndex(ujKeret->getSzuro());
-                });
-
-                listaElem->setIcon(pixmap);
-                listaElem->setIconSize(QSize(100, 100));
-
-                kepekLista[ujKeret] = listaElem;
-                ui->kepListaVerticalLayoutSzerkeszto->addWidget(listaElem);
-
-                //keret projekthez adas
-                jelenlegiProjekt->getJelenlegiOldal()->keretHozzaadas(ujKeret);
-            });
-        }
-
-        //oldal beállítása
-        ui->oldalszamLabelSzerkeszto->setText(QString::fromStdString("" + to_string(jelenlegiProjekt->getJelenlegiOldal()->getOldalszam()) + "/" + to_string(jelenlegiProjekt->getOldalszam())));
-
-        //szerkeszto oldal betoltese
-        ui->kepernyoStackedWidget->setCurrentWidget(ui->szerkesztoKepernyoPage);
-
-        file.close();
+    }else{
+        QMessageBox::warning(this, "Figyelem!", "Nincs kiválasztva projekt!");
     }
 }
 

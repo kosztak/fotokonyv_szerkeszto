@@ -203,13 +203,16 @@ private:
 
     //rendszer
     Projekt* jelenlegiProjekt = nullptr;
+    pair<string, QPushButton*> kivalasztottProjekt = pair<string, QPushButton*>("", nullptr);
     map<string, string> projektek; //nev, eleres
     map<string, string> belyegek; //nev, eleres
     map<string, string> mintak; //nev, eleres
     map<string ,Elrendezes> elrendezesek;
     QSvgRenderer keretAlapHatter = QSvgRenderer(QString::fromStdString("./image.svg"));
+    map<string, QPushButton*> projektekLista;
     map<Keret*, QPushButton*> kepekLista;
     map<Belyeg*, QPushButton*> belyegekLista;
     map<Szoveg*, QPushButton*> szovegekLista;
+    list<QPushButton*> gombok;
 };
 #endif // MAINWINDOW_H

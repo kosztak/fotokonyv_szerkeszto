@@ -40,7 +40,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="szerkesztoKepernyoPage">
        <layout class="QVBoxLayout" name="verticalLayout">
@@ -642,8 +642,8 @@ border: 3px inset #bb1133;
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>128</width>
-                        <height>758</height>
+                        <width>60</width>
+                        <height>16</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_21">
@@ -740,8 +740,8 @@ border: 3px inset #bb1133;
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>128</width>
-                        <height>801</height>
+                        <width>60</width>
+                        <height>16</height>
                        </rect>
                       </property>
                       <property name="styleSheet">
@@ -1048,8 +1048,8 @@ border: 3px inset #bb1133;
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>126</width>
-                          <height>221</height>
+                          <width>58</width>
+                          <height>16</height>
                          </rect>
                         </property>
                         <layout class="QVBoxLayout" name="verticalLayout_31">
@@ -1128,8 +1128,8 @@ border: 3px inset #bb1133;
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>126</width>
-                          <height>219</height>
+                          <width>58</width>
+                          <height>16</height>
                          </rect>
                         </property>
                         <layout class="QVBoxLayout" name="verticalLayout_34">
@@ -1208,8 +1208,8 @@ border: 3px inset #bb1133;
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>126</width>
-                          <height>221</height>
+                          <width>58</width>
+                          <height>16</height>
                          </rect>
                         </property>
                         <layout class="QVBoxLayout" name="verticalLayout_33">
@@ -4067,7 +4067,10 @@ border: 4px inset #f5c28f;
 background-color: rgb(249, 219, 189);
 }</string>
                 </property>
-                <layout class="QGridLayout" name="gridLayout_29">
+                <layout class="QVBoxLayout" name="verticalLayout_46">
+                 <property name="spacing">
+                  <number>0</number>
+                 </property>
                  <property name="leftMargin">
                   <number>0</number>
                  </property>
@@ -4080,15 +4083,25 @@ background-color: rgb(249, 219, 189);
                  <property name="bottomMargin">
                   <number>0</number>
                  </property>
-                 <property name="spacing">
-                  <number>0</number>
-                 </property>
-                 <item row="0" column="0">
+                 <item>
                   <layout class="QVBoxLayout" name="projektekVerticalLayoutFomenu">
                    <property name="spacing">
                     <number>0</number>
                    </property>
                   </layout>
+                 </item>
+                 <item>
+                  <spacer name="verticalSpacer_17">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
                  </item>
                 </layout>
                </widget>
@@ -4341,8 +4354,8 @@ border: 4px inset #f5c28f;
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>610</width>
-                  <height>674</height>
+                  <width>478</width>
+                  <height>16</height>
                  </rect>
                 </property>
                 <property name="styleSheet">
