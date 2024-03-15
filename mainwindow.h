@@ -16,6 +16,7 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QFileDialog>
 #include <string>
 #include <list>
 #include <map>
@@ -189,6 +190,8 @@ private slots:
 
     void on_oldalTorlesPushButtonSzerkeszto_clicked();
 
+    void on_kepHozzaadasPushButtonSzerkeszto_clicked();
+
 private:
     Ui::MainWindow *ui;
 
@@ -214,5 +217,6 @@ private:
     map<Belyeg*, QPushButton*> belyegekLista;
     map<Szoveg*, QPushButton*> szovegekLista;
     list<QPushButton*> gombok;
+    list<string> ujKepek;
 };
 #endif // MAINWINDOW_H

@@ -593,6 +593,157 @@ void MainWindow::on_kepMeretSpinBoxSzerkeszto_valueChanged(int arg1)
     ui->kepVertikalisSpinBoxSzerkeszto->setValue(yPont);
 }
 
+void MainWindow::on_kepHozzaadasPushButtonSzerkeszto_clicked()
+{
+    QString path = QFileDialog::getOpenFileName(this, "", "", "JPEG (*.jpg *.jpeg);;PNG (*.png)");
+
+    if(path != "")
+    {
+        //uj utvonal elkeszitese
+        ujKepek.push_back(path.split("/").last().toStdString());
+
+        //gomb letrehozasa
+        QPushButton *tempbutton = new QPushButton;
+        tempbutton->setStyleSheet("border: 3px outset #c2c2c2;");
+        QPixmap pixmap(path);
+
+        tempbutton->setIcon(pixmap);
+        tempbutton->setIconSize(QSize(100, 100));
+
+        ui->kepekVerticalLayoutSzerkeszto->addWidget(tempbutton);
+        gombok.push_back(tempbutton);
+
+        //funkcio hozzaadas a kep gombnak
+        connect(tempbutton, &QPushButton::clicked, [=]{
+            Keret *ujKeret = new Keret(pixmap.size(), path.toStdString(), 0, 0, 0, 100, 100, 100, 0, 0, 0, 0);
+            ujKeret->getKimenet()->setStyleSheet("background-color: transparent");
+            ujKeret->getKimenet()->setParent(szerkesztoWidget);
+            ujKeret->getKimenet()->setPixmap(pixmap);
+            ujKeret->getKimenet()->resize(pixmap.size());
+            ujKeret->getKimenet()->resize(pixmap.size());
+            ujKeret->getKimenet()->show();
+
+            //kimenet funkcio
+            connect(ujKeret->getKimenet(), &Kimenet::clicked, [=]{
+                ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->kepPageSzerkeszto);
+
+                if(jelenlegiProjekt->getJelenlegiElem() != nullptr)
+                {
+                    if(jelenlegiProjekt->getJelenlegiElem()->getTipus() != szoveg)
+                    {
+                        jelenlegiProjekt->getJelenlegiElem()->getKimenet()->setStyleSheet("background-color: transparent");
+                    }else{
+                        QColor szin = dynamic_cast<Szoveg*>(jelenlegiProjekt->getJelenlegiElem())->getSzin();
+                        jelenlegiProjekt->getJelenlegiElem()->getKimenet()->setStyleSheet(QString::fromStdString("background-color: transparent; color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
+                    }
+                }
+
+                jelenlegiProjekt->setJelenlegiElem(ujKeret);
+                ujKeret->getKimenet()->setStyleSheet(QString::fromStdString(kijeloltElemQSS));
+
+
+                //horizontalis mozgatas
+                unsigned xPont = ujKeret->getKimenet()->x();
+                ui->kepHorizontalisSpinBoxSzerkeszto->setMaximum(szerkesztoWidget->width() - ujKeret->getKimenet()->width());
+                ui->kepHorizontalisSpinBoxSzerkeszto->setValue(xPont);
+
+                //vertikalis mozgatas
+                unsigned yPont = ujKeret->getKimenet()->y();
+                ui->kepVertikalisSpinBoxSzerkeszto->setMaximum(szerkesztoWidget->height() - ujKeret->getKimenet()->height());
+                ui->kepVertikalisSpinBoxSzerkeszto->setValue(yPont);
+
+                //meretezes
+                ui->kepMeretSpinBoxSzerkeszto->setValue(ujKeret->getMeretArany());
+
+                //dolesszog
+                ui->kepDolesszogSpinBoxSzerkeszto->setValue(ujKeret->getDolesszog());
+
+                //aranyok
+                unsigned szel = ujKeret->getSzelesseg();
+                ui->kepSzelessegSpinBoxSzerkeszto->setValue(szel);
+
+                unsigned mag = ujKeret->getMagassag();
+                ui->kepMagassagSpinBoxSzerkeszto->setValue(mag);
+
+                unsigned xKoor = ujKeret->getKepXKoordinata();
+                ui->keparanyHorizontalisSpinBoxSzerkeszto->setMaximum(ujKeret->getMeret().width()*(1-szel/100.0));
+                ui->keparanyHorizontalisSpinBoxSzerkeszto->setValue(xKoor);
+
+                unsigned yKoor = ujKeret->getKepYKoordinata();
+                ui->keparanyVertikalisSpinBoxSzerkeszto->setMaximum(ujKeret->getMeret().height()*(1-mag/100.0));
+                ui->keparanyVertikalisSpinBoxSzerkeszto->setValue(yKoor);
+
+                //szuro
+                ui->kepSzuroComboBoxSzerkeszto->setCurrentIndex(ujKeret->getSzuro());
+            });
+
+            //lista elem
+            QPushButton* listaElem = new QPushButton;
+            listaElem->setAutoFillBackground(true);
+            listaElem->setStyleSheet("border: 3px outset #c2c2c2;");
+
+            connect(listaElem, &QPushButton::clicked, [=]{
+                ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->kepPageSzerkeszto);
+
+                if(jelenlegiProjekt->getJelenlegiElem() != nullptr)
+                {
+                    if(jelenlegiProjekt->getJelenlegiElem()->getTipus() != szoveg)
+                    {
+                        jelenlegiProjekt->getJelenlegiElem()->getKimenet()->setStyleSheet("background-color: transparent");
+                    }else{
+                        QColor szin = dynamic_cast<Szoveg*>(jelenlegiProjekt->getJelenlegiElem())->getSzin();
+                        jelenlegiProjekt->getJelenlegiElem()->getKimenet()->setStyleSheet(QString::fromStdString("background-color: transparent; color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
+                    }
+                }
+
+                jelenlegiProjekt->setJelenlegiElem(ujKeret);
+                ujKeret->getKimenet()->setStyleSheet(QString::fromStdString(kijeloltElemQSS));
+
+
+                //horizontalis mozgatas
+                unsigned xPont = ujKeret->getKimenet()->x();
+                ui->kepHorizontalisSpinBoxSzerkeszto->setMaximum(szerkesztoWidget->width() - ujKeret->getKimenet()->width());
+                ui->kepHorizontalisSpinBoxSzerkeszto->setValue(xPont);
+
+                //vertikalis mozgatas
+                unsigned yPont = ujKeret->getKimenet()->y();
+                ui->kepVertikalisSpinBoxSzerkeszto->setMaximum(szerkesztoWidget->height() - ujKeret->getKimenet()->height());
+                ui->kepVertikalisSpinBoxSzerkeszto->setValue(yPont);
+
+                //meretezes
+                ui->kepMeretSpinBoxSzerkeszto->setValue(ujKeret->getMeretArany());
+
+                //aranyok
+                unsigned szel = ujKeret->getSzelesseg();
+                ui->kepSzelessegSpinBoxSzerkeszto->setValue(szel);
+
+                unsigned mag = ujKeret->getMagassag();
+                ui->kepMagassagSpinBoxSzerkeszto->setValue(mag);
+
+                unsigned xKoor = ujKeret->getKepXKoordinata();
+                ui->keparanyHorizontalisSpinBoxSzerkeszto->setMaximum(ujKeret->getMeret().width()*(1-szel/100.0));
+                ui->keparanyHorizontalisSpinBoxSzerkeszto->setValue(xKoor);
+
+                unsigned yKoor = ujKeret->getKepYKoordinata();
+                ui->keparanyVertikalisSpinBoxSzerkeszto->setMaximum(ujKeret->getMeret().height()*(1-mag/100.0));
+                ui->keparanyVertikalisSpinBoxSzerkeszto->setValue(yKoor);
+
+                //szuro
+                ui->kepSzuroComboBoxSzerkeszto->setCurrentIndex(ujKeret->getSzuro());
+            });
+
+            listaElem->setIcon(pixmap);
+            listaElem->setIconSize(QSize(100, 100));
+
+            kepekLista[ujKeret] = listaElem;
+            ui->kepListaVerticalLayoutSzerkeszto->addWidget(listaElem);
+
+            //keret projekthez adas
+            jelenlegiProjekt->getJelenlegiOldal()->keretHozzaadas(ujKeret);
+        });
+    }
+}
+
 //belyegek
 void MainWindow::on_belyegHorizontalisSpinBoxSzerkeszto_valueChanged(int arg1)
 {
@@ -1289,6 +1440,11 @@ void MainWindow::on_bezarasPushButtonSzerkeszto_clicked()
     }
     gombok.clear();
 
+    //uj kepek torlese
+    cout << ujKepek.size() << endl;
+    ujKepek.clear();
+    cout << ujKepek.size() << "\n" << endl;
+
     //fomenu betoltese
     ui->kepernyoStackedWidget->setCurrentWidget(ui->fomenuKepernyoPage);
 }
@@ -1302,6 +1458,17 @@ void MainWindow::on_exportalasPushButtonSzerkeszto_clicked()
 
         //jelenlegi elem nullazasa
         ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->uresPageSzerkeszto);
+
+        if(jelenlegiProjekt->getJelenlegiElem() != nullptr)
+        {
+            if(jelenlegiProjekt->getJelenlegiElem()->getTipus() != szoveg)
+            {
+                jelenlegiProjekt->getJelenlegiElem()->getKimenet()->setStyleSheet("background-color: transparent");
+            }else{
+                QColor szin = dynamic_cast<Szoveg*>(jelenlegiProjekt->getJelenlegiElem())->getSzin();
+                jelenlegiProjekt->getJelenlegiElem()->getKimenet()->setStyleSheet(QString::fromStdString("background-color: transparent; color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
+            }
+        }
 
         jelenlegiProjekt->setJelenlegiElem(nullptr);
 
