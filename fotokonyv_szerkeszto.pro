@@ -26,7 +26,8 @@ SOURCES += \
     oldal.cpp \
     projekt.cpp \
     stilus.cpp \
-    szoveg.cpp
+    szoveg.cpp \
+    ujprojekt.cpp
 
 HEADERS += \
     customview.h \
@@ -45,14 +46,16 @@ HEADERS += \
     oldal.h \
     projekt.h \
     stilus.h \
-    szoveg.h
+    szoveg.h \
+    ujprojekt.h
 
 FORMS += \
     elrendezesvalaszto.ui \
     exportwindow.ui \
     kepvalaszto.ui \
     keretvalaszto.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    ujprojekt.ui
 
 CONFIG += lrelease
 CONFIG += embed_translations

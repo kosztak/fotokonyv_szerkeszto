@@ -1361,7 +1361,7 @@ void MainWindow::on_elrendezesPushButtonSzerkeszto_clicked()
 
 void MainWindow::on_oldalHozaadasPushButtonSzerkeszto_clicked()
 {
-    if(jelenlegiProjekt->getOldalszam() < 200)
+    if(jelenlegiProjekt->getOldalszam() < 100)
     {
         //oldal letrehozasa
         Oldal* ujOldal = new Oldal(jelenlegiProjekt->getOldalszam()+1);
@@ -1444,6 +1444,9 @@ void MainWindow::on_bezarasPushButtonSzerkeszto_clicked()
     cout << ujKepek.size() << endl;
     ujKepek.clear();
     cout << ujKepek.size() << "\n" << endl;
+
+    //oldal visszaalitasa
+    szerkesztoWidget->setStyleSheet("background-color: #ffffff");
 
     //fomenu betoltese
     ui->kepernyoStackedWidget->setCurrentWidget(ui->fomenuKepernyoPage);
@@ -1538,11 +1541,144 @@ void MainWindow::on_exportalasPushButtonSzerkeszto_clicked()
     }
 }
 
+void MainWindow::on_mentesPushButtonSzerkeszto_clicked()
+{
+}
+
 //------------------------------------------------------------------------------------------
 //FOMENU
 void MainWindow::on_ujProjektPushButtonFomenu_clicked()
 {
-    ui->kepernyoStackedWidget->setCurrentWidget(ui->szerkesztoKepernyoPage);
+    UjProjekt p(this, projektek);
+    if(p.exec() == QDialog::Accepted)
+    {
+        string nev = p.getNev();
+        unsigned short oldalszam = p.getOldalszam();
+
+        //uj projekt elkeszitese
+        list<Oldal*> oldalak;
+        Projekt* ujProjekt = new Projekt(nev, "./projektek/" + nev + "/" + nev + ".json");
+        for(unsigned short i = 1; i <= oldalszam; ++i)
+        {
+            Oldal* ujOldal = new Oldal(i);
+            ujProjekt->oldalHozzaadas(ujOldal);
+            oldalak.push_back(ujOldal);
+        }
+
+        jelenlegiProjekt = ujProjekt;
+
+        projektek[nev] = ujProjekt->getEleresiUt();
+
+        QFile rendszerFile("./adatok/rendszer.json");
+        if(rendszerFile.open(QIODevice::ReadWrite))
+        {
+            QJsonDocument document = QJsonDocument::fromJson(rendszerFile.readAll());
+            rendszerFile.resize(0);
+            QJsonObject rendszerObject = document.object();
+            QJsonArray projektArray = rendszerObject["projektek"].toArray();
+
+            QJsonObject projektObject;
+            projektObject["nev"] = QString::fromStdString(nev);
+            projektObject["eleres"] = QString::fromStdString(ujProjekt->getEleresiUt());
+
+            projektArray.push_back(projektObject);
+            rendszerObject["projektek"] = projektArray;
+
+            document.setObject(rendszerObject);
+
+            rendszerFile.write(document.toJson());
+
+            rendszerFile.close();
+        }
+
+        //uj projekt mentese
+        QDir dir;
+        dir.mkpath(QString::fromStdString("./projektek/" + nev));
+
+        QFile projektFile(QString::fromStdString(ujProjekt->getEleresiUt()));
+        if(projektFile.open(QIODevice::WriteOnly))
+        {
+            QJsonObject projektObject;
+            projektObject["nev"] = QString::fromStdString(nev);
+
+            //oldalak
+            QJsonArray oldalArray;
+            for(Oldal* o: oldalak)
+            {
+                QJsonObject oldalObject;
+                oldalObject["oldalszam"] = (int)o->getOldalszam();
+
+                //stilus
+                QJsonObject stilusObject;
+                stilusObject["hatterTipus"] = false;
+
+                QJsonObject mintaObject;
+                mintaObject["nev"] = "";
+                mintaObject["eleres"] = "";
+                stilusObject["minta"] = mintaObject;
+
+                QJsonObject szinObject;
+                szinObject["piros"] = 255;
+                szinObject["zold"] = 255;
+                szinObject["kek"] = 255;
+                stilusObject["szin"] = szinObject;
+
+                oldalObject["stilus"] = stilusObject;
+
+                //elemek
+                QJsonArray keretArray;
+                oldalObject["keretek"] = keretArray;
+
+                QJsonArray belyegArray;
+                oldalObject["belyegek"] = belyegArray;
+
+                QJsonArray szovegArray;
+                oldalObject["szovegek"] = szovegArray;
+
+                oldalArray.push_back(oldalObject);
+            }
+
+            projektObject["oldalak"] = oldalArray;
+
+            //kepek
+            QJsonArray kepekArray;
+            projektObject["kepek"] = kepekArray;
+
+            //mentes
+            QJsonDocument document;
+            document.setObject(projektObject);
+            projektFile.write(document.toJson());
+
+            projektFile.close();
+        }
+
+        //gomb elkeszitese
+        QPushButton* button = new QPushButton();
+        button->setText(QString::fromStdString("  " + nev));
+        button->setStyleSheet("text-align: left; font-size: 24pt; font-weight: bold; color: #000000; background-color: rgb(249, 219, 189); border: 4px outset #f5c28f;");
+        button->setAutoFillBackground(true);
+
+        projektekLista[nev] = button;
+        ui->projektekVerticalLayoutFomenu->addWidget(button);
+
+        connect(button, &QPushButton::clicked, [=](){
+            if(kivalasztottProjekt.second != nullptr)
+            {
+                kivalasztottProjekt.second->setStyleSheet("text-align: left; font-size: 24pt; font-weight: bold; color: #000000; background-color: rgb(249, 219, 189); border: 4px outset #f5c28f;");
+            }
+
+            kivalasztottProjekt = pair<string, QPushButton*>(ujProjekt->getEleresiUt(), button);
+
+            button->setStyleSheet("text-align: left; font-size: 24pt; font-weight: bold; color: #000000; background-color: rgb(249, 219, 189); border: 4px inset #f5c28f;");
+        });
+
+        //oldal beállítása
+        ui->oldalszamLabelSzerkeszto->setText(QString::fromStdString("" + to_string(jelenlegiProjekt->getJelenlegiOldal()->getOldalszam()) + "/" + to_string(jelenlegiProjekt->getOldalszam())));
+
+        //oldal valtas
+        ui->kepernyoStackedWidget->setCurrentWidget(ui->szerkesztoKepernyoPage);
+    }
+
 }
 
 void MainWindow::on_projektBetoltesePushButtonFomenu_clicked()

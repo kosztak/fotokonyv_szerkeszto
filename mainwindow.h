@@ -13,6 +13,7 @@
 #include <QGraphicsBlurEffect>
 #include <QtPrintSupport/QPrinter>
 #include <QFile>
+#include <QDir>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -31,6 +32,7 @@
 #include "kepvalaszto.h"
 #include "elrendezesvalaszto.h"
 #include "exportwindow.h"
+#include "ujprojekt.h"
 
 #include <iostream>
 #include <QMouseEvent>
@@ -191,6 +193,8 @@ private slots:
     void on_oldalTorlesPushButtonSzerkeszto_clicked();
 
     void on_kepHozzaadasPushButtonSzerkeszto_clicked();
+
+    void on_mentesPushButtonSzerkeszto_clicked();
 
 private:
     Ui::MainWindow *ui;
