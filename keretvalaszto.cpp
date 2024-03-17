@@ -30,6 +30,13 @@ void KeretValaszto::inicializalas()
 
     //funkcio hozzaadas a keret gombnak
     connect(tempbutton, &QPushButton::clicked, [=]{
+        if(jelenlegiButton != nullptr)
+        {
+            jelenlegiButton->setStyleSheet("background-color: #ffffff; border: 3px outset #c2c2c2;");
+        }
+        jelenlegiButton = tempbutton;
+        tempbutton->setStyleSheet("background-color: #ffffff; border: 3px inset #c2c2c2;");
+
         index = 0;
     });
 
@@ -81,6 +88,13 @@ void KeretValaszto::inicializalas()
 
         //funkcio hozzaadas a keret gombnak
         connect(tempbutton, &QPushButton::clicked, [=]{
+            if(jelenlegiButton != nullptr)
+            {
+                jelenlegiButton->setStyleSheet("background-color: #ffffff; border: 3px outset #c2c2c2;");
+            }
+            jelenlegiButton = tempbutton;
+            tempbutton->setStyleSheet("background-color: #ffffff; border: 3px inset #c2c2c2;");
+
             index = i;
         });
     }

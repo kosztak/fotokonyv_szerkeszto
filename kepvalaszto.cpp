@@ -28,6 +28,13 @@ void KepValaszto::inicializalas()
         ++counter;
         //funkcio hozzaadas a kep gombnak
         connect(tempbutton, &QPushButton::clicked, [=]{
+            if(jelenlegiButton != nullptr)
+            {
+                jelenlegiButton->setStyleSheet("background-color: #ffffff; border: 3px outset #c2c2c2;");
+            }
+            jelenlegiButton = tempbutton;
+            tempbutton->setStyleSheet("background-color: #ffffff; border: 3px inset #c2c2c2;");
+
             jelenlegiKep = i;
         });
     }

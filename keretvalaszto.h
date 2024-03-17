@@ -33,6 +33,7 @@ private:
     Ui::KeretValaszto *ui;
 
     //rendszer
+    QPushButton* jelenlegiButton = nullptr;
     unsigned short index;
     QSvgRenderer image = QSvgRenderer(QString::fromStdString("./image.svg"));
 };

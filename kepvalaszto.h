@@ -33,6 +33,7 @@ private:
     Ui::kepValaszto *ui;
 
     //rendszer
+    QPushButton* jelenlegiButton = nullptr;
     string jelenlegiKep = "";
     list<string> kepLista;
 };
