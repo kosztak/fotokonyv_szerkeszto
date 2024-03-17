@@ -602,6 +602,7 @@ void MainWindow::on_kepHozzaadasPushButtonSzerkeszto_clicked()
         //uj utvonal elkeszitese
         string ujUtvonal = "./projektek/" + jelenlegiProjekt->getNev() + "/" + path.split("/").last().toStdString();
         ujKepek[path.toStdString()] = ujUtvonal;
+        jelenlegiProjekt->addKep(ujUtvonal);
 
         //gomb letrehozasa
         QPushButton *tempbutton = new QPushButton;
