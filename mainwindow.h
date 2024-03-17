@@ -221,6 +221,6 @@ private:
     map<Belyeg*, QPushButton*> belyegekLista;
     map<Szoveg*, QPushButton*> szovegekLista;
     list<QPushButton*> gombok;
-    list<string> ujKepek;
+    map<string, string> ujKepek; // regi, uj
 };
 #endif // MAINWINDOW_H

@@ -117,6 +117,11 @@ string Projekt::getEleresiUt() const
     return eleresiUt;
 }
 
+vector<Oldal *> Projekt::getOldalak() const
+{
+    return oldalak;
+}
+
 Projekt::Projekt(const string &nev, const string &eleresiUt) : nev(nev), eleresiUt(eleresiUt)
 {
 

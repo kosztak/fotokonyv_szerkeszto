@@ -600,7 +600,8 @@ void MainWindow::on_kepHozzaadasPushButtonSzerkeszto_clicked()
     if(path != "")
     {
         //uj utvonal elkeszitese
-        ujKepek.push_back(path.split("/").last().toStdString());
+        string ujUtvonal = "./projektek/" + jelenlegiProjekt->getNev() + "/" + path.split("/").last().toStdString();
+        ujKepek[path.toStdString()] = ujUtvonal;
 
         //gomb letrehozasa
         QPushButton *tempbutton = new QPushButton;
@@ -616,6 +617,7 @@ void MainWindow::on_kepHozzaadasPushButtonSzerkeszto_clicked()
         //funkcio hozzaadas a kep gombnak
         connect(tempbutton, &QPushButton::clicked, [=]{
             Keret *ujKeret = new Keret(pixmap.size(), path.toStdString(), 0, 0, 0, 100, 100, 100, 0, 0, 0, 0);
+            ujKeret->setEleres(ujUtvonal);
             ujKeret->getKimenet()->setStyleSheet("background-color: transparent");
             ujKeret->getKimenet()->setParent(szerkesztoWidget);
             ujKeret->getKimenet()->setPixmap(pixmap);
@@ -1441,9 +1443,7 @@ void MainWindow::on_bezarasPushButtonSzerkeszto_clicked()
     gombok.clear();
 
     //uj kepek torlese
-    cout << ujKepek.size() << endl;
     ujKepek.clear();
-    cout << ujKepek.size() << "\n" << endl;
 
     //oldal visszaalitasa
     szerkesztoWidget->setStyleSheet("background-color: #ffffff");
@@ -1543,6 +1543,146 @@ void MainWindow::on_exportalasPushButtonSzerkeszto_clicked()
 
 void MainWindow::on_mentesPushButtonSzerkeszto_clicked()
 {
+    QFile file(QString::fromStdString(jelenlegiProjekt->getEleresiUt()));
+    if(file.open(QIODevice::ReadWrite))
+    {
+        QJsonObject projektObject;
+        projektObject["nev"] = QString::fromStdString(jelenlegiProjekt->getNev());
+
+        //oldalak
+        QJsonArray oldalArray;
+        vector<Oldal*> jelenlegiOldalak = jelenlegiProjekt->getOldalak();
+        for(Oldal* o: jelenlegiOldalak)
+        {
+            QJsonObject oldalObject;
+            oldalObject["oldalszam"] = (int)o->getOldalszam();
+
+            //stilus
+            Stilus* jelenlegiStilus = o->getStilus();
+            QJsonObject stilusObject;
+            stilusObject["hatterTipus"] = jelenlegiStilus->getHatterTipus();
+
+            QJsonObject mintaObject;
+            mintaObject["nev"] = QString::fromStdString(jelenlegiStilus->getMinta().getNev());
+            mintaObject["eleres"] = QString::fromStdString(jelenlegiStilus->getMinta().getEleresiUt());
+            stilusObject["minta"] = mintaObject;
+
+            QJsonObject szinObject;
+            szinObject["piros"] = jelenlegiStilus->getSzin().red();
+            szinObject["zold"] = jelenlegiStilus->getSzin().green();
+            szinObject["kek"] = jelenlegiStilus->getSzin().blue();
+            stilusObject["szin"] = szinObject;
+
+            oldalObject["stilus"] = stilusObject;
+
+            //keretek
+            QJsonArray keretArray;
+            list<Keret*> jelenlegiKeretek = o->getKeretek();
+            for(Keret* k: jelenlegiKeretek)
+            {
+                QJsonObject keretObject;
+                keretObject["dolesszog"] = k->getDolesszog();
+                keretObject["x"] = k->getKimenet()->x();
+                keretObject["y"] = k->getKimenet()->y();
+                keretObject["eleres"] = QString::fromStdString(k->getEleres());
+                keretObject["meretArany"] = k->getMeretArany();
+                keretObject["szelesseg"] = k->getSzelesseg();
+                keretObject["magassag"] = k->getMagassag();
+                keretObject["kepXKoordinata"] = (int)k->getKepXKoordinata();
+                keretObject["kepYKoordinata"] = (int)k->getKepYKoordinata();
+                keretObject["szuro"] = k->getSzuro();
+                keretObject["kepKeret"] = k->getKeret();
+
+                QJsonObject meretObject;
+                meretObject["szelesseg"] = k->getMeret().width();
+                meretObject["magassag"] = k->getMeret().height();
+                keretObject["meret"] = meretObject;
+
+                keretArray.push_back(keretObject);
+            }
+            oldalObject["keretek"] = keretArray;
+
+            //belyegek
+            QJsonArray belyegArray;
+            list<Belyeg*> jelenlegiBelyegek = o->getBelyegek();
+            for(Belyeg* b: jelenlegiBelyegek)
+            {
+                QJsonObject belyegObject;
+                belyegObject["dolesszog"] = b->getDolesszog();
+                belyegObject["x"] = b->getKimenet()->x();
+                belyegObject["y"] = b->getKimenet()->y();
+                belyegObject["eleres"] = QString::fromStdString(b->getEleres());
+                belyegObject["meretArany"] = b->getMeretArany();
+                belyegObject["nev"] = QString::fromStdString(b->getNev());
+
+                QJsonObject meretObject;
+                meretObject["szelesseg"] = b->getMeret().width();
+                meretObject["magassag"] = b->getMeret().height();
+                belyegObject["meret"] = meretObject;
+
+                belyegArray.push_back(belyegObject);
+            }
+            oldalObject["belyegek"] = belyegArray;
+
+            //szovegek
+            QJsonArray szovegArray;
+            list<Szoveg*> jelenlegiSzovegek = o->getSzovegek();
+            for(Szoveg* s: jelenlegiSzovegek)
+            {
+                QJsonObject szovegObject;
+                szovegObject["dolesszog"] = 0;
+                szovegObject["x"] = s->getKimenet()->x();
+                szovegObject["y"] = s->getKimenet()->y();
+                szovegObject["tartalom"] = QString::fromStdString(s->getTartalom());
+
+                QJsonObject szinObject;
+                szinObject["piros"] = s->getSzin().red();
+                szinObject["zold"] = s->getSzin().green();
+                szinObject["kek"] = s->getSzin().blue();
+                szovegObject["szin"] = szinObject;
+
+                QFont font = s->getBetutipus();
+                szovegObject["betumeret"] = font.pointSize();
+                szovegObject["betutipus"] = font.family();
+                szovegObject["felkover"] = font.bold();
+                szovegObject["dolt"] = font.italic();
+                szovegObject["alahuzott"] = font.underline();
+
+                szovegArray.push_back(szovegObject);
+            }
+            oldalObject["szovegek"] = szovegArray;
+
+            oldalArray.push_back(oldalObject);
+        }
+
+        projektObject["oldalak"] = oldalArray;
+
+        //kepek
+        QJsonArray kepekArray;
+        list<string> kepekList = jelenlegiProjekt->getKepek();
+        for(string k: kepekList)
+        {
+            kepekArray.push_back(QString::fromStdString(k));
+        }
+        projektObject["kepek"] = kepekArray;
+
+        //uj kepek mentese
+        for(auto pair: ujKepek)
+        {
+            if(QFile::exists(QString::fromStdString(pair.first)))
+                QFile::copy(QString::fromStdString(pair.first), QString::fromStdString(pair.second));
+        }
+        ujKepek.clear();
+
+        //mentes
+        QJsonDocument document;
+        document.setObject(projektObject);
+        file.resize(0);
+        file.write(document.toJson());
+
+
+        file.close();
+    }
 }
 
 //------------------------------------------------------------------------------------------
@@ -1718,6 +1858,7 @@ void MainWindow::on_projektBetoltesePushButtonFomenu_clicked()
                     oldal->keretHozzaadas(keret);
                     keret->kepKeszites();
                     keret->getKimenet()->setParent(szerkesztoWidget);
+                    keret->getKimenet()->setStyleSheet("background-color: transparent");
 
                     //kimenet funkcio
                     connect(keret->getKimenet(), &Kimenet::clicked, [=]{
@@ -1784,6 +1925,7 @@ void MainWindow::on_projektBetoltesePushButtonFomenu_clicked()
                     oldal->belyegHozzaadas(belyeg);
                     belyeg->kepKeszites();
                     belyeg->getKimenet()->setParent(szerkesztoWidget);
+                    belyeg->getKimenet()->setStyleSheet("background-color: transparent");
 
                     //kimenet funkcio
                     connect(belyeg->getKimenet(), &Kimenet::clicked, [=]{
@@ -1820,7 +1962,6 @@ void MainWindow::on_projektBetoltesePushButtonFomenu_clicked()
                         ui->belyegDolesszogSpinBoxSzerkeszto->setValue(belyeg->getDolesszog());
                     });
                 }
-                // list<Belyeg*> lista = projekt.getJelenlegiOldal()->getBelyegek();
 
                 //szovegek beallitasa
                 QJsonArray szovegArray = oldalObject["szovegek"].toArray();
@@ -1831,7 +1972,7 @@ void MainWindow::on_projektBetoltesePushButtonFomenu_clicked()
                     Szoveg* szoveg = new Szoveg(szovegObject["x"].toInt(), szovegObject["y"].toInt(), szovegObject["dolesszog"].toInt(), szovegObject["tartalom"].toString().toStdString());
                     QColor szin(szinObject["piros"].toInt(), szinObject["zold"].toInt(), szinObject["kek"].toInt());
                     szoveg->setSzin(szin);
-                    szoveg->getKimenet()->setStyleSheet(QString::fromStdString("color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
+                    szoveg->getKimenet()->setStyleSheet(QString::fromStdString("color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + "); background-color: transparent"));
 
                     QFont font = szoveg->getBetutipus();
                     font.setPointSize(szovegObject["betumeret"].toInt());

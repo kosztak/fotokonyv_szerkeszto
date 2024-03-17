@@ -26,19 +26,9 @@ const QFont &Szoveg::getBetutipus() const
     return betutipus;
 }
 
-unsigned Szoveg::getMeret() const
-{
-
-}
-
-void Szoveg::setMeret(unsigned ujMeret)
-{
-
-}
-
 bool Szoveg::isFelkover() const
 {
-
+    return betutipus.bold();
 }
 
 void Szoveg::setFelkover(bool ertek)

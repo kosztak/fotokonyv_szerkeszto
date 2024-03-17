@@ -39,6 +39,7 @@ public:
     void setJelenlegiElem(Elem *newJelenlegiElem);
     bool lapozas(const bool &fel);
     string getEleresiUt() const;
+    vector<Oldal *> getOldalak() const;
 };
 
 #endif // PROJEKT_H

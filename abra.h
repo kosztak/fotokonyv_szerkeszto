@@ -23,6 +23,7 @@ public:
     unsigned short getMeretArany() const;
     void setMeretArany(unsigned short newMeretArany);
     string getEleres() const;
+    void setEleres(const string &newEleres);
 };
 
 #endif // ABRA_H
