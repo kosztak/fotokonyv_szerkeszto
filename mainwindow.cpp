@@ -1803,13 +1803,14 @@ void MainWindow::on_ujProjektPushButtonFomenu_clicked()
         projektekLista[nev] = button;
         ui->projektekVerticalLayoutFomenu->addWidget(button);
 
+        string* eleresiUt = new string(ujProjekt->getEleresiUt());
         connect(button, &QPushButton::clicked, [=](){
             if(kivalasztottProjekt.second != nullptr)
             {
                 kivalasztottProjekt.second->setStyleSheet("text-align: left; font-size: 24pt; font-weight: bold; color: #000000; background-color: rgb(249, 219, 189); border: 4px outset #f5c28f;");
             }
 
-            kivalasztottProjekt = pair<string, QPushButton*>(ujProjekt->getEleresiUt(), button);
+            kivalasztottProjekt = pair<string, QPushButton*>(*eleresiUt, button);
 
             button->setStyleSheet("text-align: left; font-size: 24pt; font-weight: bold; color: #000000; background-color: rgb(249, 219, 189); border: 4px inset #f5c28f;");
         });
