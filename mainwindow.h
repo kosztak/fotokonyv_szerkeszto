@@ -210,7 +210,7 @@ private:
 
     //rendszer
     Projekt* jelenlegiProjekt = nullptr;
-    pair<string, QPushButton*> kivalasztottProjekt = pair<string, QPushButton*>("", nullptr);
+    pair<string, QPushButton*> kivalasztottProjekt = pair<string, QPushButton*>("", nullptr); //eleres, gomb
     map<string, string> projektek; //nev, eleres
     map<string, string> belyegek; //nev, eleres
     map<string, string> mintak; //nev, eleres

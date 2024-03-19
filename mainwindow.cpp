@@ -1448,6 +1448,7 @@ void MainWindow::on_bezarasPushButtonSzerkeszto_clicked()
 
     //oldal visszaalitasa
     szerkesztoWidget->setStyleSheet("background-color: #ffffff");
+    ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->uresPageSzerkeszto);
 
     //fomenu betoltese
     ui->kepernyoStackedWidget->setCurrentWidget(ui->fomenuKepernyoPage);
@@ -2368,7 +2369,59 @@ void MainWindow::on_mintakPushButtonFomenu_clicked()
 
 void MainWindow::on_projektTorlesePushButtonFomenu_clicked()
 {
+    QFile projektFile(QString::fromStdString(kivalasztottProjekt.first));
+    QFile rendszerFile("./adatok/rendszer.json");
+    if(projektFile.open(QIODevice::ReadOnly))
+    {
+        if(rendszerFile.open(QIODevice::ReadWrite))
+        {
+            QJsonDocument document = QJsonDocument::fromJson(projektFile.readAll());
 
+            //kepek torlese
+            QJsonArray kepArray = (document.object())["kepek"].toArray();
+            for(auto it = kepArray.begin(); it != kepArray.end(); ++it)
+            {
+                QFile::remove(it->toString());
+            }
+
+            //json torlese
+            projektFile.close();
+            QFile::remove(QString::fromStdString(kivalasztottProjekt.first));
+
+            //mappa torlese
+            QDir dir;
+            QString mappaEleres = QString::fromStdString(kivalasztottProjekt.first);
+            dir.rmdir(mappaEleres.left(mappaEleres.lastIndexOf(QChar('/'))));
+
+            //rendszerbol torles
+            document = QJsonDocument::fromJson(rendszerFile.readAll());
+            QJsonObject rendszerObject = document.object();
+            QJsonArray projektArray = rendszerObject["projektek"].toArray();
+            auto arrayIt = projektArray.begin();
+            while((arrayIt->toObject())["eleres"].toString().toStdString() != kivalasztottProjekt.first)
+            {
+                ++arrayIt;
+            }
+            projektArray.erase(arrayIt);
+            rendszerObject["projektek"] = projektArray;
+            document.setObject(rendszerObject);
+            rendszerFile.resize(0);
+            rendszerFile.write(document.toJson());
+
+            //gomb torlese
+            delete kivalasztottProjekt.second;
+            kivalasztottProjekt = pair<string, QPushButton*>("", nullptr);
+
+            rendszerFile.close();
+        }else{
+            cout << "belul" << endl;
+        }
+
+        if(projektFile.isOpen())
+            projektFile.close();
+    }else{
+        cout << kivalasztottProjekt.first << endl;
+    }
 }
 
 void MainWindow::on_kilepesPushButtonFomenu_clicked()
