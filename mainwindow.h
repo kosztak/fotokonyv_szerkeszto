@@ -176,13 +176,9 @@ private slots:
 
     void on_ujBelyegPushButtonBelyeg_clicked();
 
-    void on_belyegTorlesePushButtonBelyeg_clicked();
-
     void on_visszalepesPushButtonBelyeg_clicked();
 
     void on_ujMintaPushButtonMinta_clicked();
-
-    void on_mintaTorlesePushButtonMinta_clicked();
 
     void on_visszalepesPushButtonMinta_clicked();
 
@@ -207,6 +203,9 @@ private:
                              "border-style: dotted;"
                              "border-width: 5px;"
                              "border-color: blue;";
+
+    unsigned belyegCounter = 0;
+    unsigned mintaCounter = 0;
 
     //rendszer
     Projekt* jelenlegiProjekt = nullptr;

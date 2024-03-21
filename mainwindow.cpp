@@ -104,6 +104,44 @@ void MainWindow::inicializalas()
         });
     }
 
+    //belyeg gombok elkeszitese
+    for(auto i : belyegek)
+    {
+        QPushButton *tempbutton = new QPushButton;
+        tempbutton->setStyleSheet("background-color: rgb(249, 219, 189); border: 3px inset #f5c28f;");
+        QPixmap pixmap(QString::fromStdString(i.second));
+
+        tempbutton->setIconSize(QSize(128, 128));
+        tempbutton->setIcon(pixmap);
+
+        ui->belyegekGridLayoutBelyeg->addWidget(tempbutton, belyegCounter/4, belyegCounter%4);
+
+        ++belyegCounter;
+
+        // //funkcio hozzaadas a gombnak
+        // connect(tempbutton, &QPushButton::clicked, [=]{
+        // });
+    }
+
+    //minta gombok elkeszitese
+    for(auto i : mintak)
+    {
+        QPushButton *tempbutton = new QPushButton;
+        tempbutton->setStyleSheet("background-color: rgb(249, 219, 189); border: 3px inset #f5c28f;");
+        QPixmap pixmap(QString::fromStdString(i.second));
+
+        tempbutton->setIconSize(QSize(256, 256));
+        tempbutton->setIcon(pixmap);
+
+        ui->mintakGridLayoutMinta->addWidget(tempbutton, mintaCounter/3, mintaCounter%3);
+
+        ++mintaCounter;
+
+        // //funkcio hozzaadas a gombnak
+        // connect(tempbutton, &QPushButton::clicked, [=]{
+        // });
+    }
+
     //elrendezesek
     unsigned short szegely = 50;
     {
@@ -2434,11 +2472,67 @@ void MainWindow::on_kilepesPushButtonFomenu_clicked()
 //BELYEGEK
 void MainWindow::on_ujBelyegPushButtonBelyeg_clicked()
 {
+    QString eleres = QFileDialog::getOpenFileName(this, "", "", "JPEG (*.jpg *.jpeg);;PNG (*.png)");
 
-}
+    if(eleres != "")
+    {
+        QString nev = (eleres.split("/").last()).split(".").first();
 
-void MainWindow::on_belyegTorlesePushButtonBelyeg_clicked()
-{
+        if(!any_of(belyegek.begin(), belyegek.end(), [&](auto temp){
+                return temp.first == nev.toStdString();
+            }))
+        {
+            //belyeg masolasa
+            QString ujEleres = QString::fromStdString("./belyegek/" + eleres.split("/").last().toStdString());
+            QFile::copy(eleres, ujEleres);
+
+            //belyeg hozzadasa rendszerhez
+            belyegek[nev.toStdString()] = ujEleres.toStdString();
+
+            //rendszer fajl frissitese
+            QFile file("./adatok/rendszer.json");
+            if(file.open(QIODevice::ReadWrite))
+            {
+                QJsonDocument document = QJsonDocument::fromJson(file.readAll());
+                QJsonObject rendszerObject = document.object();
+                QJsonArray belyegArray;
+                for(auto b: belyegek)
+                {
+                    QJsonObject belyegObject;
+                    belyegObject["nev"] = QString::fromStdString(b.first);
+                    belyegObject["eleres"] = QString::fromStdString(b.second);
+
+                    belyegArray.push_back(belyegObject);
+                }
+
+                rendszerObject["belyegek"] = belyegArray;
+                document.setObject(rendszerObject);
+
+                file.resize(0);
+                file.write(document.toJson());
+
+                file.close();
+            }
+
+            //uj belyeg gomb letrehozasa
+            QPushButton *tempbutton = new QPushButton;
+            tempbutton->setStyleSheet("background-color: rgb(249, 219, 189); border: 3px inset #f5c28f;");
+            QPixmap pixmap(QString::fromStdString(ujEleres.toStdString()));
+
+            tempbutton->setIconSize(QSize(128, 128));
+            tempbutton->setIcon(pixmap);
+
+            ui->belyegekGridLayoutBelyeg->addWidget(tempbutton, belyegCounter/4, belyegCounter%4);
+
+            ++belyegCounter;
+
+            // //funkcio hozzaadas a gombnak
+            // connect(tempbutton, &QPushButton::clicked, [=]{
+            // });
+        }else{
+            QMessageBox::warning(this, "Figyelem!", "Ilyen néven már létezik bélyeg a rendszerben!");
+        }
+    }
 
 }
 
@@ -2451,12 +2545,67 @@ void MainWindow::on_visszalepesPushButtonBelyeg_clicked()
 //MINTAK
 void MainWindow::on_ujMintaPushButtonMinta_clicked()
 {
+    QString eleres = QFileDialog::getOpenFileName(this, "", "", "JPEG (*.jpg *.jpeg);;PNG (*.png)");
 
-}
+    if(eleres != "")
+    {
+        QString nev = (eleres.split("/").last()).split(".").first();
 
-void MainWindow::on_mintaTorlesePushButtonMinta_clicked()
-{
+        if(!any_of(mintak.begin(), mintak.end(), [&](auto temp){
+                return temp.first == nev.toStdString();
+            }))
+        {
+            //minta masolasa
+            QString ujEleres = QString::fromStdString("./mintak/" + eleres.split("/").last().toStdString());
+            QFile::copy(eleres, ujEleres);
 
+            //minta hozzadasa rendszerhez
+            mintak[nev.toStdString()] = ujEleres.toStdString();
+
+            //rendszer fajl frissitese
+            QFile file("./adatok/rendszer.json");
+            if(file.open(QIODevice::ReadWrite))
+            {
+                QJsonDocument document = QJsonDocument::fromJson(file.readAll());
+                QJsonObject rendszerObject = document.object();
+                QJsonArray mintaArray;
+                for(auto m: mintak)
+                {
+                    QJsonObject mintaObject;
+                    mintaObject["nev"] = QString::fromStdString(m.first);
+                    mintaObject["eleres"] = QString::fromStdString(m.second);
+
+                    mintaArray.push_back(mintaObject);
+                }
+
+                rendszerObject["mintak"] = mintaArray;
+                document.setObject(rendszerObject);
+
+                file.resize(0);
+                file.write(document.toJson());
+
+                file.close();
+            }
+
+            //uj minta gomb letrehozasa
+            QPushButton *tempbutton = new QPushButton;
+            tempbutton->setStyleSheet("background-color: rgb(249, 219, 189); border: 3px inset #f5c28f;");
+            QPixmap pixmap(QString::fromStdString(ujEleres.toStdString()));
+
+            tempbutton->setIconSize(QSize(256, 256));
+            tempbutton->setIcon(pixmap);
+
+            ui->mintakGridLayoutMinta->addWidget(tempbutton, mintaCounter/3, mintaCounter%3);
+
+            ++mintaCounter;
+
+            // //funkcio hozzaadas a gombnak
+            // connect(tempbutton, &QPushButton::clicked, [=]{
+            // });
+        }else{
+            QMessageBox::warning(this, "Figyelem!", "Ilyen néven már létezik minta a rendszerben!");
+        }
+    }
 }
 
 void MainWindow::on_visszalepesPushButtonMinta_clicked()
