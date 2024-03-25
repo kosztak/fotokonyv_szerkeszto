@@ -40,7 +40,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="szerkesztoKepernyoPage">
        <layout class="QVBoxLayout" name="verticalLayout">
@@ -740,8 +740,8 @@ border: 3px inset #bb1133;
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>60</width>
-                        <height>16</height>
+                        <width>94</width>
+                        <height>24</height>
                        </rect>
                       </property>
                       <property name="styleSheet">
@@ -1048,8 +1048,8 @@ border: 3px inset #bb1133;
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>58</width>
-                          <height>16</height>
+                          <width>94</width>
+                          <height>24</height>
                          </rect>
                         </property>
                         <layout class="QVBoxLayout" name="verticalLayout_31">
@@ -1128,8 +1128,8 @@ border: 3px inset #bb1133;
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>58</width>
-                          <height>16</height>
+                          <width>94</width>
+                          <height>24</height>
                          </rect>
                         </property>
                         <layout class="QVBoxLayout" name="verticalLayout_34">
@@ -1208,8 +1208,8 @@ border: 3px inset #bb1133;
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>58</width>
-                          <height>16</height>
+                          <width>94</width>
+                          <height>24</height>
                          </rect>
                         </property>
                         <layout class="QVBoxLayout" name="verticalLayout_33">
@@ -1593,7 +1593,7 @@ border: 3px outset #bb1133;
                 </size>
                </property>
                <property name="currentIndex">
-                <number>2</number>
+                <number>4</number>
                </property>
                <widget class="QWidget" name="uresPageSzerkeszto">
                 <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -3649,7 +3649,7 @@ border-radius: 5px;</string>
                         <string notr="true">color: rgb(255, 255, 255);</string>
                        </property>
                        <property name="text">
-                        <string>Minta:</string>
+                        <string>Háttérkép:</string>
                        </property>
                       </widget>
                      </item>
@@ -3679,8 +3679,8 @@ border: 3px inset #bb1133;
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>58</width>
-                          <height>16</height>
+                          <width>266</width>
+                          <height>648</height>
                          </rect>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_18">
@@ -3825,7 +3825,7 @@ border: 3px outset #bb1133;
               <widget class="QPushButton" name="ujProjektPushButtonFomenu">
                <property name="minimumSize">
                 <size>
-                 <width>200</width>
+                 <width>220</width>
                  <height>30</height>
                 </size>
                </property>
@@ -3953,7 +3953,7 @@ border: 2px outset #c2c2c2;
 border-radius: 5px;</string>
                </property>
                <property name="text">
-                <string>Minták szerkesztése</string>
+                <string>Háttérképek szerkesztése</string>
                </property>
               </widget>
              </item>
@@ -4060,8 +4060,8 @@ border: 4px inset #f5c28f;
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>478</width>
-                  <height>16</height>
+                  <width>540</width>
+                  <height>674</height>
                  </rect>
                 </property>
                 <property name="styleSheet">
@@ -4478,7 +4478,7 @@ border: 2px outset #c2c2c2;
 border-radius: 5px;</string>
                </property>
                <property name="text">
-                <string>Új minta</string>
+                <string>Új háttérkép</string>
                </property>
               </widget>
              </item>

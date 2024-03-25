@@ -2603,7 +2603,7 @@ void MainWindow::on_ujMintaPushButtonMinta_clicked()
             // connect(tempbutton, &QPushButton::clicked, [=]{
             // });
         }else{
-            QMessageBox::warning(this, "Figyelem!", "Ilyen néven már létezik minta a rendszerben!");
+            QMessageBox::warning(this, "Figyelem!", "Ilyen néven már létezik háttérkép a rendszerben!");
         }
     }
 }
