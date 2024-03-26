@@ -1854,6 +1854,134 @@ void MainWindow::on_ujProjektPushButtonFomenu_clicked()
         });
 
         //oldal beállítása
+        for(auto i : belyegek)
+        {
+            QPushButton *tempbutton = new QPushButton;
+            tempbutton->setAutoFillBackground(true);
+            tempbutton->setStyleSheet("border: 3px outset #c2c2c2;");
+            QPixmap pixmap(QString::fromStdString(i.second));
+
+            tempbutton->setIcon(pixmap);
+            tempbutton->setIconSize(QSize(100, 100));
+
+            ui->belyegekVerticalLayoutSzerkeszto->addWidget(tempbutton);
+            gombok.push_back(tempbutton);
+
+            //funkcio hozzaadas a belyeg gombnak
+            connect(tempbutton, &QPushButton::clicked, [=]{
+                Belyeg *ujBelyeg = new Belyeg(i.first, pixmap.size(), i.second, 0, 0, 0, 100);
+                ujBelyeg->getKimenet()->setStyleSheet("background-color: transparent");
+                ujBelyeg->getKimenet()->setParent(szerkesztoWidget);
+                ujBelyeg->getKimenet()->setPixmap(pixmap);
+                ujBelyeg->getKimenet()->resize(pixmap.size());
+                ujBelyeg->getKimenet()->resize(pixmap.size());
+                ujBelyeg->getKimenet()->show();
+
+                //kimenet funkcio
+                connect(ujBelyeg->getKimenet(), &Kimenet::clicked, [=]{
+                    ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->belyegPageSzerkeszto);
+
+                    if(jelenlegiProjekt->getJelenlegiElem() != nullptr)
+                    {
+                        if(jelenlegiProjekt->getJelenlegiElem()->getTipus() != szoveg)
+                        {
+                            jelenlegiProjekt->getJelenlegiElem()->getKimenet()->setStyleSheet("background-color: transparent");
+                        }else{
+                            QColor szin = dynamic_cast<Szoveg*>(jelenlegiProjekt->getJelenlegiElem())->getSzin();
+                            jelenlegiProjekt->getJelenlegiElem()->getKimenet()->setStyleSheet(QString::fromStdString("background-color: transparent; color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
+                        }
+                    }
+
+                    jelenlegiProjekt->setJelenlegiElem(ujBelyeg);
+                    ujBelyeg->getKimenet()->setStyleSheet(QString::fromStdString(kijeloltElemQSS));
+
+                    //horizontalis mozgatas
+                    unsigned xPont = ujBelyeg->getKimenet()->x();
+                    ui->belyegHorizontalisSpinBoxSzerkeszto->setMaximum(szerkesztoWidget->width() - ujBelyeg->getKimenet()->width());
+                    ui->belyegHorizontalisSpinBoxSzerkeszto->setValue(xPont);
+
+                    //vertikalis mozgatas
+                    unsigned yPont = ujBelyeg->getKimenet()->y();
+                    ui->belyegVertikalisSpinBoxSzerkeszto->setMaximum(szerkesztoWidget->height() - ujBelyeg->getKimenet()->height());
+                    ui->belyegVertikalisSpinBoxSzerkeszto->setValue(yPont);
+
+                    //meretezes
+                    ui->belyegMeretSpinBoxSzerkeszto->setValue(ujBelyeg->getMeretArany());
+
+                    //dolesszog
+                    ui->belyegDolesszogSpinBoxSzerkeszto->setValue(ujBelyeg->getDolesszog());
+                });
+
+                //lista elem
+                QPushButton* listaElem = new QPushButton;
+                listaElem->setAutoFillBackground(true);
+                listaElem->setStyleSheet("border: 3px outset #c2c2c2;");
+
+                connect(listaElem, &QPushButton::clicked, [=]{
+                    ui->tulajdonsagokStackedWidgetSzerkeszto->setCurrentWidget(ui->belyegPageSzerkeszto);
+
+                    if(jelenlegiProjekt->getJelenlegiElem() != nullptr)
+                    {
+                        if(jelenlegiProjekt->getJelenlegiElem()->getTipus() != szoveg)
+                        {
+                            jelenlegiProjekt->getJelenlegiElem()->getKimenet()->setStyleSheet("background-color: transparent");
+                        }else{
+                            QColor szin = dynamic_cast<Szoveg*>(jelenlegiProjekt->getJelenlegiElem())->getSzin();
+                            jelenlegiProjekt->getJelenlegiElem()->getKimenet()->setStyleSheet(QString::fromStdString("background-color: transparent; color: rgba(" + to_string(szin.red()) + "," + to_string(szin.green()) + "," + to_string(szin.blue()) + "," + to_string(szin.alphaF()) + ");"));
+                        }
+                    }
+
+                    jelenlegiProjekt->setJelenlegiElem(ujBelyeg);
+                    ujBelyeg->getKimenet()->setStyleSheet(QString::fromStdString(kijeloltElemQSS));
+
+                    //horizontalis mozgatas
+                    unsigned xPont = ujBelyeg->getKimenet()->x();
+                    ui->belyegHorizontalisSpinBoxSzerkeszto->setMaximum(szerkesztoWidget->width() - ujBelyeg->getKimenet()->width());
+                    ui->belyegHorizontalisSpinBoxSzerkeszto->setValue(xPont);
+
+                    //vertikalis mozgatas
+                    unsigned yPont = ujBelyeg->getKimenet()->y();
+                    ui->belyegVertikalisSpinBoxSzerkeszto->setMaximum(szerkesztoWidget->height() - ujBelyeg->getKimenet()->height());
+                    ui->belyegVertikalisSpinBoxSzerkeszto->setValue(yPont);
+
+                    //meretezes
+                    ui->belyegMeretSpinBoxSzerkeszto->setValue(ujBelyeg->getMeretArany());
+                });
+
+                listaElem->setIcon(pixmap);
+                listaElem->setIconSize(QSize(100, 100));
+
+                belyegekLista[ujBelyeg] = listaElem;
+                ui->belyegListaVerticalLayoutSzerkeszto->addWidget(listaElem);
+
+                //belyeg projekthez adas
+                jelenlegiProjekt->getJelenlegiOldal()->belyegHozzaadas(ujBelyeg);
+            });
+        }
+
+        for(auto i : mintak)
+        {
+            QPushButton *tempbutton = new QPushButton;
+            tempbutton->setAutoFillBackground(true);
+            tempbutton->setStyleSheet("border: 3px outset #c2c2c2;");
+            QPixmap pixmap(QString::fromStdString(i.second));
+
+            tempbutton->setIcon(pixmap);
+            tempbutton->setIconSize(QSize(200, 200));
+
+            ui->mintakVerticalLayoutSzerkeszto->addWidget(tempbutton);
+            gombok.push_back(tempbutton);
+
+            //funkcio hozzaadas a minta gombnak
+            connect(tempbutton, &QPushButton::clicked, [=]{
+                Minta ujMinta = Minta(i.first, i.second);
+
+                jelenlegiProjekt->getJelenlegiOldal()->getStilus()->setMinta(ujMinta);
+                jelenlegiProjekt->getJelenlegiOldal()->getStilus()->setHatterTipus(1);
+
+                szerkesztoWidget->setStyleSheet(QString::fromStdString("QWidget#szerkesztoWidget{border-image: url(" + i.second + ") 0 0 0 0 stretch stretch;}"));
+            });
+        }
         ui->oldalszamLabelSzerkeszto->setText(QString::fromStdString("" + to_string(jelenlegiProjekt->getJelenlegiOldal()->getOldalszam()) + "/" + to_string(jelenlegiProjekt->getOldalszam())));
 
         //oldal valtas
