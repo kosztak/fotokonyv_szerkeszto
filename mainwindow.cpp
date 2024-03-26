@@ -2658,7 +2658,7 @@ void MainWindow::on_ujBelyegPushButtonBelyeg_clicked()
             // connect(tempbutton, &QPushButton::clicked, [=]{
             // });
         }else{
-            QMessageBox::warning(this, "Figyelem!", "Ilyen néven már létezik bélyeg a rendszerben!");
+            QMessageBox::warning(this, "Figyelem!", "Ilyen néven már létezik matrica a rendszerben!");
         }
     }
 

@@ -259,7 +259,7 @@ border-radius: 5px;</string>
            <widget class="QFrame" name="frame_2">
             <property name="minimumSize">
              <size>
-              <width>110</width>
+              <width>120</width>
               <height>80</height>
              </size>
             </property>
@@ -328,8 +328,8 @@ border: 3px outset #691213;
                  </property>
                  <property name="minimumSize">
                   <size>
-                   <width>75</width>
-                   <height>80</height>
+                   <width>80</width>
+                   <height>90</height>
                   </size>
                  </property>
                  <property name="baseSize">
@@ -376,8 +376,8 @@ border-radius: 5px;
                  </property>
                  <property name="minimumSize">
                   <size>
-                   <width>75</width>
-                   <height>80</height>
+                   <width>80</width>
+                   <height>90</height>
                   </size>
                  </property>
                  <property name="font">
@@ -417,8 +417,8 @@ border-radius: 5px;</string>
                  </property>
                  <property name="minimumSize">
                   <size>
-                   <width>75</width>
-                   <height>80</height>
+                   <width>80</width>
+                   <height>90</height>
                   </size>
                  </property>
                  <property name="font">
@@ -434,7 +434,7 @@ border: 2px outset #c2c2c2;
 border-radius: 5px;</string>
                  </property>
                  <property name="text">
-                  <string>BÉLYEGEK</string>
+                  <string>MATRICÁK</string>
                  </property>
                  <property name="icon">
                   <iconset>
@@ -458,8 +458,8 @@ border-radius: 5px;</string>
                  </property>
                  <property name="minimumSize">
                   <size>
-                   <width>75</width>
-                   <height>80</height>
+                   <width>80</width>
+                   <height>90</height>
                   </size>
                  </property>
                  <property name="font">
@@ -556,7 +556,7 @@ border: 3px outset #bb1133;
                 <string notr="true"/>
                </property>
                <property name="currentIndex">
-                <number>0</number>
+                <number>3</number>
                </property>
                <widget class="QWidget" name="kepekPageSzerkeszto">
                 <layout class="QGridLayout" name="gridLayout_6">
@@ -740,8 +740,8 @@ border: 3px inset #bb1133;
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>94</width>
-                        <height>24</height>
+                        <width>128</width>
+                        <height>801</height>
                        </rect>
                       </property>
                       <property name="styleSheet">
@@ -1048,8 +1048,8 @@ border: 3px inset #bb1133;
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>94</width>
-                          <height>24</height>
+                          <width>126</width>
+                          <height>221</height>
                          </rect>
                         </property>
                         <layout class="QVBoxLayout" name="verticalLayout_31">
@@ -1107,7 +1107,7 @@ border: 3px inset #bb1133;
                         <string notr="true">color: rgb(255, 255, 255);</string>
                        </property>
                        <property name="text">
-                        <string>Bélyegek:</string>
+                        <string>Matricák:</string>
                        </property>
                       </widget>
                      </item>
@@ -1128,8 +1128,8 @@ border: 3px inset #bb1133;
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>94</width>
-                          <height>24</height>
+                          <width>126</width>
+                          <height>219</height>
                          </rect>
                         </property>
                         <layout class="QVBoxLayout" name="verticalLayout_34">
@@ -1208,8 +1208,8 @@ border: 3px inset #bb1133;
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>94</width>
-                          <height>24</height>
+                          <width>126</width>
+                          <height>221</height>
                          </rect>
                         </property>
                         <layout class="QVBoxLayout" name="verticalLayout_33">
@@ -3929,7 +3929,7 @@ border: 2px outset #c2c2c2;
 border-radius: 5px;</string>
                </property>
                <property name="text">
-                <string>Bélyegek szerkesztése</string>
+                <string>Matricák szerkesztése</string>
                </property>
               </widget>
              </item>
@@ -4214,7 +4214,7 @@ border: 2px outset #c2c2c2;
 border-radius: 5px;</string>
                </property>
                <property name="text">
-                <string>Új bélyeg</string>
+                <string>Új matrica</string>
                </property>
               </widget>
              </item>
