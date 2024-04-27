@@ -14,8 +14,8 @@
    <string>Fotókönyv Szerkesztő</string>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normaloff>../build-fotokonyv_szerkeszto-Desktop_Qt_6_6_0_MinGW_64_bit-Debug/ikonok/icon.png</normaloff>../build-fotokonyv_szerkeszto-Desktop_Qt_6_6_0_MinGW_64_bit-Debug/ikonok/icon.png</iconset>
+   <iconset resource="Icons.qrc">
+    <normaloff>:/icons/ikonok/icon.png</normaloff>:/icons/ikonok/icon.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -355,8 +355,8 @@ border-radius: 5px;
                   <string>STÍLUS</string>
                  </property>
                  <property name="icon">
-                  <iconset>
-                   <normaloff>../build-fotokonyv_szerkeszto-Desktop_Qt_6_6_0_MinGW_64_bit-Debug/ikonok/brush.png</normaloff>../build-fotokonyv_szerkeszto-Desktop_Qt_6_6_0_MinGW_64_bit-Debug/ikonok/brush.png</iconset>
+                  <iconset resource="Icons.qrc">
+                   <normaloff>:/icons/ikonok/brush.png</normaloff>:/icons/ikonok/brush.png</iconset>
                  </property>
                  <property name="iconSize">
                   <size>
@@ -396,8 +396,8 @@ border-radius: 5px;</string>
                   <string>KÉPEK</string>
                  </property>
                  <property name="icon">
-                  <iconset>
-                   <normaloff>../build-fotokonyv_szerkeszto-Desktop_Qt_6_6_0_MinGW_64_bit-Debug/ikonok/image.png</normaloff>../build-fotokonyv_szerkeszto-Desktop_Qt_6_6_0_MinGW_64_bit-Debug/ikonok/image.png</iconset>
+                  <iconset resource="Icons.qrc">
+                   <normaloff>:/icons/ikonok/image.png</normaloff>:/icons/ikonok/image.png</iconset>
                  </property>
                  <property name="iconSize">
                   <size>
@@ -437,8 +437,8 @@ border-radius: 5px;</string>
                   <string>MATRICÁK</string>
                  </property>
                  <property name="icon">
-                  <iconset>
-                   <normaloff>../build-fotokonyv_szerkeszto-Desktop_Qt_6_6_0_MinGW_64_bit-Debug/ikonok/post-stamp.png</normaloff>../build-fotokonyv_szerkeszto-Desktop_Qt_6_6_0_MinGW_64_bit-Debug/ikonok/post-stamp.png</iconset>
+                  <iconset resource="Icons.qrc">
+                   <normaloff>:/icons/ikonok/post-stamp.png</normaloff>:/icons/ikonok/post-stamp.png</iconset>
                  </property>
                  <property name="iconSize">
                   <size>
@@ -478,8 +478,8 @@ border-radius: 5px;</string>
                   <string>ELEMEK</string>
                  </property>
                  <property name="icon">
-                  <iconset>
-                   <normaloff>../build-fotokonyv_szerkeszto-Desktop_Qt_6_6_0_MinGW_64_bit-Debug/ikonok/collage.png</normaloff>../build-fotokonyv_szerkeszto-Desktop_Qt_6_6_0_MinGW_64_bit-Debug/ikonok/collage.png</iconset>
+                  <iconset resource="Icons.qrc">
+                   <normaloff>:/icons/ikonok/collage.png</normaloff>:/icons/ikonok/collage.png</iconset>
                  </property>
                  <property name="iconSize">
                   <size>
@@ -556,7 +556,7 @@ border: 3px outset #bb1133;
                 <string notr="true"/>
                </property>
                <property name="currentIndex">
-                <number>3</number>
+                <number>2</number>
                </property>
                <widget class="QWidget" name="kepekPageSzerkeszto">
                 <layout class="QGridLayout" name="gridLayout_6">
@@ -645,6 +645,9 @@ border: 3px inset #bb1133;
                         <width>128</width>
                         <height>758</height>
                        </rect>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">background-color: rgb(255, 255, 255);</string>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_21">
                        <property name="leftMargin">
@@ -745,7 +748,7 @@ border: 3px inset #bb1133;
                        </rect>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true"/>
+                       <string notr="true">background-color: rgb(255, 255, 255);</string>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_22">
                        <property name="leftMargin">
@@ -1052,6 +1055,9 @@ border: 3px inset #bb1133;
                           <height>221</height>
                          </rect>
                         </property>
+                        <property name="styleSheet">
+                         <string notr="true">background-color: rgb(255, 255, 255);</string>
+                        </property>
                         <layout class="QVBoxLayout" name="verticalLayout_31">
                          <property name="spacing">
                           <number>0</number>
@@ -1132,6 +1138,9 @@ border: 3px inset #bb1133;
                           <height>219</height>
                          </rect>
                         </property>
+                        <property name="styleSheet">
+                         <string notr="true">background-color: rgb(255, 255, 255);</string>
+                        </property>
                         <layout class="QVBoxLayout" name="verticalLayout_34">
                          <property name="spacing">
                           <number>0</number>
@@ -1211,6 +1220,9 @@ border: 3px inset #bb1133;
                           <width>126</width>
                           <height>221</height>
                          </rect>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true">background-color: rgb(255, 255, 255);</string>
                         </property>
                         <layout class="QVBoxLayout" name="verticalLayout_33">
                          <property name="spacing">
@@ -1394,8 +1406,8 @@ border-radius: 5px;</string>
                     <string/>
                    </property>
                    <property name="icon">
-                    <iconset>
-                     <normaloff>../build-fotokonyv_szerkeszto-Desktop_Qt_6_6_0_MinGW_64_bit-Debug/ikonok/left.png</normaloff>../build-fotokonyv_szerkeszto-Desktop_Qt_6_6_0_MinGW_64_bit-Debug/ikonok/left.png</iconset>
+                    <iconset resource="Icons.qrc">
+                     <normaloff>:/icons/ikonok/left.png</normaloff>:/icons/ikonok/left.png</iconset>
                    </property>
                    <property name="iconSize">
                     <size>
@@ -1498,8 +1510,8 @@ border-radius: 5px;</string>
                     <string/>
                    </property>
                    <property name="icon">
-                    <iconset>
-                     <normaloff>../build-fotokonyv_szerkeszto-Desktop_Qt_6_6_0_MinGW_64_bit-Debug/ikonok/right.png</normaloff>../build-fotokonyv_szerkeszto-Desktop_Qt_6_6_0_MinGW_64_bit-Debug/ikonok/right.png</iconset>
+                    <iconset resource="Icons.qrc">
+                     <normaloff>:/icons/ikonok/right.png</normaloff>:/icons/ikonok/right.png</iconset>
                    </property>
                    <property name="iconSize">
                     <size>
@@ -1593,7 +1605,7 @@ border: 3px outset #bb1133;
                 </size>
                </property>
                <property name="currentIndex">
-                <number>4</number>
+                <number>3</number>
                </property>
                <widget class="QWidget" name="uresPageSzerkeszto">
                 <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -3063,7 +3075,7 @@ border-radius: 5px;</string>
                                </property>
                                <property name="minimumSize">
                                 <size>
-                                 <width>30</width>
+                                 <width>0</width>
                                  <height>27</height>
                                 </size>
                                </property>
@@ -3664,7 +3676,6 @@ border-radius: 5px;</string>
                        <property name="styleSheet">
                         <string notr="true">QScrollArea#scrollArea
 {
-background-color: white;
 border: 3px inset #bb1133;
 }</string>
                        </property>
@@ -3682,6 +3693,9 @@ border: 3px inset #bb1133;
                           <width>266</width>
                           <height>648</height>
                          </rect>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true">background-color: rgb(255, 255, 255);</string>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_18">
                          <property name="leftMargin">
@@ -4060,8 +4074,8 @@ border: 4px inset #f5c28f;
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>540</width>
-                  <height>674</height>
+                  <width>478</width>
+                  <height>16</height>
                  </rect>
                 </property>
                 <property name="styleSheet">
@@ -4327,8 +4341,8 @@ border: 4px inset #f5c28f;
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>610</width>
-                  <height>674</height>
+                  <width>478</width>
+                  <height>16</height>
                  </rect>
                 </property>
                 <property name="styleSheet">
@@ -4585,8 +4599,8 @@ border: 4px inset #f5c28f;
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>610</width>
-                  <height>674</height>
+                  <width>478</width>
+                  <height>16</height>
                  </rect>
                 </property>
                 <property name="styleSheet">
@@ -4640,6 +4654,8 @@ background-color: rgb(249, 219, 189);
    </property>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="Icons.qrc"/>
+ </resources>
  <connections/>
 </ui>

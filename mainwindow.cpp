@@ -559,6 +559,7 @@ void MainWindow::on_keretValasztasPushButtonSzerleszto_clicked()
             kepFrissites(jelenlegiKeret);
         }
     }
+    delete k;
 }
 
 void MainWindow::on_kepValasztasPushButtonSzerkeszto_clicked()
@@ -577,6 +578,7 @@ void MainWindow::on_kepValasztasPushButtonSzerkeszto_clicked()
             kepFrissites(jelenlegiKeret);
         }
     }
+    delete k;
 }
 
 void MainWindow::on_kepElorehozasPushButtonSzerkeszto_clicked()
@@ -1194,6 +1196,7 @@ void MainWindow::on_egysegeskeretPushButtonSzerkeszto_clicked()
         if(k->getIndex() != 1000)
             jelenlegiProjekt->getJelenlegiOldal()->egysegesKeret(k->getIndex());
     }
+    delete k;
 }
 
 void MainWindow::on_elrendezesPushButtonSzerkeszto_clicked()
@@ -1398,6 +1401,7 @@ void MainWindow::on_elrendezesPushButtonSzerkeszto_clicked()
             jelenlegiProjekt->getJelenlegiOldal()->keretHozzaadas(ujKeret);
         }
     }
+    delete e;
 }
 
 void MainWindow::on_oldalHozaadasPushButtonSzerkeszto_clicked()

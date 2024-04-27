@@ -22,7 +22,7 @@ border: 3px outset #bb1133;
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
-    <number>10</number>
+    <number>30</number>
    </property>
    <property name="leftMargin">
     <number>25</number>

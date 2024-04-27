@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>ikonok/brush.png</file>
+        <file>ikonok/collage.png</file>
+        <file>ikonok/icon.png</file>
+        <file>ikonok/image.png</file>
+        <file>ikonok/left.png</file>
+        <file>ikonok/post-stamp.png</file>
+        <file>ikonok/right.png</file>
+    </qresource>
+</RCC>
